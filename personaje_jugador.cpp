@@ -6,6 +6,8 @@ using namespace std;
 ///constructor del personaje
 Jugador::Jugador()
 {
+    _buffer.loadFromFile("walk.wav");
+    _sound.setBuffer(_buffer);
     _sprite.setPosition(500,500);
     _texture.loadFromFile("gwen.png"); ///carga la textura
     _sprite.setTexture(_texture); /// asigna la textura al sprite del personaje
@@ -34,22 +36,39 @@ void Jugador::updateView(sf::View& view, const sf::Vector2f& mapSize)
 ///Moviemiento del jugador
 void Jugador::update()
 {
+    float velo = _velocidad.y;
     _velocidad = {0,0};
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) ///Mover Arriba
     {
         _velocidad.y = -4;
+        if(_sound.getStatus() != sf::Sound::Playing)
+        {
+            _sound.play();
+        }
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) ///Mover Izquierda
     {
         _velocidad.x = -4;
+        if(_sound.getStatus() != sf::Sound::Playing)
+        {
+            _sound.play();
+        }
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))///Mover Abajo
     {
         _velocidad.y = 4;
+        if(_sound.getStatus() != sf::Sound::Playing)
+        {
+            _sound.play();
+        }
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))///Mover Derecha
     {
         _velocidad.x = 4;
+        if(_sound.getStatus() != sf::Sound::Playing)
+        {
+            _sound.play();
+        }
     }
     _sprite.move(_velocidad);
     /// Vista del Personaje
