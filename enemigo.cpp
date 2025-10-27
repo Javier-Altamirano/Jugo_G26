@@ -5,8 +5,7 @@ using namespace std;
 
 Enemigo::Enemigo()
 {
-    _sprite.setPosition(1500,1000);
-    _texture.loadFromFile("enemigo.png");
+    _texture.loadFromFile("Texture/alien.png");
     _sprite.setTexture(_texture);
     _sprite.setPosition(1500,1000);
     _sprite.setOrigin(_sprite.getGlobalBounds().width/2, _sprite.getGlobalBounds().height/2);

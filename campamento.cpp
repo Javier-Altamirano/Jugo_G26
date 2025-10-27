@@ -5,7 +5,7 @@ using namespace std;
 
 Campamento::Campamento()
 {
-    _texture.loadFromFile("camp.png");
+    _texture.loadFromFile("Texture/camp.png");
     _sprite.setTexture(_texture);
     _sprite.setPosition(1000,1000);
     _sprite.setOrigin(_sprite.getGlobalBounds().width/2, _sprite.getGlobalBounds().height/2);

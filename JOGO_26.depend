@@ -1,11 +1,13 @@
 # depslib dependency file v1.0
-1761264912 source:c:\users\franc\desktop\jogo_26\main.cpp
+1761559733 source:c:\users\franc\desktop\jogo_26\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<iostream>
+	"souns.h"
 	"personaje_jugador.h"
 	"enemigo.h"
 	"campamento.h"
+	"vendedor.h"
 
 1731167480 c:\users\franc\desktop\jogo_26\sfml\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -425,12 +427,13 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1761259157 c:\users\franc\desktop\jogo_26\personaje_jugador.h
+1761429862 c:\users\franc\desktop\jogo_26\personaje_jugador.h
 	<SFML/Audio.hpp>
 	<SFML/Graphics.hpp>
 	"colision.h"
+	"souns.h"
 
-1761260455 source:c:\users\franc\desktop\jogo_26\personaje_jugador.cpp
+1761546039 source:c:\users\franc\desktop\jogo_26\personaje_jugador.cpp
 	<iostream>
 	"personaje_jugador.h"
 
@@ -441,15 +444,15 @@
 1761236203 c:\users\franc\desktop\jogo_26\colision.h
 	<SFML/Graphics.hpp>
 
-1761243361 source:c:\users\franc\desktop\jogo_26\campamento.cpp
+1761552091 source:c:\users\franc\desktop\jogo_26\campamento.cpp
 	<iostream>
 	"campamento.h"
 
-1761236203 c:\users\franc\desktop\jogo_26\campamento.h
+1761552240 c:\users\franc\desktop\jogo_26\campamento.h
 	<SFML/Graphics.hpp>
 	"colision.h"
 
-1761255589 source:c:\users\franc\desktop\jogo_26\enemigo.cpp
+1761546513 source:c:\users\franc\desktop\jogo_26\enemigo.cpp
 	<iostream>
 	"enemigo.h"
 
@@ -560,4 +563,27 @@
 1731167480 c:\users\franc\desktop\jogo_26\sfml\include\sfml\audio\soundfilewriter.hpp
 	<SFML/Audio/Export.hpp>
 	<string>
+
+1761555585 source:c:\users\franc\desktop\jogo_26\sounds.cpp
+	<iostream>
+	"souns.h"
+
+1761555158 c:\users\franc\desktop\jogo_26\souns.h
+	<SFML/Audio.hpp>
+	<SFML/Graphics.hpp>
+
+1761558526 c:\users\franc\desktop\jogo_26\vendedor.h
+	<SFML/Graphics.hpp>
+	"colision.h"
+
+1761558533 source:c:\users\franc\desktop\jogo_26\vendedor.cpp
+	<iostream>
+	"vendedor.h"
+
+1761558865 source:c:\users\franc\desktop\jogo_26\menu.cpp
+	<iostream>
+	"menu.h"
+
+1761558773 c:\users\franc\desktop\jogo_26\menu.h
+	<SFML/Graphics.hpp>
 
