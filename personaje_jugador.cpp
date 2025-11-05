@@ -6,11 +6,14 @@ using namespace std;
 ///constructor del personaje
 Jugador::Jugador()
 {
-    _buffer.loadFromFile("Sound/walk.wav");
-    _sound.setBuffer(_buffer);
     _sprite.setPosition(1000,1000);
-    _texture.loadFromFile("Texture/ezreal.png"); ///carga la textura
+    if(!_texture.loadFromFile("Texture/fury.png"))///carga la textura
+    {
+        std::cout << "error fury...\n";
+    }
     _sprite.setTexture(_texture); /// asigna la textura al sprite del personaje
+    _sprite.setTextureRect(sf::IntRect(0, 136, 65, 116));
+    //_sprite.setScale(0.4f,0.4f);
     _velocidad = {4,4}; ///velocidad a la que lo podemos mover
     _sprite.setOrigin(_sprite.getGlobalBounds().width/2, _sprite.getGlobalBounds().height);///coloca el eje en el centro del sprite
 }
@@ -40,34 +43,18 @@ void Jugador::update()
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) ///Mover Arriba
     {
         _velocidad.y = -4;
-        if(_sound.getStatus() != sf::Sound::Playing)
-        {
-            _sound.play();
-        }
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) ///Mover Izquierda
     {
         _velocidad.x = -4;
-        if(_sound.getStatus() != sf::Sound::Playing)
-        {
-            _sound.play();
-        }
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))///Mover Abajo
     {
         _velocidad.y = 4;
-        if(_sound.getStatus() != sf::Sound::Playing)
-        {
-            _sound.play();
-        }
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))///Mover Derecha
     {
         _velocidad.x = 4;
-        if(_sound.getStatus() != sf::Sound::Playing)
-        {
-            _sound.play();
-        }
     }
     _sprite.move(_velocidad);
     /// Vista del Personaje
@@ -102,38 +89,22 @@ void Jugador::jugador_mapa()
 {}
 void Jugador::jugador_tienda()
 {
-        _velocidad = {0,0};
+    _velocidad = {0,0};
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) ///Mover Arriba
     {
         _velocidad.y = -4;
-        if(_sound.getStatus() != sf::Sound::Playing)
-        {
-            _sound.play();
-        }
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) ///Mover Izquierda
     {
         _velocidad.x = -4;
-        if(_sound.getStatus() != sf::Sound::Playing)
-        {
-            _sound.play();
-        }
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))///Mover Abajo
     {
         _velocidad.y = 4;
-        if(_sound.getStatus() != sf::Sound::Playing)
-        {
-            _sound.play();
-        }
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))///Mover Derecha
     {
         _velocidad.x = 4;
-        if(_sound.getStatus() != sf::Sound::Playing)
-        {
-            _sound.play();
-        }
     }
     _sprite.move(_velocidad);
     /// Vista del Personaje

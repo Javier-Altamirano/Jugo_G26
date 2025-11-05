@@ -5,7 +5,10 @@ using namespace std;
 
 Vendedor::Vendedor()
 {
-    _texture.loadFromFile("Texture/buhonero.png");
+    if(!_texture.loadFromFile("Texture/buhonero.png"))
+    {
+        std::cout << "error buhonero...\n";
+    }
     _sprite.setTexture(_texture);
     _sprite.setPosition(30,300);
     _sprite.setOrigin(_sprite.getGlobalBounds().width/2, _sprite.getGlobalBounds().height/2);

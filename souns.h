@@ -16,6 +16,11 @@ private:
 
     sf::SoundBuffer _buffer_Pelea;
     sf::Sound _sound_Pelea;
+
+    sf::SoundBuffer _buffer_Menu;
+    sf::Sound _sound_Menu;
+
+    int _volumen;
 public:
     Sound();
     void mapa_chill();
@@ -27,6 +32,13 @@ public:
     void pelea();
     void pelea_stop();
 
+    void menu();
+    void menu_stop();
+
     void open();
+
+    void subir();
+    void bajar();
+    int getVolumen();
 
 };

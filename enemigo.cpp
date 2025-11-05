@@ -5,7 +5,10 @@ using namespace std;
 
 Enemigo::Enemigo()
 {
-    _texture.loadFromFile("Texture/alien.png");
+    if(!_texture.loadFromFile("Texture/alien.png"))
+    {
+        std::cout << "error alien...\n";
+    }
     _sprite.setTexture(_texture);
     _sprite.setPosition(1500,1000);
     _sprite.setOrigin(_sprite.getGlobalBounds().width/2, _sprite.getGlobalBounds().height/2);

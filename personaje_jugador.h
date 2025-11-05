@@ -1,14 +1,10 @@
 #pragma once
-#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include "colision.h"
-#include "souns.h"
 
-class Jugador: public sf::Drawable, public Colision, public Sound
+class Jugador: public sf::Drawable, public Colision
 {
 private:
-    sf::SoundBuffer _buffer;
-    sf::Sound _sound;
     sf::Sprite _sprite;
     sf::Texture _texture;
     sf::Vector2f _velocidad;
