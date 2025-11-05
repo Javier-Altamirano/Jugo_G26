@@ -31,7 +31,7 @@ Menu::Menu()
         _text_pausa[i].setFont(_font);
         _text_pausa[i].setString(op_pausa[i]);
         _text_pausa[i].setCharacterSize(25);
-        _text_pausa[i].setPosition(280, 180 + i * 70);
+        //_text_pausa[i].setPosition(200, 100 + i * 50);
     }
     ///TIENDA------------------------------------------------------------
     std::string opciones[] = {"Comprar","Vender","Atras"};

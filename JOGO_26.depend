@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1762226268 source:c:\users\franc\desktop\jogo_26\main.cpp
+1762318903 source:c:\users\franc\desktop\jogo_26\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<iostream>
@@ -563,7 +563,7 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1762224473 source:c:\users\franc\desktop\jogo_26\sounds.cpp
+1762318748 source:c:\users\franc\desktop\jogo_26\sounds.cpp
 	<iostream>
 	"souns.h"
 
@@ -579,7 +579,7 @@
 	<iostream>
 	"vendedor.h"
 
-1762226441 source:c:\users\franc\desktop\jogo_26\menu.cpp
+1762314916 source:c:\users\franc\desktop\jogo_26\menu.cpp
 	<iostream>
 	"menu.h"
 

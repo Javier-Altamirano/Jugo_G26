@@ -4,9 +4,9 @@ using namespace std;
 
 Sound::Sound()
 {
-    if(!_buffer_Menu.loadFromFile("Sound/ganando.wav"))
+    if(!_buffer_Menu.loadFromFile("Sound/cumbia.wav"))
     {
-        std::cout << "error ganando...\n";
+        std::cout << "error cumbia...\n";
     }
     _sound_Menu.setBuffer(_buffer_Menu);
     _sound_Menu.setLoop(true);
@@ -120,6 +120,7 @@ void Sound::subir()
     {
         _volumen++;
     }
+    _sound_Menu.setVolume(_volumen);
     _sound_Map.setVolume(_volumen);
     _sound_Open.setVolume(_volumen);
     _sound_Pelea.setVolume(_volumen);

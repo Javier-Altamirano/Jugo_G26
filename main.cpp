@@ -39,6 +39,14 @@ int main()
     sf::Sprite sprite2;
     sprite2.setTexture(texture2);
 
+    sf::Texture textPortada;
+    if(!textPortada.loadFromFile("Texture/portada.png"))
+    {
+        //error
+    }
+    sf::Sprite portada;
+    portada.setTexture(textPortada);
+
     sf::Texture textCarta;
     if(!textCarta.loadFromFile("Texture/cartilla.png"))
     {
@@ -113,9 +121,9 @@ int main()
             ///MENU INICIO----------------------------------------------
             if(estado == MENUINICIO)
             {
+                musica.menu();
                 if (event.type == sf::Event::KeyPressed)
                 {
-                    musica.menu();
                     if (event.key.code == sf::Keyboard::W)
                     {
                         reloj.restart();
@@ -134,16 +142,16 @@ int main()
                         {
                         case 0:
                             estado = MAPA;
-                            std::cout << "Iniciando Nueva Partida...";
+                            std::cout << "Iniciando Nueva Partida...\n";
                             musica.menu_stop();
                             break;
                         case 1:
                             estado = MAPA;
-                            std::cout << "Cargando partida...";
+                            std::cout << "Cargando partida...\n";
                             musica.menu_stop();
                             break;
                         case 2:
-                            std::cout << "Made for Mr. Claudio :3...";
+                            std::cout << "Made for Mr. Claudio :3...\n";
                             break;
                         case 3:
                             std::cout << "Saliendo de juego... \n";
@@ -174,14 +182,14 @@ int main()
                         switch(menu.getSeleccion_pausa())
                         {
                         case 0:
-                            std::cout << "Continuando...";
+                            std::cout << "Continuando...\n";
                             pausa = false;
                             break;
                         case 1:
-                            std::cout << "Mochila...";
+                            std::cout << "Mochila...\n";
                             break;
                         case 2:
-                            std::cout << "Saliendo...";
+                            std::cout << "Saliendo...\n";
                             musica.mapa_chill_stop();
                             estado = MENUINICIO;
                             pausa = false;
@@ -420,6 +428,7 @@ int main()
         if(estado == MENUINICIO)
         {
             window.setView(window.getDefaultView()); // Evita vista fuera de pantall
+            window.draw(portada);
             menu.mostrar_inicio(window);
             window.draw(vol);
         }
@@ -447,7 +456,7 @@ int main()
             window.draw(fondo_pausa);
             // Ahora dibujas el menú de pausa, si quieres sobre el cartel
 
-            menu.posicion(400,300);
+            menu.posicion(300,200);
             menu.mostrar_pausa(window);
         }
         ///pelea draw
