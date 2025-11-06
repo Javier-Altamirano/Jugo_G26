@@ -7,12 +7,18 @@
 #include "campamento.h"
 #include "vendedor.h"
 #include "menu.h"
+#include "items.h"
+#include "inventario.h"
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "The Last Guardians"); ///Ventana
     window.setFramerateLimit(60); ///FPS
     sf::Clock reloj; ///Crea un reloj
     float delay = 0.2f; // segundo
+
+    Inventario mochila(10);
+    Item pocionV(1, "P Vida", 50, 25);
+    Item pocionE(2, "P Energia", 200, 100);
 
     Jugador gwen;///Gwen
     Campamento camp;///Campamento / Tienda
@@ -83,16 +89,18 @@ int main()
     mensaje.setFont(fuente);
     mensaje.setFillColor(sf::Color::Red);
     mensaje.setCharacterSize(30);
-    const char mens2[30] = "COMBATE";
     const char mens3[30] = "Hello Strager";
     bool mostrar_mensaje;///verifica si estas cerca para mostrar el mensaje
 
     /////////////////
-    enum EstadoJuego { MAPA, TIENDA, PELEA, MENUINICIO, SALIR };
+    enum EstadoJuego { MAPA, TIENDA, PELEA, MENUINICIO, SALIR};
     EstadoJuego estado = MENUINICIO;
     bool pausa = false;
-    enum TiendaEstado {VIENDO, COMPRANDO, FUERA};
+    bool mochilaA = false;
+    enum TiendaEstado {VIENDO, COMPRANDO, FUERA, QUIETO};
     TiendaEstado estadoT = FUERA;
+    enum Comprando {COMPRA, VENTA, NADA};
+    Comprando estadoC = NADA;
     float x,y;
 
 
@@ -127,18 +135,19 @@ int main()
                     if (event.key.code == sf::Keyboard::W)
                     {
                         reloj.restart();
-                        menu.arriba_inicio();
+                        //menu.arriba_inicio();
+                        menu.arribaG(1);
                     }
                     else if (event.key.code == sf::Keyboard::S)
                     {
                         reloj.restart();
-                        menu.abajo_inicio();
+                        menu.abajoG(1);
                     }
                     else if (event.key.code == sf::Keyboard::F)
                     {
                         // Acción del menú (nuevo juego, cargar, salir, etc)
                         reloj.restart();
-                        switch(menu.getSeleccion_inicio())
+                        switch(menu.getSeleccion())
                         {
                         case 0:
                             estado = MAPA;
@@ -163,30 +172,35 @@ int main()
                 }
             }
             ///PAUSA----------------------------------------------
-            else if(pausa == true)
+            else if(pausa == true && mochilaA == false)
             {
                 if(event.type == sf::Event::KeyPressed && reloj.getElapsedTime().asSeconds() > delay)
                 {
                     if(event.key.code == sf::Keyboard::W)
                     {
-                        menu.arriba_pausa();
+                        menu.arribaG(2);
                         reloj.restart();
                     }
                     else if(event.key.code == sf::Keyboard::S)
                     {
-                        menu.abajo_pausa();
+                        menu.abajoG(2);
                         reloj.restart();
                     }
                     else if(event.key.code == sf::Keyboard::F)
                     {
-                        switch(menu.getSeleccion_pausa())
+                        switch(menu.getSeleccion())
                         {
                         case 0:
                             std::cout << "Continuando...\n";
                             pausa = false;
+                            estadoT = VIENDO;
                             break;
                         case 1:
                             std::cout << "Mochila...\n";
+                            mochilaA = true;
+                            mochila.getCantidad();
+                            mochila.getCapacidadMax();
+                            mochila.mostrarContenido();
                             break;
                         case 2:
                             std::cout << "Saliendo...\n";
@@ -199,7 +213,20 @@ int main()
                     else if(event.key.code == sf::Keyboard::Escape)
                     {
                         reloj.restart();
+                        estadoT = VIENDO;
                         pausa = false;
+                    }
+                }
+            }
+            ////
+            else if(pausa ==  true && mochilaA == true)
+            {
+                if(event.type == sf::Event::KeyPressed && reloj.getElapsedTime().asSeconds() > delay)
+                {
+                    if(event.key.code == sf::Keyboard::F)
+                    {
+                        reloj.restart();
+                        mochilaA = false;
                     }
                 }
             }
@@ -208,8 +235,6 @@ int main()
             {
                 window.setView(window.getDefaultView()); // Evita vista fuera de pantalla
 
-                mensaje.setString(mens2);
-                mensaje.setPosition(0, 0);
                 if (event.type == sf::Event::KeyPressed && reloj.getElapsedTime().asSeconds() > delay)
                 {
                     if (event.key.code == sf::Keyboard::W)
@@ -264,18 +289,18 @@ int main()
             }
             ///TIENDA--------------------------------------------------
             ///COMPRANDO
-            else if(estado == TIENDA && estadoT == COMPRANDO)
+            else if(estado == TIENDA && estadoT == COMPRANDO && estadoC == NADA)
             {
                 if (event.type == sf::Event::KeyPressed && reloj.getElapsedTime().asSeconds() > delay)
                 {
                     if (event.key.code == sf::Keyboard::W)
                     {
-                        menu.arriba();
+                        menu.arribaG(2);
                         reloj.restart();
                     }
                     else if(event.key.code == sf::Keyboard::S)
                     {
-                        menu.abajo();
+                        menu.abajoG(2);
                         reloj.restart();
                     }
                     else if(event.key.code == sf::Keyboard::F)
@@ -285,12 +310,81 @@ int main()
                         {
                         case 0:
                             std::cout << "COMPRASTE! \n";
+                            //mochila.agregarItem(pocion);
+                            estadoC = COMPRA;
                             break;
                         case 1:
                             std::cout << "VENDISTE! \n";
+                            //mochila.quitarItem(1);
+                            estadoC = VENTA;
                             break;
                         case 2:
                             estadoT = VIENDO;
+                            estadoC = NADA;
+                            break;
+                        }
+                    }
+                }
+            }
+            else if(estadoC == COMPRA && estadoT == COMPRANDO)
+            {
+                if (event.type == sf::Event::KeyPressed && reloj.getElapsedTime().asSeconds() > delay)
+                {
+                    if (event.key.code == sf::Keyboard::W)
+                    {
+                        menu.arribaG(1);
+                        reloj.restart();
+                    }
+                    else if(event.key.code == sf::Keyboard::S)
+                    {
+                        menu.abajoG(1);
+                        reloj.restart();
+                    }
+                    else if(event.key.code == sf::Keyboard::F)
+                    {
+                        reloj.restart();
+                        switch(menu.getSeleccion())
+                        {
+                        case 0:
+                            mochila.agregarItem(pocionV);
+                            break;
+                        case 1:
+                            mochila.agregarItem(pocionE);
+                            break;
+                        case 2:
+                            estadoC = NADA;
+                            break;
+                        }
+                    }
+                }
+            }
+            else if(estadoC == VENTA && estadoT == COMPRANDO)
+            {
+                if (event.type == sf::Event::KeyPressed && reloj.getElapsedTime().asSeconds() > delay)
+                {
+                    if (event.key.code == sf::Keyboard::W)
+                    {
+                        menu.arribaG(1);
+                        reloj.restart();
+                    }
+                    else if(event.key.code == sf::Keyboard::S)
+                    {
+                        menu.abajoG(1);
+                        reloj.restart();
+                    }
+                    else if(event.key.code == sf::Keyboard::F)
+                    {
+                        reloj.restart();
+                        switch(menu.getSeleccion())
+                        {
+                        case 0:
+                            mochila.quitarItem(1);
+                            break;
+                        case 1:
+                            mochila.quitarItem(2);
+                            break;
+                        case 2:
+                            estadoC = NADA;
                             break;
                         }
                     }
@@ -368,6 +462,13 @@ int main()
             ///movimiento
             gwen.jugador_tienda();
 
+            ///Pausa
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && reloj.getElapsedTime().asSeconds() > delay)
+            {
+                reloj.restart();
+                estadoT = QUIETO;
+                pausa = true;
+            }
             ///interactuar con vendedor
             vendedor_cerca = false;
             if(gwen.isColision(vendedor))
@@ -409,13 +510,13 @@ int main()
             }
         }
         ///VOLUMEN
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Add) && reloj.getElapsedTime().asSeconds() > delay)
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && reloj.getElapsedTime().asSeconds() > delay)
         {
             reloj.restart();
             musica.subir();
             vol.setString(std::to_string(musica.getVolumen()));
         }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Subtract) && reloj.getElapsedTime().asSeconds() > delay)
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && reloj.getElapsedTime().asSeconds() > delay)
         {
             reloj.restart();
             musica.bajar();
@@ -448,16 +549,23 @@ int main()
                 window.draw(mensaje_camp);
             }
         }
-        if(pausa == true)
+        if(pausa == true && estado == MAPA)
         {
             // Asegura que el texto esté centrado en la pantalla
             window.setView(window.getDefaultView()); // Fija la vista base
+            if(mochilaA == false)
+            {
+                window.draw(fondo_pausa);
+                // Ahora dibujas el menú de pausa, si quieres sobre el cartel
 
-            window.draw(fondo_pausa);
-            // Ahora dibujas el menú de pausa, si quieres sobre el cartel
-
-            menu.posicion(300,200);
-            menu.mostrar_pausa(window);
+                menu.posicion(300,200);
+                menu.mostrar_pausa(window);
+            }
+            else if(mochilaA == true)
+            {
+                window.draw(fondo_pausa);
+                mochila.mostrar(window);
+            }
         }
         ///pelea draw
         else if(estado == PELEA)
@@ -467,7 +575,6 @@ int main()
             musica.pelea();
 
             window.draw(sprite2);
-            window.draw(mensaje);
             menu.mostrar_pelea(window);
         }
         ///tirnda draw
@@ -479,6 +586,25 @@ int main()
             window.draw(gwen);
             window.draw(vendedor);
             window.draw(camp); ///simula puerta
+            if(pausa == true && estadoT == QUIETO)
+            {
+                window.draw(fondo_pausa);
+                // Ahora dibujas el menú de pausa, si quieres sobre el cartel
+                if(mochilaA == false)
+                {
+                    window.draw(fondo_pausa);
+                    // Ahora dibujas el menú de pausa, si quieres sobre el cartel
+
+                    menu.posicion(300,200);
+                    menu.mostrar_pausa(window);
+                }
+                else if(mochilaA == true)
+                {
+                    window.draw(fondo_pausa);
+                    mochila.mostrar(window);
+                }
+
+            }
             if(estado == TIENDA && estadoT == VIENDO)
             {
                 if(vendedor_cerca == true)
@@ -487,10 +613,18 @@ int main()
                 }
                 window.draw(mensaje);
             }
-            else if(estado == TIENDA && estadoT == COMPRANDO)
+            else if(estado == TIENDA && estadoT == COMPRANDO && estadoC == NADA)
             {
                 window.draw(carta);
                 menu.mostrar(window);
+            }
+            else if(estado == TIENDA && estadoT == COMPRANDO && estadoC == COMPRA)
+            {
+                menu.mostrar_items(window);
+            }
+            else if(estado == TIENDA && estadoT == COMPRANDO && estadoC == VENTA)
+            {
+                menu.mostrar_items(window);
             }
         }
 

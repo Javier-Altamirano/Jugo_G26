@@ -52,6 +52,11 @@
 		<Unit filename="enemigo.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="inventario.cpp" />
+		<Unit filename="inventario.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="items.cpp" />
 		<Unit filename="items.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>

@@ -132,6 +132,7 @@ void Sound::bajar()
     {
         _volumen--;
     }
+    _sound_Menu.setVolume(_volumen);
     _sound_Map.setVolume(_volumen);
     _sound_Open.setVolume(_volumen);
     _sound_Pelea.setVolume(_volumen);
