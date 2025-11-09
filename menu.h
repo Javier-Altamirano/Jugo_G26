@@ -1,9 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "items.h"
 
 class Menu
 {
 private:
+    Item* _items;
     ///MENU INICIO
     sf::Text _text_inicio[4];
     //Pausa
@@ -15,13 +17,11 @@ private:
     int _seleccion;
 
     ///menu pelea
-    sf::Font _font_pelea;
     sf::Text _text_pelea[2][2];
     int _fila;
     int _columna;
     ///General
     sf::Text _text_G[10];
-
 public:
     ///tienda
     Menu();

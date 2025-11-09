@@ -20,6 +20,17 @@ private:
     sf::SoundBuffer _buffer_Menu;
     sf::Sound _sound_Menu;
 
+    sf::SoundBuffer _buffer_ty;
+    sf::Sound _sound_ty;
+    sf::SoundBuffer _buffer_wel;
+    sf::Sound _sound_wel;
+
+    sf::SoundBuffer _buffer_ok;
+    sf::Sound _sound_ok;
+
+    sf::SoundBuffer _buffer_ok2;
+    sf::Sound _sound_ok2;
+
     int _volumen;
 public:
     Sound();
@@ -36,6 +47,10 @@ public:
     void menu_stop();
 
     void open();
+    void thanks();
+    void welcome();
+    void ok();
+    void ok2();
 
     void subir();
     void bajar();

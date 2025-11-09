@@ -13,7 +13,7 @@ private:
 
 public:
     Item();
-    Item(int id, const std::string& nombre, int compra , int venta);
+    Item(int id, const std::string& nombre, int compra , int venta, int cantidad);
     ///Crear personajes para usar
     int getId() const { return _idItem; }
     std::string getNombre() const { return _nombre; }

@@ -6,7 +6,7 @@ using namespace std;
 ///constructor del personaje
 Jugador::Jugador()
 {
-    _sprite.setPosition(1000,1000);
+    _sprite.setPosition(1200,1000);
     if(!_texture.loadFromFile("Texture/fury.png"))///carga la textura
     {
         std::cout << "error fury...\n";
@@ -76,13 +76,13 @@ void Jugador::update()
         _sprite.setPosition(_sprite.getPosition().x, _sprite.getOrigin().y);
     }
 
-    if (_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width > 2000)
+    if (_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width > 4000)
     {
-        _sprite.setPosition(2000 - (_sprite.getGlobalBounds().width - _sprite.getOrigin().x), _sprite.getPosition().y);
+        _sprite.setPosition(4000 - (_sprite.getGlobalBounds().width - _sprite.getOrigin().x), _sprite.getPosition().y);
     }
-    if(_sprite.getGlobalBounds().top+_sprite.getGlobalBounds().height > 2000)
+    if(_sprite.getGlobalBounds().top+_sprite.getGlobalBounds().height > 3200)
     {
-        _sprite.setPosition(_sprite.getPosition().x, 2000 + (_sprite.getGlobalBounds().height - _sprite.getOrigin().y));
+        _sprite.setPosition(_sprite.getPosition().x, 3200 + (_sprite.getGlobalBounds().height - _sprite.getOrigin().y));
     }
 }
 void Jugador::jugador_mapa()

@@ -60,6 +60,9 @@
 		<Unit filename="items.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="jugables.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="main.cpp" />
 		<Unit filename="menu.cpp" />
 		<Unit filename="menu.h">
@@ -67,6 +70,13 @@
 		</Unit>
 		<Unit filename="personaje_jugador.cpp" />
 		<Unit filename="personaje_jugador.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="pesonajes.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="recursos.cpp" />
+		<Unit filename="recursos.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="sounds.cpp" />

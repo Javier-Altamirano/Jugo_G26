@@ -10,9 +10,8 @@ private:
     int _cantidad;
     int _capacidad_maxima;
     sf::Font _font;
-    sf::Text _text[2];
-    sf::Text _disponible[2];
-    sf::Text _items_tienda;
+    sf::Text _text;
+    int _saldo;
 public:
     Inventario(int capacidad);
     /// Destructor
@@ -25,6 +24,9 @@ public:
 
     bool quitarItem(int id);
 
+    int getsaldo();
+    void mostrar_saldo(sf::RenderWindow& window);
+
     /// CONTENIDO
     void mostrarContenido() const;
     /// Espacio disponible
@@ -35,8 +37,8 @@ public:
 
     /// Verificar si tiene un item
     bool tieneItem(int id) const;
-    int contar1();
-    int contar2();
+
+    void mensajes(sf::RenderWindow& window);
 
     void mostrar(sf::RenderWindow& window);
 };

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1762469082 source:c:\users\franc\desktop\jogo_26\main.cpp
+1762669940 source:c:\users\franc\desktop\jogo_26\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<iostream>
@@ -434,7 +434,7 @@
 	<SFML/Graphics.hpp>
 	"colision.h"
 
-1761976936 source:c:\users\franc\desktop\jogo_26\personaje_jugador.cpp
+1762641521 source:c:\users\franc\desktop\jogo_26\personaje_jugador.cpp
 	<iostream>
 	"personaje_jugador.h"
 
@@ -565,11 +565,11 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1762456502 source:c:\users\franc\desktop\jogo_26\sounds.cpp
+1762669754 source:c:\users\franc\desktop\jogo_26\sounds.cpp
 	<iostream>
 	"souns.h"
 
-1762224313 c:\users\franc\desktop\jogo_26\souns.h
+1762669692 c:\users\franc\desktop\jogo_26\souns.h
 	<SFML/Audio.hpp>
 	<SFML/Graphics.hpp>
 
@@ -581,27 +581,30 @@
 	<iostream>
 	"vendedor.h"
 
-1762461267 source:c:\users\franc\desktop\jogo_26\menu.cpp
+1762487766 source:c:\users\franc\desktop\jogo_26\menu.cpp
 	<iostream>
 	"menu.h"
 
-1762461267 c:\users\franc\desktop\jogo_26\menu.h
+1762483920 c:\users\franc\desktop\jogo_26\menu.h
 	<SFML/Graphics.hpp>
+	"items.h"
 
-1762471106 source:c:\users\franc\desktop\jogo_26\items.cpp
+1762476000 source:c:\users\franc\desktop\jogo_26\items.cpp
 	<iostream>
 	"items.h"
 
-1762471442 c:\users\franc\desktop\jogo_26\items.h
+1762476000 c:\users\franc\desktop\jogo_26\items.h
 	<SFML/Graphics.hpp>
 	<iostream>
 
-1762470145 c:\users\franc\desktop\jogo_26\inventario.h
+1762664620 c:\users\franc\desktop\jogo_26\inventario.h
 	<istream>
 	"items.h"
 	<SFML/Graphics.hpp>
 
-1762470327 source:c:\users\franc\desktop\jogo_26\inventario.cpp
+1762667837 source:c:\users\franc\desktop\jogo_26\inventario.cpp
 	<iostream>
 	"inventario.h"
+
+1762666378 source:c:\users\franc\desktop\jogo_26\recursos.cpp
 

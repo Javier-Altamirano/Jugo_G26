@@ -9,6 +9,7 @@
 #include "menu.h"
 #include "items.h"
 #include "inventario.h"
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "The Last Guardians"); ///Ventana
@@ -17,17 +18,21 @@ int main()
     float delay = 0.2f; // segundo
 
     Inventario mochila(10);
-    Item pocionV(1, "P Vida", 50, 25);
-    Item pocionE(2, "P Energia", 200, 100);
-
-    Jugador gwen;///Gwen
+    Item pocionV(1, "P Vida", 50, 25,1);
+    Item pocionE(2, "P Energia", 200, 100,1);
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///Sonido
+    Sound musica;
+    Jugador gwen;///Gwen JUGADO ****************************
     Campamento camp;///Campamento / Tienda
-    bool camp_cerca;
     Vendedor vendedor; /// NPC VENDEDOR
     Menu menu; ///TODOS LOS MENUS
-    int f,c;
+    Enemigo enemi; ///ENEMIGO
+    int f,c; ///POSICION DE FILA Y COLUMNA
+    bool camp_cerca;
     bool vendedor_cerca;
-    sf::Texture texura;
+    bool enemigo_cerca;
+    sf::Texture texura;///PISO DE LA TIENDA
     if(!texura.loadFromFile("Texture/piso.png"))
     {
         std::cout << "error\n";
@@ -35,9 +40,7 @@ int main()
     sf::Sprite sprite;
     sprite.setTexture(texura);
     ////////////////////////////
-    Enemigo enemi;
-    bool enemigo_cerca;
-    sf::Texture texture2;
+    sf::Texture texture2;///FONDO DE LA PELEA
     if(!texture2.loadFromFile("Texture/pelea.png"))
     {
         std::cout << "error pelea...\n";
@@ -45,7 +48,7 @@ int main()
     sf::Sprite sprite2;
     sprite2.setTexture(texture2);
 
-    sf::Texture textPortada;
+    sf::Texture textPortada;///FONDO PORTADA INICIO
     if(!textPortada.loadFromFile("Texture/portada.png"))
     {
         //error
@@ -53,16 +56,53 @@ int main()
     sf::Sprite portada;
     portada.setTexture(textPortada);
 
-    sf::Texture textCarta;
-    if(!textCarta.loadFromFile("Texture/cartilla.png"))
+    sf::Texture textPausa; ///MENU DE COMPRA
+    if(!textPausa.loadFromFile("Texture/menu1.png"))
+    {
+        std::cout << "error menu1...\n";
+    }
+    sf::Sprite pausaS;
+    pausaS.setTexture(textPausa);
+    pausaS.setPosition(50,50);
+
+    sf::Texture textCarta; ///MENU DE PAUSA
+    if(!textCarta.loadFromFile("Texture/fondomenu.png"))
     {
         std::cout << "error cartilla...\n";
     }
     sf::Sprite carta;
     carta.setTexture(textCarta);
+    carta.setPosition(150,140);
 
-    ///Sonido
-    Sound musica;
+    sf::Texture text_m; ///INVENTARIO ABIERTO
+    if(!text_m.loadFromFile("Texture/mOpen.png"))
+    {
+        std::cout << "error maletin1...\n";
+    }
+    sf::Sprite m1;
+    m1.setTexture(text_m);
+    m1.setPosition(360,250);
+
+    sf::Texture text_m2;///INVENTARIO CERRADO (SOLO VISUAL)
+    if(!text_m2.loadFromFile("Texture/mClose.png"))
+    {
+        std::cout << "error maletin...\n";
+    }
+    sf::Sprite m2;
+    m2.setTexture(text_m2);
+    m2.setPosition(360,250);
+
+    ////////FONDO
+    sf::Sprite mapa;
+    sf::Texture _mapa;
+    if(!_mapa.loadFromFile("Texture/mapa.png"))
+    {
+        std::cout << "error mapa...\n";
+    }
+    mapa.setTexture(_mapa);
+    ////////Funcion para seguir al personaje
+    sf::View view(sf::FloatRect(0, 0, 800, 600)); // vista
+    sf::Vector2f mapSize(4000.f, 3200.f); /// mapa
     //-----//
     ////////////////////////////
     sf::Font fuente;
@@ -70,7 +110,6 @@ int main()
     {
         std::cout << "error square...\n";
     }
-
     sf::Text vol;
     vol.setFont(fuente);
 
@@ -82,40 +121,26 @@ int main()
     sf::Text mensaje_camp;
     mensaje_camp.setFont(fuente);
     mensaje_camp.setCharacterSize(20);
-    mensaje_camp.setFillColor(sf::Color::Red);
+    mensaje_camp.setFillColor(sf::Color::White);
     const char mens[30] = "Pesiona (F)";
     mensaje_camp.setString(mens);
 
     mensaje.setFont(fuente);
-    mensaje.setFillColor(sf::Color::Red);
+    mensaje.setFillColor(sf::Color::White);
     mensaje.setCharacterSize(30);
     const char mens3[30] = "Hello Strager";
     bool mostrar_mensaje;///verifica si estas cerca para mostrar el mensaje
 
     /////////////////
-    enum EstadoJuego { MAPA, TIENDA, PELEA, MENUINICIO, SALIR};
+    enum EstadoJuego { MAPA, TIENDA, PELEA, MENUINICIO, SALIR, CINEMATICA};
+    enum TiendaEstado {VIENDO, COMPRANDO, FUERA, QUIETO};
+    enum Comprando {COMPRA, VENTA, NADA};
     EstadoJuego estado = MENUINICIO;
+    TiendaEstado estadoT = FUERA;
+    Comprando estadoC = NADA;
     bool pausa = false;
     bool mochilaA = false;
-    enum TiendaEstado {VIENDO, COMPRANDO, FUERA, QUIETO};
-    TiendaEstado estadoT = FUERA;
-    enum Comprando {COMPRA, VENTA, NADA};
-    Comprando estadoC = NADA;
     float x,y;
-
-
-    ////////FONDO
-    sf::Sprite mapa;
-    sf::Texture _mapa;
-    if(!_mapa.loadFromFile("Texture/pasto.png"))
-    {
-        std::cout << "error pasto...\n";
-    }
-    mapa.setTexture(_mapa);
-    ////////Funcion para seguir al personaje
-    sf::View view(sf::FloatRect(0, 0, 800, 600)); // vista
-    sf::Vector2f mapSize(2000.f, 2000.f); /// mapa
-
 
     while (window.isOpen())
     {
@@ -150,13 +175,16 @@ int main()
                         switch(menu.getSeleccion())
                         {
                         case 0:
-                            estado = MAPA;
+                            //estado = MAPA;
+                            estado = CINEMATICA;
                             std::cout << "Iniciando Nueva Partida...\n";
+                            musica.ok();
                             musica.menu_stop();
                             break;
                         case 1:
                             estado = MAPA;
                             std::cout << "Cargando partida...\n";
+                            musica.ok();
                             musica.menu_stop();
                             break;
                         case 2:
@@ -171,6 +199,7 @@ int main()
                     }
                 }
             }
+            ///
             ///PAUSA----------------------------------------------
             else if(pausa == true && mochilaA == false)
             {
@@ -205,6 +234,7 @@ int main()
                         case 2:
                             std::cout << "Saliendo...\n";
                             musica.mapa_chill_stop();
+                            musica.tienda_stop();
                             estado = MENUINICIO;
                             pausa = false;
                             break;
@@ -332,12 +362,12 @@ int main()
                 {
                     if (event.key.code == sf::Keyboard::W)
                     {
-                        menu.arribaG(1);
+                        menu.arribaG(2);
                         reloj.restart();
                     }
                     else if(event.key.code == sf::Keyboard::S)
                     {
-                        menu.abajoG(1);
+                        menu.abajoG(2);
                         reloj.restart();
                     }
                     else if(event.key.code == sf::Keyboard::F)
@@ -347,9 +377,11 @@ int main()
                         {
                         case 0:
                             mochila.agregarItem(pocionV);
+                            musica.thanks();
                             break;
                         case 1:
                             mochila.agregarItem(pocionE);
+                            musica.thanks();
                             break;
                         case 2:
                             estadoC = NADA;
@@ -364,12 +396,12 @@ int main()
                 {
                     if (event.key.code == sf::Keyboard::W)
                     {
-                        menu.arribaG(1);
+                        menu.arribaG(2);
                         reloj.restart();
                     }
                     else if(event.key.code == sf::Keyboard::S)
                     {
-                        menu.abajoG(1);
+                        menu.abajoG(2);
                         reloj.restart();
                     }
                     else if(event.key.code == sf::Keyboard::F)
@@ -396,6 +428,13 @@ int main()
         if(estado == MENUINICIO)
         {
 
+        }
+        else if(estado == CINEMATICA)
+        {
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) && reloj.getElapsedTime().asSeconds() > delay)
+            {
+                estado = MAPA;
+            }
         }
         //////////////////////////////////////////////////////////////////////////////////////////
         ///MAPA -------------------------------------------------------
@@ -424,6 +463,7 @@ int main()
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) && reloj.getElapsedTime().asSeconds() > delay)
                 {
                     reloj.restart();
+                    musica.ok2();
                     musica.mapa_chill_stop();
                     sprite2.setPosition(0,80);
                     estado = PELEA;
@@ -481,6 +521,7 @@ int main()
             {
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) && reloj.getElapsedTime().asSeconds() > delay)
                 {
+                    musica.welcome();
                     estadoT = COMPRANDO;
                     carta.setPosition(200,100);
                 }
@@ -533,6 +574,10 @@ int main()
             menu.mostrar_inicio(window);
             window.draw(vol);
         }
+        else if(estado == CINEMATICA)
+        {
+            window.setView(window.getDefaultView());
+        }
         ///mapa draw
         else if(estado == MAPA)
         {
@@ -556,15 +601,20 @@ int main()
             if(mochilaA == false)
             {
                 window.draw(fondo_pausa);
-                // Ahora dibujas el menú de pausa, si quieres sobre el cartel
-
-                menu.posicion(300,200);
+                window.draw(m2);
+                window.draw(pausaS);
+                menu.posicion(100,130);
                 menu.mostrar_pausa(window);
+                mochila.mostrar_saldo(window);
             }
             else if(mochilaA == true)
             {
                 window.draw(fondo_pausa);
+                window.draw(m1);
+                window.draw(pausaS);
+                menu.mostrar_pausa(window);
                 mochila.mostrar(window);
+                mochila.mostrar_saldo(window);
             }
         }
         ///pelea draw
@@ -577,7 +627,7 @@ int main()
             window.draw(sprite2);
             menu.mostrar_pelea(window);
         }
-        ///tirnda draw
+        ///tienda draw
         else if(estado == TIENDA)
         {
             window.setView(window.getDefaultView()); // Evita vista fuera de pantalla
@@ -588,22 +638,24 @@ int main()
             window.draw(camp); ///simula puerta
             if(pausa == true && estadoT == QUIETO)
             {
-                window.draw(fondo_pausa);
-                // Ahora dibujas el menú de pausa, si quieres sobre el cartel
                 if(mochilaA == false)
                 {
                     window.draw(fondo_pausa);
-                    // Ahora dibujas el menú de pausa, si quieres sobre el cartel
-
-                    menu.posicion(300,200);
+                    window.draw(m2);
+                    window.draw(pausaS);
+                    menu.posicion(70,130);
                     menu.mostrar_pausa(window);
+                    mochila.mostrar_saldo(window);
                 }
                 else if(mochilaA == true)
                 {
                     window.draw(fondo_pausa);
+                    window.draw(m1);
+                    window.draw(pausaS);
+                    menu.mostrar_pausa(window);
                     mochila.mostrar(window);
+                    mochila.mostrar_saldo(window);
                 }
-
             }
             if(estado == TIENDA && estadoT == VIENDO)
             {
@@ -620,14 +672,15 @@ int main()
             }
             else if(estado == TIENDA && estadoT == COMPRANDO && estadoC == COMPRA)
             {
+                window.draw(carta);
                 menu.mostrar_items(window);
             }
             else if(estado == TIENDA && estadoT == COMPRANDO && estadoC == VENTA)
             {
+                window.draw(carta);
                 menu.mostrar_items(window);
             }
         }
-
 
         window.display();
     }

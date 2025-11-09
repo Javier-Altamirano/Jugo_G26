@@ -2,7 +2,6 @@
 #include "inventario.h"
 using namespace std;
 
-
 Inventario::Inventario(int capacidad)
 {
     _capacidad_maxima = capacidad;
@@ -12,46 +11,41 @@ Inventario::Inventario(int capacidad)
     {
         //error
     }
-    std::string opciones [] {"P. Vida X", "P. Energia X"};
-    for(int i=0; i<2; i++)
-    {
-        _text[i].setFont(_font);
-        _text[i].setString(opciones[i]);
-        _text[i].setCharacterSize(28);
-        _text[i].setPosition(280, 180 + i * 70);
-    }
-    for(int i=0; i<2; i++)
-    {
-        _disponible[i].setFont(_font);
-        _disponible[i].setCharacterSize(28);
-        _disponible[i].setPosition(280, 180 + i * 70);
-    }
+    _text.setFont(_font);
+    _text.setCharacterSize(20);
+    _text.setColor(sf::Color::White);
+    _saldo = 50;
 }
 bool Inventario::agregarItem(const Item& item)
 {
-    // Buscar si ya existe
-    for (int i = 0; i < _cantidad; i++)
+    int precio = item.getPrecioCompra();
+    if(_saldo >= precio && _cantidad < _capacidad_maxima)
     {
-        if (_items[i].getId() == item.getId())
+        // Buscar si ya existe
+        for (int i = 0; i < _cantidad; i++)
         {
-            int nuevaCantidad = _items[i].getCantidad() + item.getCantidad();
-            _items[i].setCantidad(nuevaCantidad);
-            std::cout << item.getNombre() << " ahora tiene " << nuevaCantidad << " unidades.\n";
-            return true;
+            int saldo = _items[i].getPrecioCompra();
+            if (_items[i].getId() == item.getId() && _saldo >= saldo)
+            {
+                int nuevaCantidad = _items[i].getCantidad() + item.getCantidad();
+                _items[i].setCantidad(nuevaCantidad);
+                std::cout << item.getNombre() << " ahora tiene " << nuevaCantidad << " unidades.\n";
+                _text.setString(item.getNombre() + " ahora tiene " + std::to_string(nuevaCantidad) + " unidades");
+                return true;
+            }
         }
+        // Si no existe, agregar como nuevo
+        _items[_cantidad] = item;
+        _cantidad++;
+        _saldo -= precio;
+        std::cout << item.getNombre() << " agregado al inventario.\n";
+        return true;
     }
-
-    // Si no existe, agregar como nuevo
-    if (_cantidad >= _capacidad_maxima)
+    if (_cantidad >= _capacidad_maxima || precio > _saldo)
     {
         std::cout << "El inventario está lleno (" << _capacidad_maxima << " espacios).\n";
         return false;
     }
-
-    _items[_cantidad] = item;
-    _cantidad++;
-    std::cout << item.getNombre() << " agregado al inventario.\n";
-    return true;
 }
 
 bool Inventario::quitarItem(int id)
@@ -66,6 +60,8 @@ bool Inventario::quitarItem(int id)
             {
                 _items[x] = _items[x + 1];
             }
+            int saldo = _items[i].getPrecioVenta();
+            _saldo += saldo;
             _cantidad--;
             return true;
         }
@@ -74,7 +70,7 @@ bool Inventario::quitarItem(int id)
     return false;
 }
 
-/// CONTENIDO
+/// CONTENIDO /// TEXTO
 void Inventario::mostrarContenido() const
 {
     std::cout << "\n Contenido del inventario (" << _cantidad << "/" << _capacidad_maxima << "):\n";
@@ -101,6 +97,11 @@ int Inventario::getCapacidadMax() const
 {
     return _capacidad_maxima;
 }
+///
+int Inventario::getsaldo()
+{
+    return _saldo;
+}
 /// Verificar si tiene un item
 bool Inventario::tieneItem(int id) const
 {
@@ -116,25 +117,32 @@ bool Inventario::tieneItem(int id) const
         }
     }
 }
-
+void Inventario::mostrar_saldo(sf::RenderWindow& window)
+{
+    _text.setPosition(80,415);
+    _text.setColor(sf::Color::Green);
+    _text.setString("Dinero $ " + std::to_string(_saldo));
+    window.draw(_text);
+}
 void Inventario::mostrar(sf::RenderWindow& window)
 {
     sf::Text mensaje;
     mensaje.setFont(_font);
-    std::string mens1 = "Esta vacio";
+    std::string mens1 = "VACIO...";
     mensaje.setString(mens1);
     if (_cantidad == 0)
     {
-        mensaje.setPosition(400,300);
+        mensaje.setPosition(575,340);
         window.draw(mensaje);
     }
     else
     {
         for (int i = 0; i < _cantidad; i++)
         {
-            mensaje.setString(_items[i].getNombre());
+            mensaje.setString(_items[i].getNombre() + " X (" + std::to_string(_items[i].getCantidad()) + ")");
+
             mensaje.setCharacterSize(20);
-            mensaje.setPosition(400,50+i*70);
+            mensaje.setPosition(570,280+i*30);
             window.draw(mensaje);
         }
     }

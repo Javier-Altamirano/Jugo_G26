@@ -11,9 +11,9 @@ Sound::Sound()
     _sound_Menu.setBuffer(_buffer_Menu);
     _sound_Menu.setLoop(true);
 
-    if(!_buffer_Map.loadFromFile("Sound/song.wav"))
+    if(!_buffer_Map.loadFromFile("Sound/fondo1.wav"))
     {
-        std::cout << "error song...\n";
+        std::cout << "error fondo1...\n";
     }
     _sound_Map.setBuffer(_buffer_Map);
     _sound_Map.setLoop(true);
@@ -38,7 +38,34 @@ Sound::Sound()
     }
     _sound_Open.setBuffer(_buffer_Open);
 
+    if(!_buffer_ty.loadFromFile("Sound/ty.wav"))
+    {
+        std::cout << "error ty...\n";
+    }
+    _sound_ty.setBuffer(_buffer_ty);
+
+    if(!_buffer_wel.loadFromFile("Sound/welcome.wav"))
+    {
+        std::cout << "error welcome...\n";
+    }
+    _sound_wel.setBuffer(_buffer_wel);
+
+    if(!_buffer_ok.loadFromFile("Sound/ok1.wav"))
+    {
+        std::cout << "error ok1...\n";
+    }
+    _sound_ok.setBuffer(_buffer_ok);
+    if(!_buffer_ok2.loadFromFile("Sound/ok2.wav"))
+    {
+        std::cout << "error ok2...\n";
+    }
+    _sound_ok2.setBuffer(_buffer_ok2);
+
     _volumen = 50.0f;
+    _sound_ok2.setVolume(_volumen);
+    _sound_ok.setVolume(_volumen);
+    _sound_wel.setVolume(_volumen);
+    _sound_ty.setVolume(_volumen);
     _sound_Menu.setVolume(_volumen);
     _sound_Map.setVolume(_volumen);
     _sound_Open.setVolume(_volumen);
@@ -113,6 +140,34 @@ void Sound::open()
         _sound_Open.play();
     }
 }
+void Sound::thanks()
+{
+    if(_sound_ty.getStatus() != sf::Sound::Playing)
+    {
+        _sound_ty.play();
+    }
+}
+void Sound::welcome()
+{
+    if(_sound_wel.getStatus() != sf::Sound::Playing)
+    {
+        _sound_wel.play();
+    }
+}
+void Sound::ok()
+{
+    if(_sound_ok.getStatus() != sf::Sound::Playing)
+    {
+        _sound_ok.play();
+    }
+}
+void Sound::ok2()
+{
+    if(_sound_ok2.getStatus() != sf::Sound::Playing)
+    {
+        _sound_ok2.play();
+    }
+}
 ///---------CONTROL DE VOLUMEN-------------------------
 void Sound::subir()
 {
@@ -120,6 +175,10 @@ void Sound::subir()
     {
         _volumen++;
     }
+    _sound_ok2.setVolume(_volumen);
+    _sound_ok.setVolume(_volumen);
+    _sound_wel.setVolume(_volumen);
+    _sound_ty.setVolume(_volumen);
     _sound_Menu.setVolume(_volumen);
     _sound_Map.setVolume(_volumen);
     _sound_Open.setVolume(_volumen);
@@ -132,6 +191,10 @@ void Sound::bajar()
     {
         _volumen--;
     }
+    _sound_ok2.setVolume(_volumen);
+    _sound_ok.setVolume(_volumen);
+    _sound_wel.setVolume(_volumen);
+    _sound_ty.setVolume(_volumen);
     _sound_Menu.setVolume(_volumen);
     _sound_Map.setVolume(_volumen);
     _sound_Open.setVolume(_volumen);

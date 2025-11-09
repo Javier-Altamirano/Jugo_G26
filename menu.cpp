@@ -5,14 +5,10 @@ using namespace std;
 
 Menu::Menu()
 {
-    if(!_font_pelea.loadFromFile("Font/square.ttf"))
+    if(!_font.loadFromFile("Font/square.ttf"))
     {
         ///error
         std::cout << "error\n";
-    }
-    if(!_font.loadFromFile("Font/moab.ttf"))
-    {
-        ///error
     }
     ///INICIO------------------------------------------------------------
     std::string opciones_ini[] = {"NUEVA PARTIDA","CONTINUAR","ACERCA DE","SALIR"};
@@ -32,21 +28,21 @@ Menu::Menu()
         _text_pausa[i].setCharacterSize(25);
     }
     ///TIENDA------------------------------------------------------------
-    std::string opciones[] = {"Comprar","Vender","Atras"};
+    std::string opciones[] = {"Comprar","Vender","Atras..."};
     for(int i=0; i<3; i++)
     {
         _text[i].setFont(_font);
         _text[i].setString(opciones[i]);
-        _text[i].setCharacterSize(28);
-        _text[i].setPosition(280, 180 + i * 70);
+        _text[i].setCharacterSize(30);
+        _text[i].setPosition(220, 150 + i * 70);
     }
-    std::string opciones_items[] = {"Pocion Vida", "Pocion Energia", "Atras"};
+    std::string opciones_items[] = {"Pocion V", "Pocion E", "Atras..."};
     for(int i=0; i<3; i++)
     {
         _text_items[i].setFont(_font);
         _text_items[i].setString(opciones_items[i]);
-        _text_items[i].setCharacterSize(28);
-        _text_items[i].setPosition(280, 180 + i * 70);
+        _text_items[i].setCharacterSize(30);
+        _text_items[i].setPosition(220, 150 + i * 70);
     }
     _seleccion = 0;
     ///PELEA-------------------------------------------------------------
@@ -60,7 +56,7 @@ Menu::Menu()
     {
         for(int l=0; l<2; l++)
         {
-            _text_pelea[i][l].setFont(_font_pelea);
+            _text_pelea[i][l].setFont(_font);
             _text_pelea[i][l].setString(acciones[i][l]);
             _text_pelea[i][l].setCharacterSize(30);
             _text_pelea[i][l].setPosition(400 + i * 200, 458 + l * 80);
@@ -98,11 +94,13 @@ int Menu::getColumna() const
 
 void Menu::mostrar_pelea(sf::RenderWindow& window)
 {
+    sf::Color verdeSemiOscuro(34, 139, 34, 255);
+    sf::Color negroT(0, 0, 0, 128);
     for(int i=0; i<2; i++)
     {
         for(int l=0; l<2; l++)
         {
-            _text_pelea[i][l].setFillColor((i == _columna && l == _fila) ? sf::Color::Yellow : sf::Color::White);
+            _text_pelea[i][l].setFillColor((i == _columna && l == _fila) ? sf::Color::Red : negroT);
             window.draw(_text_pelea[i][l]);
         }
     }
@@ -139,17 +137,24 @@ int Menu::getSeleccion() const
 }
 void Menu::mostrar(sf::RenderWindow& window)
 {
+    ///colores
+    sf::Color verdeSemiOscuro(34, 139, 34, 255);
+    sf::Color grisTransparente(128, 128, 128, 100);
+    ///
     for (int i = 0; i < 3; i++)
     {
-        _text[i].setFillColor(i == _seleccion ? sf::Color::Red : sf::Color::Black);
+        _text[i].setFillColor(i == _seleccion ? verdeSemiOscuro : grisTransparente);
         window.draw(_text[i]);
     }
 }
 void Menu::mostrar_items(sf::RenderWindow& window)
 {
+
+    sf::Color verdeSemiOscuro(34, 139, 34, 255);
+    sf::Color grisTransparente(128, 128, 128, 100);
     for (int i = 0; i < 3; i++)
     {
-        _text_items[i].setFillColor(i == _seleccion ? sf::Color::Red : sf::Color::Black);
+        _text_items[i].setFillColor(i == _seleccion ? verdeSemiOscuro : grisTransparente);
         window.draw(_text_items[i]);
     }
 }
