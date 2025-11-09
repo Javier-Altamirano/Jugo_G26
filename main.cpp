@@ -125,10 +125,6 @@ int main()
     const char mens[30] = "Pesiona (F)";
     mensaje_camp.setString(mens);
 
-    mensaje.setFont(fuente);
-    mensaje.setFillColor(sf::Color::White);
-    mensaje.setCharacterSize(30);
-    const char mens3[30] = "Hello Strager";
     bool mostrar_mensaje;///verifica si estas cerca para mostrar el mensaje
 
     /////////////////
@@ -514,8 +510,6 @@ int main()
             if(gwen.isColision(vendedor))
             {
                 vendedor_cerca = true;
-                mensaje.setString(mens3);
-                mensaje.setPosition(30,230);
             }
             if(vendedor_cerca == true)
             {
@@ -674,11 +668,13 @@ int main()
             {
                 window.draw(carta);
                 menu.mostrar_items(window);
+                //mochila.mostrar_saldo(window);
             }
             else if(estado == TIENDA && estadoT == COMPRANDO && estadoC == VENTA)
             {
                 window.draw(carta);
                 menu.mostrar_items(window);
+                //mochila.mostrar_saldo(window);
             }
         }
 

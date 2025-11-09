@@ -149,7 +149,6 @@ void Menu::mostrar(sf::RenderWindow& window)
 }
 void Menu::mostrar_items(sf::RenderWindow& window)
 {
-
     sf::Color verdeSemiOscuro(34, 139, 34, 255);
     sf::Color grisTransparente(128, 128, 128, 100);
     for (int i = 0; i < 3; i++)

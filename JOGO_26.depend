@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1762669940 source:c:\users\franc\desktop\jogo_26\main.cpp
+1762723557 source:c:\users\franc\desktop\jogo_26\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<iostream>
@@ -430,7 +430,7 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1761976936 c:\users\franc\desktop\jogo_26\personaje_jugador.h
+1762727344 c:\users\franc\desktop\jogo_26\personaje_jugador.h
 	<SFML/Graphics.hpp>
 	"colision.h"
 
@@ -581,7 +581,7 @@
 	<iostream>
 	"vendedor.h"
 
-1762487766 source:c:\users\franc\desktop\jogo_26\menu.cpp
+1762723382 source:c:\users\franc\desktop\jogo_26\menu.cpp
 	<iostream>
 	"menu.h"
 
@@ -593,7 +593,7 @@
 	<iostream>
 	"items.h"
 
-1762476000 c:\users\franc\desktop\jogo_26\items.h
+1762723415 c:\users\franc\desktop\jogo_26\items.h
 	<SFML/Graphics.hpp>
 	<iostream>
 
@@ -607,4 +607,11 @@
 	"inventario.h"
 
 1762666378 source:c:\users\franc\desktop\jogo_26\recursos.cpp
+
+1762726308 source:c:\users\franc\desktop\jogo_26\personajes.cpp
+	<iostream>
+	"personajes.h"
+
+1762726097 c:\users\franc\desktop\jogo_26\personajes.h
+	<iostream>
 

@@ -12,19 +12,19 @@ protected:
     int _ataque;
     int _defensa;
 public:
-    Personajes(int id, std::string nombre, int vidaM, int vidaA, int ataque, int defensa, bool vivo);
-    ///destruye la derivada - limpia - {}
-    virtual ~Personaje() = default;
+    Personajes(int id, const std::string& nombre, int vidaM, int vidaA, int ataque, int defensa, bool vivo);
+    ///destruye la derivada - limpia - {};
+    virtual ~Personajes() = default;
     ///Acciones
     virtual void recibirDanio(int danio);
 
     bool estaVivo() const;
 
-    const std::string& getNombre() const;
+    const std::string getNombre() const;
 
     int getVida() const;
 
     int getAtaque() const;
 
-    virtual void mostrarInfo() const;
+    //virtual void mostrarInfo() const;
 };

@@ -10,7 +10,6 @@ private:
     int _compra;
     int _venta;
     int _cantidad;
-
 public:
     Item();
     Item(int id, const std::string& nombre, int compra , int venta, int cantidad);

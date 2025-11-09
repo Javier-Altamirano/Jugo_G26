@@ -72,9 +72,8 @@
 		<Unit filename="personaje_jugador.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="pesonajes.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="personajes.cpp" />
+		<Unit filename="personajes.h" />
 		<Unit filename="recursos.cpp" />
 		<Unit filename="recursos.h">
 			<Option target="&lt;{~None~}&gt;" />
