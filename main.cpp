@@ -4,12 +4,13 @@
 #include "souns.h"
 #include "personaje_jugador.h"
 #include "enemigo.h"
+#include "enemigos.h"
 #include "campamento.h"
 #include "vendedor.h"
 #include "menu.h"
 #include "items.h"
 #include "inventario.h"
-
+#include "archivos.h"
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "The Last Guardians"); ///Ventana
@@ -18,8 +19,21 @@ int main()
     float delay = 0.2f; // segundo
 
     Inventario mochila(10);
-    Item pocionV(1, "P Vida", 50, 25,1);
-    Item pocionE(2, "P Energia", 200, 100,1);
+    //Item pocionV(1, "P Vida", 50, 25,1);
+    //Item pocionE(2, "P Energia", 200, 100,1);
+    Archivos archivos("Aliados.dat","Enemigos.dat","Items.dat");
+    //archivos.GuardarItem(pocionV);
+    //archivos.GuardarItem(pocionE);
+    /// ========>> ITEMS <<========
+    Item pocionV = archivos.LeerItem(0);
+    Item pocionE = archivos.LeerItem(1);
+    /// ========>> ALIADOS <<========
+    Aliado a1(1,"Messi",250,250,12,9,true);
+    /// ========>> ENEMIGOS <<========
+    //Enemigos e1(1,"SoldadoA",120,120,10,8,true);
+    Enemigos e1 = archivos.LeerEnemigo(0);
+    std::cout << e1.getNombre()  <<" " << e1.getId() << " " <<e1.getVidaM() << std::endl;
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///Sonido
     Sound musica;

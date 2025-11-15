@@ -30,7 +30,7 @@ bool Inventario::agregarItem(const Item& item)
                 int nuevaCantidad = _items[i].getCantidad() + item.getCantidad();
                 _items[i].setCantidad(nuevaCantidad);
                 std::cout << item.getNombre() << " ahora tiene " << nuevaCantidad << " unidades.\n";
-                _text.setString(item.getNombre() + " ahora tiene " + std::to_string(nuevaCantidad) + " unidades");
+                _text.setString(std::string(item.getNombre()) + " ahora tiene " + std::to_string(nuevaCantidad) + " unidades");
                 return true;
             }
         }
@@ -139,7 +139,7 @@ void Inventario::mostrar(sf::RenderWindow& window)
     {
         for (int i = 0; i < _cantidad; i++)
         {
-            mensaje.setString(_items[i].getNombre() + " X (" + std::to_string(_items[i].getCantidad()) + ")");
+            mensaje.setString(std::string(_items[i].getNombre()) + " X (" + std::to_string(_items[i].getCantidad()) + ")");
 
             mensaje.setCharacterSize(20);
             mensaje.setPosition(570,280+i*30);

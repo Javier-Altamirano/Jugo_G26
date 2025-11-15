@@ -135,7 +135,7 @@ void Jugador::jugador_tienda()
         _sprite.setPosition(_sprite.getPosition().x, 600 + (_sprite.getGlobalBounds().height - _sprite.getOrigin().y));
     }
 }
-
+///COLISION DEL PJ
 sf::FloatRect Jugador::getBounds() const
 {
     return _sprite.getGlobalBounds();

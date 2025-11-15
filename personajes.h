@@ -5,14 +5,16 @@ class Personajes
 {
 protected:
     int _idPersonaje;
-    std::string _nombre;
+    char _nombre[30];
     int _vidaMax;
     int _vidaActual;
     bool _vivo;
     int _ataque;
     int _defensa;
 public:
-    Personajes(int id, const std::string& nombre, int vidaM, int vidaA, int ataque, int defensa, bool vivo);
+
+    Personajes(int id = 0, const char* nombre = "", int vidaM = 0, int vidaA = 0,
+         int ataque = 0, int defensa = 0, bool vivo = true);
     ///destruye la derivada - limpia - {};
     virtual ~Personajes() = default;
     ///Acciones
@@ -20,11 +22,13 @@ public:
 
     bool estaVivo() const;
 
-    const std::string getNombre() const;
+    const char* getNombre() const;
 
-    int getVida() const;
+    int getVidaA() const;
+
+    int getId() const;
+
+    int getVidaM() const;
 
     int getAtaque() const;
-
-    //virtual void mostrarInfo() const;
 };

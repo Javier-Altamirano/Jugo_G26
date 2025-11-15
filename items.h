@@ -1,24 +1,23 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include <iostream>
 
 class Item
 {
 private:
     int _idItem;
-    std::string _nombre;
+    char _nombre[30];
     int _compra;
     int _venta;
     int _cantidad;
 public:
-    Item();
-    Item(int id, const std::string& nombre, int compra , int venta, int cantidad);
+
+    Item(int id = 0, const char* nombre = "", int compra = 0, int venta = 0, int cantidad = 0);
     ///Crear personajes para usar
-    int getId() const { return _idItem; }
-    std::string getNombre() const { return _nombre; }
-    int getPrecioCompra() const { return _compra; }
-    int getPrecioVenta() const { return _venta; }
-    int getCantidad() const {return _cantidad;}
+    int getId() const;
+    const char* getNombre() const;
+    int getPrecioCompra() const;
+    int getPrecioVenta() const;
+    int getCantidad() const;
     void setCantidad(int cantidad);
 
 };

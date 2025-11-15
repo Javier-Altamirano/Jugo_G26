@@ -1,16 +1,18 @@
 # depslib dependency file v1.0
-1762723557 source:c:\users\franc\desktop\jogo_26\main.cpp
+1763094080 source:c:\users\franc\desktop\jogo_26\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<iostream>
 	"souns.h"
 	"personaje_jugador.h"
 	"enemigo.h"
+	"enemigos.h"
 	"campamento.h"
 	"vendedor.h"
 	"menu.h"
 	"items.h"
 	"inventario.h"
+	"archivos.h"
 
 1731167480 c:\users\franc\desktop\jogo_26\sfml\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -434,7 +436,7 @@
 	<SFML/Graphics.hpp>
 	"colision.h"
 
-1762641521 source:c:\users\franc\desktop\jogo_26\personaje_jugador.cpp
+1762924096 source:c:\users\franc\desktop\jogo_26\personaje_jugador.cpp
 	<iostream>
 	"personaje_jugador.h"
 
@@ -589,12 +591,13 @@
 	<SFML/Graphics.hpp>
 	"items.h"
 
-1762476000 source:c:\users\franc\desktop\jogo_26\items.cpp
+1763089916 source:c:\users\franc\desktop\jogo_26\items.cpp
 	<iostream>
+	<string>
+	<cstring>
 	"items.h"
 
-1762723415 c:\users\franc\desktop\jogo_26\items.h
-	<SFML/Graphics.hpp>
+1763091361 c:\users\franc\desktop\jogo_26\items.h
 	<iostream>
 
 1762664620 c:\users\franc\desktop\jogo_26\inventario.h
@@ -602,16 +605,46 @@
 	"items.h"
 	<SFML/Graphics.hpp>
 
-1762667837 source:c:\users\franc\desktop\jogo_26\inventario.cpp
+1763091959 source:c:\users\franc\desktop\jogo_26\inventario.cpp
 	<iostream>
 	"inventario.h"
 
 1762666378 source:c:\users\franc\desktop\jogo_26\recursos.cpp
 
-1762726308 source:c:\users\franc\desktop\jogo_26\personajes.cpp
+1763079164 source:c:\users\franc\desktop\jogo_26\personajes.cpp
 	<iostream>
+	<string>
+	<cstring>
 	"personajes.h"
 
-1762726097 c:\users\franc\desktop\jogo_26\personajes.h
+1763094243 c:\users\franc\desktop\jogo_26\personajes.h
 	<iostream>
+
+1763090646 source:c:\users\franc\desktop\jogo_26\archivos.cpp
+	<iostream>
+	"archivos.h"
+
+1763091549 c:\users\franc\desktop\jogo_26\archivos.h
+	"aliados.h"
+	"enemigos.h"
+	"items.h"
+
+1763090221 c:\users\franc\desktop\jogo_26\aliados.h
+	"personajes.h"
+	<SFML/Graphics.hpp>
+
+1763094379 c:\users\franc\desktop\jogo_26\enemigos.h
+	"personajes.h"
+
+1763094730 source:c:\users\franc\desktop\jogo_26\aliados.cpp
+	<iostream>
+	"aliados.h"
+	<string>
+	<cstring>
+
+1763094730 source:c:\users\franc\desktop\jogo_26\enemigos.cpp
+	<iostream>
+	"enemigos.h"
+	<string>
+	<cstring>
 
