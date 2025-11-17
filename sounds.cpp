@@ -60,8 +60,14 @@ Sound::Sound()
         std::cout << "error ok2...\n";
     }
     _sound_ok2.setBuffer(_buffer_ok2);
+    if(!_buffer_nop.loadFromFile("Sound/nop.wav"))
+    {
+        ///error
+    }
+    _sound_nop.setBuffer(_buffer_nop);
 
     _volumen = 50.0f;
+    _sound_nop.setVolume(_volumen);
     _sound_ok2.setVolume(_volumen);
     _sound_ok.setVolume(_volumen);
     _sound_wel.setVolume(_volumen);
@@ -168,6 +174,13 @@ void Sound::ok2()
         _sound_ok2.play();
     }
 }
+void Sound::nop()
+{
+    if(_sound_nop.getStatus() != sf::Sound::Playing)
+    {
+        _sound_nop.play();
+    }
+}
 ///---------CONTROL DE VOLUMEN-------------------------
 void Sound::subir()
 {
@@ -175,6 +188,7 @@ void Sound::subir()
     {
         _volumen++;
     }
+    _sound_nop.setVolume(_volumen);
     _sound_ok2.setVolume(_volumen);
     _sound_ok.setVolume(_volumen);
     _sound_wel.setVolume(_volumen);
@@ -191,6 +205,7 @@ void Sound::bajar()
     {
         _volumen--;
     }
+    _sound_nop.setVolume(_volumen);
     _sound_ok2.setVolume(_volumen);
     _sound_ok.setVolume(_volumen);
     _sound_wel.setVolume(_volumen);

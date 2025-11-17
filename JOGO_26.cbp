@@ -60,8 +60,19 @@
 		<Unit filename="enemigos.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="game.cpp" />
+		<Unit filename="game.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="game_data.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="inventario.cpp" />
 		<Unit filename="inventario.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="inventarioView.cpp" />
+		<Unit filename="inventarioView.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="items.cpp" />
@@ -71,6 +82,18 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="menu.cpp" />
 		<Unit filename="menu.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="menu_pausa.cpp" />
+		<Unit filename="menu_pausa.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="menu_pelea.cpp" />
+		<Unit filename="menu_pelea.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="pelea.cpp" />
+		<Unit filename="pelea.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="personaje_jugador.cpp" />
@@ -85,6 +108,14 @@
 		</Unit>
 		<Unit filename="sounds.cpp" />
 		<Unit filename="souns.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="t_s.cpp" />
+		<Unit filename="t_s.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="tienda_menu.cpp" />
+		<Unit filename="tienda_menu.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="vendedor.cpp" />

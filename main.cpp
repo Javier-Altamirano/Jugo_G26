@@ -8,9 +8,17 @@
 #include "campamento.h"
 #include "vendedor.h"
 #include "menu.h"
+#include "menu_pausa.h"
+#include "menu_pelea.h"
+#include "tienda_menu.h"
+#include "t_s.h"
 #include "items.h"
 #include "inventario.h"
 #include "archivos.h"
+#include "inventarioView.h"
+#include "pelea.h"
+#include <memory>
+#include "game.h"
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "The Last Guardians"); ///Ventana
@@ -18,106 +26,55 @@ int main()
     sf::Clock reloj; ///Crea un reloj
     float delay = 0.2f; // segundo
 
-    Inventario mochila(10);
-    //Item pocionV(1, "P Vida", 50, 25,1);
-    //Item pocionE(2, "P Energia", 200, 100,1);
+    MenuPausa mp;
+    MenuPelea mpelea;
+    TiendaMenu tiendM;
+    int menuDeseado;
+
+    Inventario mochila;
+    InventarioView inventView(mochila);
     Archivos archivos("Aliados.dat","Enemigos.dat","Items.dat");
-    //archivos.GuardarItem(pocionV);
-    //archivos.GuardarItem(pocionE);
+    //Item pocionV(1, "Hierva Verde", 50, 25,1);
+    //Item pocionE(2, "Monster Mango Loco", 70, 35,1);
     /// ========>> ITEMS <<========
     Item pocionV = archivos.LeerItem(0);
     Item pocionE = archivos.LeerItem(1);
     /// ========>> ALIADOS <<========
-    Aliado a1(1,"Messi",250,250,12,9,true);
-    /// ========>> ENEMIGOS <<========
-    //Enemigos e1(1,"SoldadoA",120,120,10,8,true);
-    Enemigos e1 = archivos.LeerEnemigo(0);
-    std::cout << e1.getNombre()  <<" " << e1.getId() << " " <<e1.getVidaM() << std::endl;
+    //Aliado al = archivos.LeerAliado(archivos.BIA(10));
+    //Enemigos e1 = archivos.LeerEnemigo(archivos.BIE(1));
 
+    GameWorld world(1);
+
+    /*int ca = archivos.CantAliadoG();
+    std::cout << "Cantidad detectada por CantAliadoG() = " << ca << std::endl;
+    Aliado* lista = new Aliado[ca];
+    archivos.LeerAT(lista, ca);
+    for(int i = 0; i < ca; i++)
+    {
+        std::cout << "-> aliado " << i << " nombre: '" << lista[i].getNombre() << "'" << std::endl;
+    }
+    delete[] lista;*/
+
+    /// ========>> ENEMIGOS <<========
+    //Enemigos e1(1,"Jawa",320,320,40,30,120,120,true);
+    //archivos.GuardarEnemigo(e1);
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///Sonido
     Sound musica;
+    Txt_Spt sprites;
     Jugador gwen;///Gwen JUGADO ****************************
     Campamento camp;///Campamento / Tienda
     Vendedor vendedor; /// NPC VENDEDOR
     Menu menu; ///TODOS LOS MENUS
     Enemigo enemi; ///ENEMIGO
-    int f,c; ///POSICION DE FILA Y COLUMNA
+    //int f,c; ///POSICION DE FILA Y COLUMNA
     bool camp_cerca;
     bool vendedor_cerca;
     bool enemigo_cerca;
-    sf::Texture texura;///PISO DE LA TIENDA
-    if(!texura.loadFromFile("Texture/piso.png"))
-    {
-        std::cout << "error\n";
-    }
-    sf::Sprite sprite;
-    sprite.setTexture(texura);
     ////////////////////////////
-    sf::Texture texture2;///FONDO DE LA PELEA
-    if(!texture2.loadFromFile("Texture/pelea.png"))
-    {
-        std::cout << "error pelea...\n";
-    }
-    sf::Sprite sprite2;
-    sprite2.setTexture(texture2);
-
-    sf::Texture textPortada;///FONDO PORTADA INICIO
-    if(!textPortada.loadFromFile("Texture/portada.png"))
-    {
-        //error
-    }
-    sf::Sprite portada;
-    portada.setTexture(textPortada);
-
-    sf::Texture textPausa; ///MENU DE COMPRA
-    if(!textPausa.loadFromFile("Texture/menu1.png"))
-    {
-        std::cout << "error menu1...\n";
-    }
-    sf::Sprite pausaS;
-    pausaS.setTexture(textPausa);
-    pausaS.setPosition(50,50);
-
-    sf::Texture textCarta; ///MENU DE PAUSA
-    if(!textCarta.loadFromFile("Texture/fondomenu.png"))
-    {
-        std::cout << "error cartilla...\n";
-    }
-    sf::Sprite carta;
-    carta.setTexture(textCarta);
-    carta.setPosition(150,140);
-
-    sf::Texture text_m; ///INVENTARIO ABIERTO
-    if(!text_m.loadFromFile("Texture/mOpen.png"))
-    {
-        std::cout << "error maletin1...\n";
-    }
-    sf::Sprite m1;
-    m1.setTexture(text_m);
-    m1.setPosition(360,250);
-
-    sf::Texture text_m2;///INVENTARIO CERRADO (SOLO VISUAL)
-    if(!text_m2.loadFromFile("Texture/mClose.png"))
-    {
-        std::cout << "error maletin...\n";
-    }
-    sf::Sprite m2;
-    m2.setTexture(text_m2);
-    m2.setPosition(360,250);
-
-    ////////FONDO
-    sf::Sprite mapa;
-    sf::Texture _mapa;
-    if(!_mapa.loadFromFile("Texture/mapa.png"))
-    {
-        std::cout << "error mapa...\n";
-    }
-    mapa.setTexture(_mapa);
     ////////Funcion para seguir al personaje
     sf::View view(sf::FloatRect(0, 0, 800, 600)); // vista
     sf::Vector2f mapSize(4000.f, 3200.f); /// mapa
-    //-----//
     ////////////////////////////
     sf::Font fuente;
     if(!fuente.loadFromFile("Font/square.ttf"))
@@ -140,8 +97,8 @@ int main()
     mensaje_camp.setString(mens);
 
     bool mostrar_mensaje;///verifica si estas cerca para mostrar el mensaje
-
-    /////////////////
+    bool ganaste = false;
+    ///----------------- >FUNCIONES DE ESTADO <---------------------------
     enum EstadoJuego { MAPA, TIENDA, PELEA, MENUINICIO, SALIR, CINEMATICA};
     enum TiendaEstado {VIENDO, COMPRANDO, FUERA, QUIETO};
     enum Comprando {COMPRA, VENTA, NADA};
@@ -151,6 +108,7 @@ int main()
     bool pausa = false;
     bool mochilaA = false;
     float x,y;
+    std::unique_ptr<Pelea> combate;
 
     while (window.isOpen())
     {
@@ -170,13 +128,12 @@ int main()
                     if (event.key.code == sf::Keyboard::W)
                     {
                         reloj.restart();
-                        //menu.arriba_inicio();
-                        menu.arribaG(1);
+                        menu.arriba();
                     }
                     else if (event.key.code == sf::Keyboard::S)
                     {
                         reloj.restart();
-                        menu.abajoG(1);
+                        menu.abajo();
                     }
                     else if (event.key.code == sf::Keyboard::F)
                     {
@@ -185,7 +142,6 @@ int main()
                         switch(menu.getSeleccion())
                         {
                         case 0:
-                            //estado = MAPA;
                             estado = CINEMATICA;
                             std::cout << "Iniciando Nueva Partida...\n";
                             musica.ok();
@@ -217,17 +173,17 @@ int main()
                 {
                     if(event.key.code == sf::Keyboard::W)
                     {
-                        menu.arribaG(2);
+                        mp.arriva();
                         reloj.restart();
                     }
                     else if(event.key.code == sf::Keyboard::S)
                     {
-                        menu.abajoG(2);
+                        mp.abajo();
                         reloj.restart();
                     }
                     else if(event.key.code == sf::Keyboard::F)
                     {
-                        switch(menu.getSeleccion())
+                        switch(mp.getseleccion())
                         {
                         case 0:
                             std::cout << "Continuando...\n";
@@ -235,7 +191,7 @@ int main()
                             estadoT = VIENDO;
                             break;
                         case 1:
-                            std::cout << "Mochila...\n";
+                            std::cout << "Inventario...\n";
                             mochilaA = true;
                             mochila.getCantidad();
                             mochila.getCapacidadMax();
@@ -270,92 +226,34 @@ int main()
                     }
                 }
             }
-            ///PELEA----------------------------------------------------
-            else if(estado == PELEA)
-            {
-                window.setView(window.getDefaultView()); // Evita vista fuera de pantalla
-
-                if (event.type == sf::Event::KeyPressed && reloj.getElapsedTime().asSeconds() > delay)
-                {
-                    if (event.key.code == sf::Keyboard::W)
-                    {
-                        menu.arriba_pelea();
-                        reloj.restart();
-                    }
-                    else if(event.key.code == sf::Keyboard::S)
-                    {
-                        menu.abajo_pelea();
-                        reloj.restart();
-                    }
-                    else if(event.key.code == sf::Keyboard::A)
-                    {
-                        menu.izquierda();
-                        reloj.restart();
-                    }
-                    else if(event.key.code == sf::Keyboard::D)
-                    {
-                        menu.derecha();
-                        reloj.restart();
-                    }
-                    if(event.key.code == sf::Keyboard::F && reloj.getElapsedTime().asSeconds() > delay)
-                    {
-                        reloj.restart();
-                        f = menu.getFila();
-                        c = menu.getColumna();
-                        if(f == 0 && c == 0)
-                        {
-                            std::cout << "PELEA\n";
-                        }
-                        else if(f == 0 && c == 1)
-                        {
-                            std::cout << "MOCHILA\n";
-                        }
-                        else if(f == 1 && c == 0)
-                        {
-                            std::cout << "DEFIENDE\n";
-                        }
-                        else if(f == 1 && c == 1)
-                        {
-                            std::cout << "SALIR\n";
-                            estado = MAPA;
-                            musica.pelea_stop();
-                            musica.mapa_chill();
-                            x = 1525;
-                            y = 1000;
-                            gwen.pos(x,y);
-                        }
-                    }
-                }
-            }
             ///TIENDA--------------------------------------------------
             ///COMPRANDO
             else if(estado == TIENDA && estadoT == COMPRANDO && estadoC == NADA)
             {
+                menuDeseado = 1;
                 if (event.type == sf::Event::KeyPressed && reloj.getElapsedTime().asSeconds() > delay)
                 {
                     if (event.key.code == sf::Keyboard::W)
                     {
-                        menu.arribaG(2);
+                        tiendM.arriba(menuDeseado);
                         reloj.restart();
                     }
                     else if(event.key.code == sf::Keyboard::S)
                     {
-                        menu.abajoG(2);
+                        tiendM.abajo(menuDeseado);
                         reloj.restart();
                     }
                     else if(event.key.code == sf::Keyboard::F)
                     {
                         reloj.restart();
-                        switch(menu.getSeleccion())
+                        switch(tiendM.getseleccion(menuDeseado))
                         {
                         case 0:
-                            std::cout << "COMPRASTE! \n";
-                            //mochila.agregarItem(pocion);
+                            std::cout << "Comprando... \n";
                             estadoC = COMPRA;
                             break;
                         case 1:
-                            std::cout << "VENDISTE! \n";
-                            //mochila.quitarItem(1);
+                            std::cout << "Vendiendo... \n";
                             estadoC = VENTA;
                             break;
                         case 2:
@@ -368,30 +266,35 @@ int main()
             }
             else if(estadoC == COMPRA && estadoT == COMPRANDO)
             {
+                menuDeseado = 2;
                 if (event.type == sf::Event::KeyPressed && reloj.getElapsedTime().asSeconds() > delay)
                 {
                     if (event.key.code == sf::Keyboard::W)
                     {
-                        menu.arribaG(2);
+                        tiendM.arriba(menuDeseado);
                         reloj.restart();
                     }
                     else if(event.key.code == sf::Keyboard::S)
                     {
-                        menu.abajoG(2);
+                        tiendM.abajo(menuDeseado);
                         reloj.restart();
                     }
                     else if(event.key.code == sf::Keyboard::F)
                     {
                         reloj.restart();
-                        switch(menu.getSeleccion())
+                        switch(tiendM.getseleccion(menuDeseado))
                         {
                         case 0:
-                            mochila.agregarItem(pocionV);
-                            musica.thanks();
+                            if(mochila.agregarItem(pocionV))
+                                musica.thanks();
+                            else
+                                musica.nop();
                             break;
                         case 1:
-                            mochila.agregarItem(pocionE);
-                            musica.thanks();
+                            if(mochila.agregarItem(pocionE))
+                                musica.thanks();
+                            else
+                                musica.nop();
                             break;
                         case 2:
                             estadoC = NADA;
@@ -402,28 +305,35 @@ int main()
             }
             else if(estadoC == VENTA && estadoT == COMPRANDO)
             {
+                menuDeseado = 3;
                 if (event.type == sf::Event::KeyPressed && reloj.getElapsedTime().asSeconds() > delay)
                 {
                     if (event.key.code == sf::Keyboard::W)
                     {
-                        menu.arribaG(2);
+                        tiendM.arriba(menuDeseado);
                         reloj.restart();
                     }
                     else if(event.key.code == sf::Keyboard::S)
                     {
-                        menu.abajoG(2);
+                        tiendM.abajo(menuDeseado);
                         reloj.restart();
                     }
                     else if(event.key.code == sf::Keyboard::F)
                     {
                         reloj.restart();
-                        switch(menu.getSeleccion())
+                        switch(tiendM.getseleccion(menuDeseado))
                         {
                         case 0:
-                            mochila.quitarItem(1);
+                            if(mochila.quitarItem(pocionV.getId()) == true)
+                                musica.thanks();
+                            else
+                                musica.nop();
                             break;
                         case 1:
-                            mochila.quitarItem(2);
+                            if(mochila.quitarItem(pocionE.getId()) == true)
+                                musica.thanks();
+                            else
+                                musica.nop();
                             break;
                         case 2:
                             estadoC = NADA;
@@ -438,6 +348,24 @@ int main()
         if(estado == MENUINICIO)
         {
 
+        }
+        ///PELEA----------------------------------------------------
+        else if (estado == PELEA)
+        {
+            if(world.resultado() != 3)
+            {
+                world.update(window);
+            }
+            int r = world.resultado();
+
+            if (r == 3 || r == 4)
+            {
+                world.finalizarPelea();
+                musica.pelea_stop();
+                estado = MAPA;
+                reloj.restart();
+                continue;
+            }
         }
         else if(estado == CINEMATICA)
         {
@@ -475,8 +403,8 @@ int main()
                     reloj.restart();
                     musica.ok2();
                     musica.mapa_chill_stop();
-                    sprite2.setPosition(0,80);
                     estado = PELEA;
+                    world.iniciarPelea();
                 }
             }
             ///evalua alidaos
@@ -494,7 +422,6 @@ int main()
                     estadoT = VIENDO;
                     musica.mapa_chill_stop();
                     musica.tienda();
-                    sprite.setPosition(0,0);
                     musica.open();
                     reloj.restart();
                     ////////
@@ -531,7 +458,6 @@ int main()
                 {
                     musica.welcome();
                     estadoT = COMPRANDO;
-                    carta.setPosition(200,100);
                 }
             }
             ///salir
@@ -571,14 +497,15 @@ int main()
             musica.bajar();
             vol.setString(std::to_string(musica.getVolumen()));
         }
-        ////////////
-        window.clear();
+        ///////////////////
+        window.clear(); ///
+        ///////////////////
         ///DRAW------------------------------------------------------------------------------------
         ///menu inicio
         if(estado == MENUINICIO)
         {
             window.setView(window.getDefaultView()); // Evita vista fuera de pantall
-            window.draw(portada);
+            sprites.fondos(window,2);
             menu.mostrar_inicio(window);
             window.draw(vol);
         }
@@ -592,7 +519,7 @@ int main()
             gwen.updateView(view, mapSize);///sigue al pj
             window.setView(view); /// actualiza la posicion de la camara
 
-            window.draw(mapa);
+            sprites.fondos(window, 3);
             window.draw(enemi);
             window.draw(camp);
             window.draw(gwen); ///Dibuja el personaje
@@ -609,20 +536,19 @@ int main()
             if(mochilaA == false)
             {
                 window.draw(fondo_pausa);
-                window.draw(m2);
-                window.draw(pausaS);
-                menu.posicion(100,130);
-                menu.mostrar_pausa(window);
-                mochila.mostrar_saldo(window);
+                window.draw(mp);
+                inventView.maletinC(window);
+                mp.mostrarPausa(window);
+                inventView.mostrar_saldo(window, 1);
             }
             else if(mochilaA == true)
             {
                 window.draw(fondo_pausa);
-                window.draw(m1);
-                window.draw(pausaS);
-                menu.mostrar_pausa(window);
-                mochila.mostrar(window);
-                mochila.mostrar_saldo(window);
+                window.draw(mp);
+                inventView.maletinO(window);
+                mp.mostrarPausa(window);
+                inventView.mostrar_saldo(window, 1);
+                inventView.MostrarInv(window);
             }
         }
         ///pelea draw
@@ -631,16 +557,14 @@ int main()
             window.setView(window.getDefaultView());
 
             musica.pelea();
-
-            window.draw(sprite2);
-            menu.mostrar_pelea(window);
+            world.draw(window);
         }
         ///tienda draw
         else if(estado == TIENDA)
         {
             window.setView(window.getDefaultView()); // Evita vista fuera de pantalla
 
-            window.draw(sprite);
+            sprites.fondos(window, 0);
             window.draw(gwen);
             window.draw(vendedor);
             window.draw(camp); ///simula puerta
@@ -649,20 +573,20 @@ int main()
                 if(mochilaA == false)
                 {
                     window.draw(fondo_pausa);
-                    window.draw(m2);
-                    window.draw(pausaS);
-                    menu.posicion(70,130);
-                    menu.mostrar_pausa(window);
-                    mochila.mostrar_saldo(window);
+                    window.draw(mp);
+                    inventView.maletinC(window);
+                    mp.mostrarPausa(window);
+                    inventView.mostrar_saldo(window,1);
+
                 }
                 else if(mochilaA == true)
                 {
                     window.draw(fondo_pausa);
-                    window.draw(m1);
-                    window.draw(pausaS);
-                    menu.mostrar_pausa(window);
-                    mochila.mostrar(window);
-                    mochila.mostrar_saldo(window);
+                    window.draw(mp);
+                    inventView.maletinO(window);
+                    mp.mostrarPausa(window);
+                    inventView.mostrar_saldo(window,1);
+                    inventView.MostrarInv(window);
                 }
             }
             if(estado == TIENDA && estadoT == VIENDO)
@@ -675,23 +599,23 @@ int main()
             }
             else if(estado == TIENDA && estadoT == COMPRANDO && estadoC == NADA)
             {
-                window.draw(carta);
-                menu.mostrar(window);
+                window.draw(tiendM);
+                tiendM.mostrar(window);
+                inventView.mostrar_saldo(window,2);
             }
             else if(estado == TIENDA && estadoT == COMPRANDO && estadoC == COMPRA)
             {
-                window.draw(carta);
-                menu.mostrar_items(window);
-                //mochila.mostrar_saldo(window);
+                window.draw(tiendM);
+                tiendM.mostrarCompra(window);
+                inventView.mostrar_saldo(window,2);
             }
             else if(estado == TIENDA && estadoT == COMPRANDO && estadoC == VENTA)
             {
-                window.draw(carta);
-                menu.mostrar_items(window);
-                //mochila.mostrar_saldo(window);
+                window.draw(tiendM);
+                tiendM.mostrarVenta(window);
+                inventView.mostrar_saldo(window,2);
             }
         }
-
         window.display();
     }
 

@@ -31,6 +31,9 @@ private:
     sf::SoundBuffer _buffer_ok2;
     sf::Sound _sound_ok2;
 
+    sf::SoundBuffer _buffer_nop;
+    sf::Sound _sound_nop;
+
     int _volumen;
 public:
     Sound();
@@ -51,6 +54,7 @@ public:
     void welcome();
     void ok();
     void ok2();
+    void nop();
 
     void subir();
     void bajar();

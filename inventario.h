@@ -1,34 +1,28 @@
 #pragma once
 #include <istream>
 #include "items.h"
-#include <SFML/Graphics.hpp>
 
 class Inventario
 {
 private:
-    Item* _items;
+    Item _items[10];
     int _cantidad;
-    int _capacidad_maxima;
-    sf::Font _font;
-    sf::Text _text;
+    const int _capacidad_maxima = 10;
     int _saldo;
 public:
-    Inventario(int capacidad);
+    Inventario();
     /// Destructor
-    ~Inventario()
-    {
-        delete[] _items; /// libera memoria
-    }
+    ~Inventario(){}
 
     bool agregarItem(const Item& item);
 
     bool quitarItem(int id);
 
     int getsaldo();
-    void mostrar_saldo(sf::RenderWindow& window);
 
     /// CONTENIDO
     void mostrarContenido() const;
+
     /// Espacio disponible
     int getCantidad() const;
 
@@ -38,7 +32,6 @@ public:
     /// Verificar si tiene un item
     bool tieneItem(int id) const;
 
-    void mensajes(sf::RenderWindow& window);
+    const Item& getItem(int index) const { return _items[index]; }
 
-    void mostrar(sf::RenderWindow& window);
 };

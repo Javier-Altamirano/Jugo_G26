@@ -4,7 +4,7 @@
 #include "personajes.h"
 using namespace std;
 
-Personajes::Personajes(int id, const char* nombre, int vidaM, int vidaA, int ataque, int defensa, bool vivo)
+Personajes::Personajes(int id, const char* nombre, int vidaM, int vidaA, int ataque, int defensa,int energiaM,int energiaA, bool vivo)
 {
     _idPersonaje = id;
     // copiar nombre al char array asegurando terminación nula
@@ -16,22 +16,15 @@ Personajes::Personajes(int id, const char* nombre, int vidaM, int vidaA, int ata
     _vidaActual = vidaA;
     _ataque = ataque;
     _defensa = defensa;
+    _energiaMax = energiaM;
+    _energiaActual = energiaA;
     _vivo = vivo;
-}
-
-void Personajes::recibirDanio(int danio)
-{
-    _vidaActual -= danio;
-    if (_vidaActual <= 0)
-    {
-        _vidaActual = 0;
-        _vivo = false;
-    }
 }
 
 bool Personajes::estaVivo() const
 {
-    return _vivo;
+    if(_vidaActual > 0)
+        return _vivo;
 }
 const char* Personajes::getNombre() const
 {
@@ -55,4 +48,17 @@ int Personajes::getAtaque() const
 int Personajes::getId() const
 {
     return _idPersonaje;
+}
+
+int Personajes::getEM() const
+{
+    return _energiaMax;
+}
+int Personajes::getEA() const
+{
+    return _energiaActual;
+}
+int Personajes::getDefensa() const
+{
+    return _defensa;
 }

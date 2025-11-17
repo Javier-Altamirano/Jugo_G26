@@ -7,6 +7,7 @@ class Aliado : public Personajes
 private:
 public:
     Aliado() = default;
-    Aliado(int id, const char* nombre, int vidaM, int vidaA, int ataque, int defensa, bool vivo);
+    Aliado(int id, const char* nombre, int vidaM, int vidaA, int ataque, int defensa,int energiaM, int energiaA, bool vivo);
+
 };
 

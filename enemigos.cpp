@@ -8,7 +8,7 @@ Enemigos::Enemigos(int id, const char* nombre, int vidaM, int vidaA, int ataque,
     : Personajes(id, nombre, vidaM, vidaA, ataque, defensa, vivo)
 {
 }*/
-Enemigos::Enemigos(int id, const char* nombre, int vidaM, int vidaA, int ataque, int defensa, bool vivo)
+Enemigos::Enemigos(int id, const char* nombre, int vidaM, int vidaA, int ataque, int defensa,int energiaM, int energiaA, bool vivo)
 {
     _idPersonaje = id;
     strncpy(_nombre, nombre, sizeof(_nombre) -1);
@@ -17,5 +17,7 @@ Enemigos::Enemigos(int id, const char* nombre, int vidaM, int vidaA, int ataque,
     _vidaActual = vidaA;
     _ataque = ataque;
     _defensa = defensa;
+    _energiaMax = energiaM;
+    _energiaActual = energiaA;
     _vivo = vivo;
 }

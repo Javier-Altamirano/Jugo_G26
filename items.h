@@ -10,7 +10,6 @@ private:
     int _venta;
     int _cantidad;
 public:
-
     Item(int id = 0, const char* nombre = "", int compra = 0, int venta = 0, int cantidad = 0);
     ///Crear personajes para usar
     int getId() const;
@@ -19,5 +18,4 @@ public:
     int getPrecioVenta() const;
     int getCantidad() const;
     void setCantidad(int cantidad);
-
 };

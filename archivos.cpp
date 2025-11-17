@@ -38,7 +38,7 @@ Item Archivos::LeerItem(int pos)
     }
     Item reg;
     fseek(p, sizeof(Item) * pos, SEEK_SET);
-    fread(&reg ,sizeof(Item), 1, p);
+    fread(&reg,sizeof(Item), 1, p);
     fclose(p);
     return reg;
 }
@@ -58,7 +58,8 @@ int Archivos::CantItemsG()
 int Archivos::BII(int id)
 {
     FILE *p = fopen(_items.c_str(), "rb");
-    if(p == NULL){
+    if(p == NULL)
+    {
         return -1;
     }
     Item reg;
@@ -79,12 +80,16 @@ int Archivos::BII(int id)
 void Archivos::LeerIT(Item* v, int cantidad)
 {
     FILE *p = fopen(_items.c_str(), "rb");
-    if(p == NULL){
+    if(p == NULL)
+    {
         return;
     }
-    for(int i=0; i < CantItemsG(); i++)
+    for(int i=0; i < cantidad; i++)
     {
-        fread(&v[i], sizeof(Item), 1, p);
+        if (fread(&v[i], sizeof(Item), 1, p) != 1)
+        {
+            break;
+        }
     }
     fclose(p);
 }
@@ -124,7 +129,7 @@ Aliado Archivos::LeerAliado(int pos)
     }
     Aliado reg;
     fseek(p, sizeof(Aliado) * pos, SEEK_SET);
-    fread(&reg ,sizeof(Aliado), 1, p);
+    fread(&reg,sizeof(Aliado), 1, p);
     fclose(p);
     return reg;
 }
@@ -169,11 +174,14 @@ void Archivos::LeerAT(Aliado* v, int cantidad)
     if(p == NULL)
     {
         cout << "No se abrio\n";
-        fclose(p);
+        return;
     }
-    for(int i=0; i<CantAliadoG(); i++)
+    for(int i=0; i<cantidad; i++)
     {
-        fread(&v[i], sizeof(Aliado), 1, p);
+        if (fread(&v[i], sizeof(Aliado), 1, p) != 1)
+        {
+            break;
+        }
     }
     fclose(p);
 }
@@ -258,11 +266,14 @@ void Archivos::LeerET(Enemigos* v, int cantidad)
     if(p == NULL)
     {
         cout << "no se abrio\n";
-        fclose(p);
+        return;
     }
-    for(int i=0; i<CantEnemigoG();i++)
+    for(int i=0; i<cantidad; i++)
     {
-        fread(&v[i], sizeof(Enemigos), 1, p);
+        if (fread(&v[i], sizeof(Enemigos), 1, p) != 1)
+        {
+            break;
+        }
     }
     fclose(p);
 }

@@ -23,3 +23,8 @@ sf::FloatRect Enemigo::getBounds() const
 {
     return _sprite.getGlobalBounds();
 }
+
+void Enemigo::respawn()
+{
+    _sprite.setPosition(200,200);
+}

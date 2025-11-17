@@ -4,7 +4,7 @@
 #include <cstring>
 using namespace std;
 
-Aliado::Aliado(int id, const char* nombre, int vidaM, int vidaA, int ataque, int defensa, bool vivo)
+Aliado::Aliado(int id, const char* nombre, int vidaM, int vidaA, int ataque, int defensa,int energiaM, int energiaA, bool vivo)
 {
     _idPersonaje = id;
     strncpy(_nombre, nombre, sizeof(_nombre) -1);
@@ -13,6 +13,8 @@ Aliado::Aliado(int id, const char* nombre, int vidaM, int vidaA, int ataque, int
     _vidaActual = vidaA;
     _ataque = ataque;
     _defensa = defensa;
+    _energiaMax = energiaM;
+    _energiaActual = energiaA;
     _vivo = vivo;
 }
 /*Aliado::Aliado(int id, const char* nombre, int vidaM, int vidaA, int ataque, int defensa, bool vivo)
