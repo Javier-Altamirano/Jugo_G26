@@ -22,7 +22,6 @@ public:
     ///Acciones
     void Danio(int x)
     {
-
         if(_vidaActual > x)
         {
             _vidaActual -= x;

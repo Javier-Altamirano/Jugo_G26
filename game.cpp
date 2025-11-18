@@ -28,7 +28,6 @@ GameWorld::GameWorld(int dificultad) :
 void GameWorld::update(sf::RenderWindow& win)
 {
     int danio = aliado.getAtaque() - enemigoCombate.getDefensa();
-    int hp = aliado.getVidaA() / aliado.getVidaM();
     int danio2 = (aliado.getAtaque() * 2) - enemigoCombate.getDefensa();
     switch (estado)
     {
@@ -70,19 +69,16 @@ void GameWorld::update(sf::RenderWindow& win)
                 std::cout << "Ataque...\n";
                 enemigoCombate.Danio(danio);
                 std::cout << "vida restante... " << enemigoCombate.getVidaA() << "\n";
-                resultadoPelea = 1;
             }
             if(f == 1 && c == 0)
             {
                 std::cout << "Habilidad Especial...\n";
                 enemigoCombate.Danio(danio2);
                 std::cout << "vida restante... " << enemigoCombate.getVidaA() << "\n";
-                resultadoPelea = 1;
             }
             if(f == 0 && c == 1)
             {
                 std::cout << "Inventario...\n";
-                resultadoPelea = 1;
             }
         }
         if (enemigoCombate.getVidaA() <= 0)
@@ -120,6 +116,7 @@ void GameWorld::draw(sf::RenderWindow& win)
             aliado.getVidaM(),           // Vida Máxima del Jugador
             enemigoCombate.getVidaA(),   // Vida Actual del Enemigo
             enemigoCombate.getVidaM());   // Vida Máxima del Enemigo
+        recursos.alien(win, 0);
         menuP.mostrarPelea(win);
         break;
     case Medio:

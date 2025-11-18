@@ -4,9 +4,15 @@
 class Txt_Spt
 {
 private:
-    sf::Texture _teture[4];
+    sf::Texture _texture[4];
 
     sf::Sprite _sprite[4];
+
+    sf::Texture _enemigoTexture[3];
+    sf::Sprite _enemigoSprite[3];
+
+    sf::Texture _aliadoTexture[3];
+    sf::Sprite _aliadoSprite[3];
 
     // La forma base (contenedor) para la barra del Jugador (Player) y Enemigo (Enemy)
     sf::RectangleShape _playerBarBase;
@@ -26,6 +32,7 @@ private:
 public:
     Txt_Spt();
     void fondos(sf::RenderWindow& window, int x);
+    void alien(sf::RenderWindow& window, int x);
     void dibujarBarras(sf::RenderWindow& window, float currentP, float maxP, float currentE, float maxE);
 
 };

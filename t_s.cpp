@@ -12,16 +12,28 @@ Txt_Spt::Txt_Spt()
 {
     std::string direccion [] {"Texture/piso.png","Texture/pelea.png","Texture/portada.png","Texture/mapa.png"};
 
-    for(int i=0;i<4;i++)
+    for(int i=0; i<4; i++)
     {
-        if(!_teture[i].loadFromFile(direccion[i]))
+        if(!_texture[i].loadFromFile(direccion[i]))
         {
             ///error
             cout << "Error al cargar " << direccion[i] << endl;
         }
-        _sprite[i].setTexture(_teture[i]);
+        _sprite[i].setTexture(_texture[i]);
     }
     _sprite[1].setPosition(0,80);
+    std::string otros [] {"Texture/gordo.png","Texture/e1.png","Texture/banana.png"};
+    for(int i=0; i<3; i++)
+    {
+        if(!_enemigoTexture[i].loadFromFile(otros[i]))
+        {
+            ///error
+        }
+
+        _enemigoSprite[i].setTexture(_enemigoTexture[i]);
+        _enemigoSprite[i].setPosition(400,300);
+    }
+    _enemigoSprite[0].setPosition(490,120);
     // --- INICIALIZACIÓN DE BARRAS DE VIDA ---
 
     // 1. Cargar la fuente para el texto
@@ -71,7 +83,10 @@ void Txt_Spt::fondos(sf::RenderWindow& window, int x)
 {
     window.draw(_sprite[x]);
 }
-
+void Txt_Spt::alien(sf::RenderWindow& window, int x)
+{
+    window.draw(_enemigoSprite[x]);
+}
 // --- MÉTODO AUXILIAR PARA CALCULAR Y ACTUALIZAR ---
 void Txt_Spt::_actualizarRelleno(float currentHealth, float maxHealth, sf::RectangleShape& fillBar, sf::Text& text)
 {
@@ -92,11 +107,16 @@ void Txt_Spt::_actualizarRelleno(float currentHealth, float maxHealth, sf::Recta
     text.setString(healthString);
 
     // Opcional: Cambiar color si la vida es baja
-    if (ratio <= 0.25f) {
+    if (ratio <= 0.25f)
+    {
         fillBar.setFillColor(sf::Color::Red);
-    } else if (ratio <= 0.5f) {
+    }
+    else if (ratio <= 0.5f)
+    {
         fillBar.setFillColor(sf::Color::Yellow);
-    } else {
+    }
+    else
+    {
         fillBar.setFillColor(sf::Color::Green);
     }
 }

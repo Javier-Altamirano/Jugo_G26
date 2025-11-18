@@ -6,7 +6,7 @@ using namespace std;
 ///constructor del personaje
 Jugador::Jugador()
 {
-    _sprite.setPosition(400, 300);
+    _sprite.setPosition(1400, 1000);
     if(!_texture.loadFromFile("Texture/fury.png"))///carga la textura
     {
         std::cout << "error fury...\n";

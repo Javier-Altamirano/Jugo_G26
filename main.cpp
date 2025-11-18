@@ -45,7 +45,7 @@ int main()
 
     GameWorld world(1);
 
-    /*int ca = archivos.CantAliadoG();
+    int ca = archivos.CantAliadoG();
     std::cout << "Cantidad detectada por CantAliadoG() = " << ca << std::endl;
     Aliado* lista = new Aliado[ca];
     archivos.LeerAT(lista, ca);
@@ -53,7 +53,7 @@ int main()
     {
         std::cout << "-> aliado " << i << " nombre: '" << lista[i].getNombre() << "'" << std::endl;
     }
-    delete[] lista;*/
+    delete[] lista;
 
     /// ========>> ENEMIGOS <<========
     //Enemigos e1(1,"Jawa",320,320,40,30,120,120,true);
