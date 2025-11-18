@@ -17,7 +17,6 @@
 #include "archivos.h"
 #include "inventarioView.h"
 #include "pelea.h"
-#include <memory>
 #include "game.h"
 int main()
 {
@@ -42,10 +41,12 @@ int main()
     /// ========>> ALIADOS <<========
     //Aliado al = archivos.LeerAliado(archivos.BIA(10));
     //Enemigos e1 = archivos.LeerEnemigo(archivos.BIE(1));
+    //Aliado a1(2,"Claudio",620,620,55,42,300,300,true);
+    //archivos.GuardarAliados(a1);
 
     GameWorld world(1);
 
-    int ca = archivos.CantAliadoG();
+    /*int ca = archivos.CantAliadoG();
     std::cout << "Cantidad detectada por CantAliadoG() = " << ca << std::endl;
     Aliado* lista = new Aliado[ca];
     archivos.LeerAT(lista, ca);
@@ -53,7 +54,7 @@ int main()
     {
         std::cout << "-> aliado " << i << " nombre: '" << lista[i].getNombre() << "'" << std::endl;
     }
-    delete[] lista;
+    delete[] lista;*/
 
     /// ========>> ENEMIGOS <<========
     //Enemigos e1(1,"Jawa",320,320,40,30,120,120,true);
@@ -108,7 +109,6 @@ int main()
     bool pausa = false;
     bool mochilaA = false;
     float x,y;
-    std::unique_ptr<Pelea> combate;
 
     while (window.isOpen())
     {
@@ -364,6 +364,7 @@ int main()
                 musica.pelea_stop();
                 estado = MAPA;
                 reloj.restart();
+                gwen.pos(1400,1000);
                 continue;
             }
         }
@@ -395,16 +396,17 @@ int main()
                 mensaje.setString(mens);
                 mensaje.setPosition(1525,1000);
                 enemigo_cerca = true;
+                reloj.restart();
+                musica.ok2();
+                musica.mapa_chill_stop();
+                estado = PELEA;
+                world.iniciarPelea();
             }
             if(enemigo_cerca == true)
             {
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) && reloj.getElapsedTime().asSeconds() > delay)
                 {
-                    reloj.restart();
-                    musica.ok2();
-                    musica.mapa_chill_stop();
-                    estado = PELEA;
-                    world.iniciarPelea();
+
                 }
             }
             ///evalua alidaos

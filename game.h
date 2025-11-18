@@ -15,8 +15,13 @@ private:
     int f,c;
     MenuPelea menuP;
     Aliado aliado;
+    std::vector<Aliado> _equipoA;
+    int _aliadoS;
 
-    Enemigos enemigoBase;        // Del archivo .dat
+    std::vector<Enemigos> _enemigos;
+    int _objetivo;
+
+    Enemigos enemigoBase;
     Enemigos enemigoCombate;
 
     Txt_Spt recursos;

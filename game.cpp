@@ -4,6 +4,9 @@ GameWorld::GameWorld(int dificultad) :
     archivo("Aliados.dat", "Enemigos.dat", "Items.dat"), _dificultad(dificultad)
 {
     aliado = archivo.LeerAliado(archivo.BIA(10));
+    _equipoA.push_back(archivo.LeerAliado(archivo.BIA(10)));
+    _equipoA.push_back(archivo.LeerAliado(archivo.BIA(1)));
+    _equipoA.push_back(archivo.LeerAliado(archivo.BIA(2)));
     enemigoBase = archivo.LeerEnemigo(0);
     enemigoCombate = enemigoBase;
 
@@ -11,6 +14,10 @@ GameWorld::GameWorld(int dificultad) :
     {
     case 1:
         estado = Facil;
+        for(int i = 0; i < 3; ++i)
+        {
+            _enemigos.push_back(archivo.LeerEnemigo(0));
+        }
         break;
     case 2:
         estado = Medio;
@@ -19,6 +26,8 @@ GameWorld::GameWorld(int dificultad) :
         estado = Dificil;
         break;
     }
+    _aliadoS = 0;
+    _objetivo = 0;
     f = 0;
     c = 0;
     delay = 0.2f;
@@ -27,64 +36,107 @@ GameWorld::GameWorld(int dificultad) :
 
 void GameWorld::update(sf::RenderWindow& win)
 {
-    int danio = aliado.getAtaque() - enemigoCombate.getDefensa();
-    int danio2 = (aliado.getAtaque() * 2) - enemigoCombate.getDefensa();
+    if (resultadoPelea == 3 || estado == GANASTE || resultadoPelea == 4)
+    {
+        return;
+    }
+    Aliado& aliadoActual = _equipoA[_aliadoS];
+    win.setView(win.getDefaultView());
+
     switch (estado)
     {
     case Facil:
     {
-        win.setView(win.getDefaultView());
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) && reloj.getElapsedTime().asSeconds() > delay)
+        if (reloj.getElapsedTime().asSeconds() > delay)
         {
-            reloj.restart();
-            menuP.arriba();
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            {
+                reloj.restart();
+                menuP.arriba();
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            {
+                reloj.restart();
+                menuP.abajo();
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            {
+                reloj.restart();
+                menuP.izquierda();
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            {
+                reloj.restart();
+                menuP.derecha();
+            }
         }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)&& reloj.getElapsedTime().asSeconds() > delay)
+        if (reloj.getElapsedTime().asSeconds() > delay)
         {
-            reloj.restart();
-            menuP.abajo();
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+            {
+                reloj.restart();
+                _objetivo = (_objetivo - 1 + _enemigos.size()) % _enemigos.size();
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+            {
+                reloj.restart();
+                _objetivo = (_objetivo + 1) % _enemigos.size();
+            }
         }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)&& reloj.getElapsedTime().asSeconds() > delay)
-        {
-            reloj.restart();
-            menuP.izquierda();
-        }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)&& reloj.getElapsedTime().asSeconds() > delay)
-        {
-            reloj.restart();
-            menuP.derecha();
-        }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::F)&& reloj.getElapsedTime().asSeconds() > delay)
+
+        // --- ACCIONES (F) ---
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::F) && reloj.getElapsedTime().asSeconds() > delay)
         {
             reloj.restart();
             f = menuP.getFila();
             c = menuP.getColumna();
-            if(f == 1 && c == 1)
+
+            int danio  = aliadoActual.getAtaque() - _enemigos[_objetivo].getDefensa();
+            int danio2 = (aliadoActual.getAtaque() * 2) - _enemigos[_objetivo].getDefensa();
+
+            if (f == 1 && c == 1)
             {
                 std::cout << "huir...\n";
                 resultadoPelea = 3;
+                return;
             }
-            if(f == 0 && c == 0)
+
+            // ATAQUE NORMAL
+            if (f == 0 && c == 0)
             {
                 std::cout << "Ataque...\n";
-                enemigoCombate.Danio(danio);
-                std::cout << "vida restante... " << enemigoCombate.getVidaA() << "\n";
+                _enemigos[_objetivo].Danio(danio);
+                std::cout << "Vida restante del enemigo: "
+                          << _enemigos[_objetivo].getVidaA() << "\n";
             }
-            if(f == 1 && c == 0)
+
+            // HABILIDAD ESPECIAL
+            if (f == 1 && c == 0)
             {
-                std::cout << "Habilidad Especial...\n";
-                enemigoCombate.Danio(danio2);
-                std::cout << "vida restante... " << enemigoCombate.getVidaA() << "\n";
+                std::cout << "Habilidad especial...\n";
+                _enemigos[_objetivo].Danio(danio2);
+                std::cout << "Vida restante del enemigo: "
+                          << _enemigos[_objetivo].getVidaA() << "\n";
             }
-            if(f == 0 && c == 1)
+
+            if (f == 0 && c == 1)
             {
                 std::cout << "Inventario...\n";
             }
-        }
-        if (enemigoCombate.getVidaA() <= 0)
-        {
-            estado = GANASTE;
-            std::cout << "Ganaste la pelea!\n";
+
+            // --- ELIMINAR ENEMIGO MUERTO ---
+            if (_enemigos[_objetivo].getVidaA() <= 0)
+            {
+                _enemigos.erase(_enemigos.begin() + _objetivo);
+
+                if (_enemigos.empty())
+                {
+                    estado = GANASTE;
+                    return;
+                }
+
+                _objetivo %= _enemigos.size();
+            }
         }
     }
     break;
@@ -93,15 +145,14 @@ void GameWorld::update(sf::RenderWindow& win)
     case Dificil:
         break;
     case GANASTE:
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::F)&& reloj.getElapsedTime().asSeconds() > delay)
+        if(reloj.getElapsedTime().asSeconds() > delay)
         {
             reloj.restart();
             resultadoPelea = 4;
+            return;
         }
         break;
-
     }
-    if (resultadoPelea == 3) return;
 }
 
 void GameWorld::draw(sf::RenderWindow& win)
@@ -109,20 +160,18 @@ void GameWorld::draw(sf::RenderWindow& win)
     switch (estado)
     {
     case Facil:
-        recursos.fondos(win,1);
-        recursos.dibujarBarras(
-            win,
-            aliado.getVidaA(),           // Vida Actual del Jugador
-            aliado.getVidaM(),           // Vida Máxima del Jugador
-            enemigoCombate.getVidaA(),   // Vida Actual del Enemigo
-            enemigoCombate.getVidaM());   // Vida Máxima del Enemigo
-        recursos.alien(win, 0);
+    {
+        recursos.fondos(win, 1);
+
+        // DIBUJAR HUD DE 3 ALIADOS + 3 ENEMIGOS
+        recursos.drawCombatUnits(win, _equipoA, _enemigos);
+        //recursos.status(win, _equipoA, _enemigos);
+
+        // Menu de combate
         menuP.mostrarPelea(win);
-        break;
-    case Medio:
-        break;
-    case Dificil:
-        break;
+    }
+    break;
+
     case GANASTE:
         menuP.resultadoP(win);
         break;
@@ -144,6 +193,5 @@ void GameWorld::finalizarPelea()
 {
     resultadoPelea = 0;
     menuP.reset();
-    // dejar estado interno en algo neutro que no rompa draw/update si no se llama iniciarPelea
     estado = Facil;
 }

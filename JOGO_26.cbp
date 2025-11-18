@@ -92,20 +92,12 @@
 		<Unit filename="menu_pelea.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="pelea.cpp" />
-		<Unit filename="pelea.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
 		<Unit filename="personaje_jugador.cpp" />
 		<Unit filename="personaje_jugador.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="personajes.cpp" />
 		<Unit filename="personajes.h" />
-		<Unit filename="recursos.cpp" />
-		<Unit filename="recursos.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
 		<Unit filename="sounds.cpp" />
 		<Unit filename="souns.h">
 			<Option target="&lt;{~None~}&gt;" />
