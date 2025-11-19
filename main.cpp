@@ -16,7 +16,6 @@
 #include "inventario.h"
 #include "archivos.h"
 #include "inventarioView.h"
-#include "pelea.h"
 #include "game.h"
 int main()
 {
@@ -44,7 +43,7 @@ int main()
     //Aliado a1(2,"Claudio",620,620,55,42,300,300,true);
     //archivos.GuardarAliados(a1);
 
-    GameWorld world(1);
+    GameWorld world(1,mochila);
 
     /*int ca = archivos.CantAliadoG();
     std::cout << "Cantidad detectada por CantAliadoG() = " << ca << std::endl;
@@ -400,7 +399,7 @@ int main()
                 musica.ok2();
                 musica.mapa_chill_stop();
                 estado = PELEA;
-                world.iniciarPelea();
+                world.iniciarPelea(1);
             }
             if(enemigo_cerca == true)
             {

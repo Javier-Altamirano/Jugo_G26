@@ -5,10 +5,12 @@ class MenuPelea
 {
 private:
     sf::Font _font;
-    sf::Text _text[2][2];
+    sf::Text _text[4];
     sf::Text _resultado;
-    int _fila;
-    int _columna;
+    int _seleccion;
+
+    sf::Texture _texture;
+    sf::Sprite _sprite;
 
 public:
     MenuPelea();
@@ -17,8 +19,7 @@ public:
     void izquierda();
     void derecha();
 
-    int getFila();
-    int getColumna();
+    int getSeleccion();
 
     void reset();
 

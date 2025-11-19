@@ -5,14 +5,14 @@
 #include "archivos.h"
 #include "t_s.h"
 #include "menu_pelea.h"
-
+#include "inventario.h"
 
 class GameWorld
 {
 private:
     sf::Clock reloj;
     float delay;
-    int f,c;
+    int _seleccion;
     MenuPelea menuP;
     Aliado aliado;
     std::vector<Aliado> _equipoA;
@@ -27,19 +27,23 @@ private:
     Txt_Spt recursos;
 
     Archivos archivo;
+    Inventario& _mochila;
 
     enum Estado {Facil, Medio, Dificil, GANASTE, PERDISTE,Huir ,NADA};
     Estado estado = NADA;
 
-    int resultadoPelea = 0; // 1=ganó, 2=perdió, 3=huyó
+    int resultadoPelea = 0;
     int _dificultad;
 
+    enum Turno {TURNO_JUGADOR, TURNO_ENEMIGO};
+    Turno turnoActual;
+
 public:
-    GameWorld(int dificultad);
+    GameWorld(int dificultad,Inventario& mochila);
     void update(sf::RenderWindow& win);
     void draw(sf::RenderWindow& win);
 
-    void iniciarPelea();
+    void iniciarPelea(int x);
     void finalizarPelea();
 
     int resultado();
