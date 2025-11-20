@@ -46,8 +46,8 @@ TiendaMenu::TiendaMenu()
         nombre = _itemsTotalse[i].getNombre();
         compra = _itemsTotalse[i].getPrecioCompra();
         venta = _itemsTotalse[i].getPrecioVenta();
-         mens1 = nombre + " <> $" + std::to_string(compra);
-         mens2 = nombre + " <> $" + std::to_string(venta);
+        mens1 = nombre + " <> $" + std::to_string(compra);
+        mens2 = nombre + " <> $" + std::to_string(venta);
          ///
         _textItems[i].setFont(_font);
         _textItems[i].setString(mens1);

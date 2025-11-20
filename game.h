@@ -6,8 +6,10 @@
 #include "t_s.h"
 #include "menu_pelea.h"
 #include "inventario.h"
+#include "inventarioView.h"
 
-class GameWorld
+
+class Combate
 {
 private:
     sf::Clock reloj;
@@ -28,18 +30,21 @@ private:
 
     Archivos archivo;
     Inventario& _mochila;
+    InventarioView _mVista;
 
     enum Estado {Facil, Medio, Dificil, GANASTE, PERDISTE,Huir ,NADA};
     Estado estado = NADA;
+    enum EstadoInventario {Cerrado, Abierto};
+    EstadoInventario invActual =  Cerrado;
 
-    int resultadoPelea = 0;
+    int _resultadoPelea = 0;
     int _dificultad;
 
     enum Turno {TURNO_JUGADOR, TURNO_ENEMIGO};
     Turno turnoActual;
 
 public:
-    GameWorld(int dificultad,Inventario& mochila);
+    Combate(int dificultad,Inventario& mochila);
     void update(sf::RenderWindow& win);
     void draw(sf::RenderWindow& win);
 

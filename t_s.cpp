@@ -10,7 +10,7 @@ Txt_Spt::Txt_Spt()
     }
 
     // ========
-    string aliados[] = {"Texture/cj.png", "Texture/banana.png", "Texture/cloud.png"};
+    string aliados[] = {"Texture/messi.png", "Texture/banana.png", "Texture/cloud.png"};
     for(int i=0; i<3; i++)
     {
         _aliadoTexture[i].loadFromFile(aliados[i]);
@@ -18,7 +18,7 @@ Txt_Spt::Txt_Spt()
     }
 
     // ========
-    string enemigos[] = {"Texture/gordo.png", "Texture/e1.png", "Texture/alien.png"};
+    string enemigos[] = {"Texture/gordo.png", "Texture/e1.png", "Texture/t1.png"};
     for(int i=0; i<3; i++)
     {
         _enemigoTexture[i].loadFromFile(enemigos[i]);
@@ -45,36 +45,35 @@ Txt_Spt::Txt_Spt()
     // ================================
     for (int i = 0; i < 3; i++)
     {
-        barraFondo[i].setSize(sf::Vector2f(204, 20));
-        barraFondo[i].setFillColor(sf::Color(50, 50, 50));
-        barraFondo[i].setPosition(48, 448 + (i * 40));
+        _barraFondo[i].setSize(sf::Vector2f(204, 20));
+        _barraFondo[i].setFillColor(sf::Color(50, 50, 50));
+        _barraFondo[i].setPosition(48, 448 + (i * 40));
 
-        barraVida[i].setSize(sf::Vector2f(200, 14));
-        barraVida[i].setFillColor(sf::Color::Green);
-        barraVida[i].setPosition(50, 450 + (i * 40));
+        _barraVida[i].setSize(sf::Vector2f(200, 14));
+        _barraVida[i].setFillColor(sf::Color::Green);
+        _barraVida[i].setPosition(50, 450 + (i * 40));
 
-        // Nombres
-        nombreAliado[i].setFont(_font);
-        nombreAliado[i].setString("Aliado");
-        nombreAliado[i].setCharacterSize(18);
-        nombreAliado[i].setFillColor(sf::Color::White);
-        nombreAliado[i].setPosition(50, 425 + (i * 40));
+        _nombreAliado[i].setFont(_font);
+        _nombreAliado[i].setString("Aliado");
+        _nombreAliado[i].setCharacterSize(18);
+        _nombreAliado[i].setFillColor(sf::Color::White);
+        _nombreAliado[i].setPosition(50, 425 + (i * 40));
 
-        vidaTexto[i].setFont(_font);
-        vidaTexto[i].setCharacterSize(16);
-        vidaTexto[i].setFillColor(sf::Color::White);
-        vidaTexto[i].setPosition(60, 446 + (i * 40));
+        _vidaTexto[i].setFont(_font);
+        _vidaTexto[i].setCharacterSize(16);
+        _vidaTexto[i].setFillColor(sf::Color::White);
+        _vidaTexto[i].setPosition(60, 446 + (i * 40));
 
-        energiaTexto[i].setFont(_font);
-        energiaTexto[i].setCharacterSize(16);
-        energiaTexto[i].setFillColor(sf::Color::White);
-        energiaTexto[i].setPosition(260, 446 + (i * 40));
+        _energiaTexto[i].setFont(_font);
+        _energiaTexto[i].setCharacterSize(16);
+        _energiaTexto[i].setFillColor(sf::Color::White);
+        _energiaTexto[i].setPosition(260, 446 + (i * 40));
 
-        vida[i] = 100;
-        vidaMax[i] = 100;
+        _vida[i] = 100;
+        _vidaMax[i] = 100;
 
-        energia[i] = 50;
-        energiaMax[i] = 50;
+        _energia[i] = 50;
+        _energiaMax[i] = 50;
     }
 }
 
@@ -97,43 +96,43 @@ void Txt_Spt::setStatsAliado(int indice, int vidaActual, int vidaMaxima)
 {
     if (indice < 0 || indice > 2) return;
 
-    vida[indice] = vidaActual;
-    vidaMax[indice] = vidaMaxima;
+    _vida[indice] = vidaActual;
+    _vidaMax[indice] = vidaMaxima;
 
-    if (vida[indice] > vidaMax[indice])
-        vida[indice] = vidaMax[indice];
+    if (_vida[indice] > _vidaMax[indice])
+        _vida[indice] = _vidaMax[indice];
 
-    float pct = (float)vida[indice] / vidaMax[indice];
-    barraVida[indice].setSize(sf::Vector2f(200 * pct, 16));
-    vidaTexto[indice].setString( to_string(vida[indice]) + " / " + to_string(vidaMax[indice]));
+    float pct = (float)_vida[indice] / _vidaMax[indice];
+    _barraVida[indice].setSize(sf::Vector2f(200 * pct, 16));
+    _vidaTexto[indice].setString( to_string(_vida[indice]) + " / " + to_string(_vidaMax[indice]));
 }
 void Txt_Spt::setEnergiaAliado(int indice, int enerActual, int enerMaxima)
 {
     if (indice < 0 || indice > 2) return;
 
-    energia[indice] = enerActual;
-    energiaMax[indice] = enerMaxima;
+    _energia[indice] = enerActual;
+    _energiaMax[indice] = enerMaxima;
 
-    energiaTexto[indice].setString(
-        "ENERGIA: " + to_string(energia[indice]) + " / " + to_string(energiaMax[indice])
+    _energiaTexto[indice].setString(
+        "ENERGIA: " + to_string(_energia[indice]) + " / " + to_string(_energiaMax[indice])
     );
 }
 void Txt_Spt::setNombreAliado(int indice, const std::string& nombre)
 {
-    if (indice < 0 || indice > 2) return;
-    nombreAliado[indice].setString(nombre);
+    if (indice < 0) return;
+    _nombreAliado[indice].setString(nombre);
 }
 //////////////////////////////////////////////////////
 void Txt_Spt::drawBarras(sf::RenderWindow& window)
 {
     for (int i = 0; i < 3; i++)
     {
-        window.draw(barraFondo[i]);
-        window.draw(barraVida[i]);
-        window.draw(nombreAliado[i]);
+        window.draw(_barraFondo[i]);
+        window.draw(_barraVida[i]);
+        window.draw(_nombreAliado[i]);
 
-        window.draw(vidaTexto[i]);
-        window.draw(energiaTexto[i]);
+        window.draw(_vidaTexto[i]);
+        window.draw(_energiaTexto[i]);
     }
 }
 
@@ -149,7 +148,7 @@ void Txt_Spt::dibujarAliados(sf::RenderWindow& window)
 
     for (int i = 0; i < 3; i++)
     {
-        if (vida[i] <= 0)
+        if (_vida[i] <= 0)
             continue;
         _aliadoSprite[i].setPosition(posiciones[i]);
         window.draw(_aliadoSprite[i]);
@@ -157,24 +156,29 @@ void Txt_Spt::dibujarAliados(sf::RenderWindow& window)
 }
 void Txt_Spt::setStatsEnemigo(int id, int vidaA, int vidaM)
 {
-    vidaEnemigo[id] = vidaA;
-    vidaMaxEnemigo[id] = vidaM;
+    _vidaEnemigo[id] = vidaA;
+    _vidaMaxEnemigo[id] = vidaM;
 }
 void Txt_Spt::dibujarEnemigos(sf::RenderWindow& window)
 {
     sf::Vector2f posiciones[3] =
     {
-        {650, 250},
-        {650, 350},
-        {650, 450}
+        {500, 150},
+        {450, 200},
+        {600, 190}
     };
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < _cantidadEnemigos; i++)
     {
-        if (vidaEnemigo[i] <= 0)
-            continue;
-
-        _enemigoSprite[i].setPosition(posiciones[i]);
-        window.draw(_enemigoSprite[i]);
+        _enemigosEnPelea[i].setPosition(posiciones[i]);
+        window.draw(_enemigosEnPelea[i]);
     }
+}
+void Txt_Spt::configurarEnemigos(int cant, int e0, int e1, int e2)
+{
+    _cantidadEnemigos = cant;
+
+    if (cant >= 1) _enemigosEnPelea[0] = _enemigoSprite[e0];
+    if (cant >= 2) _enemigosEnPelea[1] = _enemigoSprite[e1];
+    if (cant >= 3) _enemigosEnPelea[2] = _enemigoSprite[e2];
 }

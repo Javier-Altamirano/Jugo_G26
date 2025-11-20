@@ -102,3 +102,7 @@ bool Inventario::tieneItem(int id) const
         return false;
     }
 }
+void Inventario::setSaldo(int saldo)
+{
+    _saldo = saldo;
+}

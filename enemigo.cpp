@@ -12,6 +12,7 @@ Enemigo::Enemigo()
     _sprite.setTexture(_texture);
     _sprite.setPosition(1500,1000);
     _sprite.setOrigin(_sprite.getGlobalBounds().width/2, _sprite.getGlobalBounds().height/2);
+    _velocidad = {5,5};
 }
 
 void Enemigo::draw(sf::RenderTarget& target, sf::RenderStates states)const
@@ -26,5 +27,16 @@ sf::FloatRect Enemigo::getBounds() const
 
 void Enemigo::respawn()
 {
-    _sprite.setPosition(200,200);
+    _time = 60 * 5;
+    _sprite.setPosition(std::rand() % 4000 + _sprite.getGlobalBounds().width, std::rand() % 3000 + _sprite.getGlobalBounds().height);
+}
+
+void Enemigo::update()
+{
+    //_sprite.move( _velocidad);
+    _time--;
+    if(_time < 0)
+    {
+        respawn();
+    }
 }

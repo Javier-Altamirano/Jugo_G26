@@ -25,5 +25,5 @@ public:
 
     void mostrarPelea(sf::RenderWindow& window);
 
-    void resultadoP(sf::RenderWindow& window);
+    void resultadoP(sf::RenderWindow& window,int x);
 };

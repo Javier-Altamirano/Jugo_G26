@@ -31,16 +31,14 @@ public:
             _vidaActual = 0;
         }
     }
-    void setEnergiaA(int e)
+    void setEnergia(int e)
     {
-        if(e <= _energiaMax)
-        {
-            _energiaActual -= e;
-        }
-        else
+        if(e < 0 || e > _energiaMax)
         {
             return;
         }
+        else if(e <= _energiaMax)
+            _energiaActual = e;
     }
     void Cura(int c)
     {

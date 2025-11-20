@@ -19,7 +19,7 @@ MenuPelea::MenuPelea()
     }
     _resultado.setFont(_font);
     _resultado.setPosition(300,300);
-    _resultado.setString("GANASTE");
+    _resultado.setString("");
     _seleccion = 0;
     if(!_texture.loadFromFile("Texture/mano.png"))
     {
@@ -58,7 +58,15 @@ void MenuPelea::reset()
     _seleccion = 0;
 }
 
-void MenuPelea::resultadoP(sf::RenderWindow& window)
+void MenuPelea::resultadoP(sf::RenderWindow& window, int x)
 {
+    if(x == 1)
+    {
+        _resultado.setString("GANASTE!");
+    }
+    else if(x == 0)
+    {
+        _resultado.setString("PERDISTE!");
+    }
     window.draw(_resultado);
 }

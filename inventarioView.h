@@ -1,5 +1,6 @@
 #pragma once
 #include "inventario.h"
+#include "archivos.h"
 #include <SFML/Graphics.hpp>
 
 class InventarioView
@@ -14,8 +15,14 @@ private:
 
     sf::Texture _textura2;
     sf::Sprite _sprite2;
+    int _cantidadItems;
+    int  _seleccion;
 public:
     InventarioView(Inventario& inv);
+
+    void arriba();
+    void abajo();
+    int getSeleccion();
 
     void MostrarInv(sf::RenderWindow& window);
 
@@ -23,4 +30,5 @@ public:
 
     void maletinC(sf::RenderWindow& window);
     void maletinO(sf::RenderWindow& window);
+    void MostrarxPela(sf::RenderWindow& window);
 };

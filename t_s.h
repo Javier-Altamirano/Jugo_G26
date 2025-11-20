@@ -11,26 +11,31 @@ private:
 
     sf::Texture _enemigoTexture[3];
     sf::Sprite  _enemigoSprite[3];
+    sf::Sprite _enemigosEnPelea[3];
+    int _cantidadEnemigos;
     ///=================================
     sf::Texture _texture[4];
     sf::Sprite  _sprite[4];
     ///=================================
-    sf::RectangleShape barraFondo[3];
-    sf::RectangleShape barraVida[3];
+    sf::RectangleShape _barraFondo[3];
+    sf::RectangleShape _barraVida[3];
 
-    sf::Text nombreAliado[3];
+    sf::Text _nombreAliado[3];
 
-    int vida[3];
-    int vidaMax[3];
+    int _vida[3];
+    int _vidaMax[3];
 
-    sf::Text vidaTexto[3];
-    sf::Text energiaTexto[3];
+    sf::Text _vidaTexto[3];
+    sf::Text _energiaTexto[3];
 
-    int energia[3];
-    int energiaMax[3];
-    int vidaEnemigo[3];
-    int vidaMaxEnemigo[3];
+    int _energia[3];
+    int _energiaMax[3];
+    int _vidaEnemigo[3];
+    int _vidaMaxEnemigo[3];
     ///=================================
+    sf::Texture _indicadorTex;
+    sf::Sprite _indicadorTurno;
+    sf::Sprite _indicadorSeleccion;
 public:
     Txt_Spt();
 
@@ -43,6 +48,7 @@ public:
     void setNombreAliado(int indice, const std::string& nombre);
     void setEnergiaAliado(int indice, int enerActual, int enerMaxima);
     void setStatsEnemigo(int id, int vidaA, int vidaM);
+    void configurarEnemigos(int cant, int e0, int e1, int e2);
     ////=================================
     void drawBarras(sf::RenderWindow& window);
     void dibujarAliados(sf::RenderWindow& window);

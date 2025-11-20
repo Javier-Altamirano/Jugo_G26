@@ -38,26 +38,22 @@ int main()
     Item pocionV = archivos.LeerItem(0);
     Item pocionE = archivos.LeerItem(1);
     /// ========>> ALIADOS <<========
-    //Aliado al = archivos.LeerAliado(archivos.BIA(10));
-    //Enemigos e1 = archivos.LeerEnemigo(archivos.BIE(1));
-    //Aliado a1(2,"Claudio",620,620,55,42,300,300,true);
-    //archivos.GuardarAliados(a1);
+    //Aliado a1(1,"Messi",540,540,67,37,300,300,true);
+   // Aliado a2(2,"Ford",620,620,55,42,300,300,true);
+    //Aliado a3(3,"Claudio",600,600,50,42,300,300,true);
 
-    GameWorld world(1,mochila);
 
-    /*int ca = archivos.CantAliadoG();
+    Combate world(1,mochila);
+    int ca = archivos.CantEnemigoG();
     std::cout << "Cantidad detectada por CantAliadoG() = " << ca << std::endl;
     Aliado* lista = new Aliado[ca];
     archivos.LeerAT(lista, ca);
     for(int i = 0; i < ca; i++)
     {
-        std::cout << "-> aliado " << i << " nombre: '" << lista[i].getNombre() << "'" << std::endl;
+        std::cout << "-> enemigos " << i << " nombre: '" << lista[i].getNombre() << "'" << std::endl;
+        std::cout << "-> enemigos " << i << " nombre: '" << lista[i].getId() << "'" << std::endl;
     }
-    delete[] lista;*/
-
-    /// ========>> ENEMIGOS <<========
-    //Enemigos e1(1,"Jawa",320,320,40,30,120,120,true);
-    //archivos.GuardarEnemigo(e1);
+    delete[] lista;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///Sonido
     Sound musica;
@@ -67,6 +63,7 @@ int main()
     Vendedor vendedor; /// NPC VENDEDOR
     Menu menu; ///TODOS LOS MENUS
     Enemigo enemi; ///ENEMIGO
+    Enemigo e1,e2,e3,e4,e5,e6,e7,e8;
     //int f,c; ///POSICION DE FILA Y COLUMNA
     bool camp_cerca;
     bool vendedor_cerca;
@@ -83,7 +80,11 @@ int main()
     }
     sf::Text vol;
     vol.setFont(fuente);
-
+    sf::Text _acercaDe;
+    _acercaDe.setFont(fuente);
+    _acercaDe.setString("TP Integrador de Programacion II\nIntegrantes\nJavier Francisco Altamirano\nLucia Aylen Maffey\nGrupo 26!!");
+    _acercaDe.setCharacterSize(40);
+    _acercaDe.setPosition(100,50);
     ///recuadro de fondo
     sf::RectangleShape fondo_pausa(sf::Vector2f(800, 600));
     fondo_pausa.setFillColor(sf::Color(0, 0, 0, 150)); // negro semitransparente
@@ -141,25 +142,19 @@ int main()
                         switch(menu.getSeleccion())
                         {
                         case 0:
-                            estado = CINEMATICA;
                             std::cout << "Iniciando Nueva Partida...\n";
+                            estado = MAPA;
+                            gwen.pos(1500,1000);
                             musica.ok();
                             musica.menu_stop();
                             break;
                         case 1:
-                            estado = MAPA;
-                            std::cout << "Cargando partida...\n";
-                            musica.ok();
-                            musica.menu_stop();
+                            estado = CINEMATICA;
                             break;
                         case 2:
-                            std::cout << "Made for Mr. Claudio :3...\n";
-                            break;
-                        case 3:
-                            std::cout << "Saliendo de juego... \n";
-                            std::cout << "BYE BYE... \n";
                             estado = SALIR;
                             window.close();
+                            break;
                         }
                     }
                 }
@@ -351,19 +346,36 @@ int main()
         ///PELEA----------------------------------------------------
         else if (estado == PELEA)
         {
-            if(world.resultado() != 3)
+            if(world.resultado() == 2)
             {
                 world.update(window);
             }
             int r = world.resultado();
 
-            if (r == 3 || r == 4)
+            if (r == 1 || r == 0)
             {
-                world.finalizarPelea();
                 musica.pelea_stop();
-                estado = MAPA;
                 reloj.restart();
-                gwen.pos(1400,1000);
+                enemi.respawn();
+                e1.respawn();
+                e2.respawn();
+                e3.respawn();
+                e4.respawn();
+                e5.respawn();
+                e6.respawn();
+                e7.respawn();
+                e8.respawn();
+                estado = MAPA;
+                continue;
+            }
+            if(r == -1)
+            {
+                estado = MENUINICIO;
+                musica.pelea_stop();
+                estado = MENUINICIO;
+                world.iniciarPelea(1);
+                world.iniciarPelea(2);
+                world.iniciarPelea(3);
                 continue;
             }
         }
@@ -378,6 +390,15 @@ int main()
         ///MAPA -------------------------------------------------------
         if(estado == MAPA && pausa == false)
         {
+            enemi.update();
+            e1.update();
+            e2.update();
+            e3.update();
+            e4.update();
+            e5.update();
+            e6.update();
+            e7.update();
+            e8.update();
             ///musica
             musica.mapa_chill();
             ///jugador
@@ -399,14 +420,29 @@ int main()
                 musica.ok2();
                 musica.mapa_chill_stop();
                 estado = PELEA;
+                world.iniciarPelea(3);
+            }
+            if(gwen.isColision(e1) || gwen.isColision(e2) || gwen.isColision(e3) || gwen.isColision(e4))
+            {
+                mensaje.setString(mens);
+                mensaje.setPosition(1525,1000);
+                enemigo_cerca = true;
+                reloj.restart();
+                musica.ok2();
+                musica.mapa_chill_stop();
+                estado = PELEA;
                 world.iniciarPelea(1);
             }
-            if(enemigo_cerca == true)
+            if(gwen.isColision(e5) || gwen.isColision(e6) || gwen.isColision(e7) || gwen.isColision(e8))
             {
-                if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) && reloj.getElapsedTime().asSeconds() > delay)
-                {
-
-                }
+                mensaje.setString(mens);
+                mensaje.setPosition(1525,1000);
+                enemigo_cerca = true;
+                reloj.restart();
+                musica.ok2();
+                musica.mapa_chill_stop();
+                estado = PELEA;
+                world.iniciarPelea(1);
             }
             ///evalua alidaos
             camp_cerca = false;
@@ -513,6 +549,7 @@ int main()
         else if(estado == CINEMATICA)
         {
             window.setView(window.getDefaultView());
+            window.draw(_acercaDe);
         }
         ///mapa draw
         else if(estado == MAPA)
@@ -522,6 +559,14 @@ int main()
 
             sprites.fondos(window, 3);
             window.draw(enemi);
+            window.draw(e1);
+            window.draw(e2);
+            window.draw(e3);
+            window.draw(e4);
+            window.draw(e5);
+            window.draw(e6);
+            window.draw(e7);
+            window.draw(e8);
             window.draw(camp);
             window.draw(gwen); ///Dibuja el personaje
 

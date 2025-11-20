@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1763530410 source:c:\users\franc\desktop\jogo_26\main.cpp
+1763671901 source:c:\users\franc\desktop\jogo_26\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<iostream>
@@ -461,11 +461,11 @@
 	<SFML/Graphics.hpp>
 	"colision.h"
 
-1763398692 source:c:\users\franc\desktop\jogo_26\enemigo.cpp
+1763666338 source:c:\users\franc\desktop\jogo_26\enemigo.cpp
 	<iostream>
 	"enemigo.h"
 
-1763398692 c:\users\franc\desktop\jogo_26\enemigo.h
+1763656766 c:\users\franc\desktop\jogo_26\enemigo.h
 	<SFML/Graphics.hpp>
 	"colision.h"
 
@@ -589,7 +589,7 @@
 	<iostream>
 	"vendedor.h"
 
-1763520589 source:c:\users\franc\desktop\jogo_26\menu.cpp
+1763670634 source:c:\users\franc\desktop\jogo_26\menu.cpp
 	<iostream>
 	"menu.h"
 
@@ -605,11 +605,11 @@
 1763181591 c:\users\franc\desktop\jogo_26\items.h
 	<iostream>
 
-1763241598 c:\users\franc\desktop\jogo_26\inventario.h
+1763609645 c:\users\franc\desktop\jogo_26\inventario.h
 	<istream>
 	"items.h"
 
-1763260008 source:c:\users\franc\desktop\jogo_26\inventario.cpp
+1763609679 source:c:\users\franc\desktop\jogo_26\inventario.cpp
 	<iostream>
 	"inventario.h"
 
@@ -621,7 +621,7 @@
 	<cstring>
 	"personajes.h"
 
-1763424698 c:\users\franc\desktop\jogo_26\personajes.h
+1763664601 c:\users\franc\desktop\jogo_26\personajes.h
 	<iostream>
 
 1763423017 source:c:\users\franc\desktop\jogo_26\archivos.cpp
@@ -652,12 +652,13 @@
 	<string>
 	<cstring>
 
-1763264202 source:c:\users\franc\desktop\jogo_26\inventarioview.cpp
+1763664112 source:c:\users\franc\desktop\jogo_26\inventarioview.cpp
 	<iostream>
 	"inventarioView.h"
 
-1763264165 c:\users\franc\desktop\jogo_26\inventarioview.h
+1763663536 c:\users\franc\desktop\jogo_26\inventarioview.h
 	"inventario.h"
+	"archivos.h"
 	<SFML/Graphics.hpp>
 
 1763245553 source:c:\users\franc\desktop\jogo_26\menu_pausa.cpp
@@ -667,14 +668,14 @@
 1763245553 c:\users\franc\desktop\jogo_26\menu_pausa.h
 	<SFML/Graphics.hpp>
 
-1763521034 source:c:\users\franc\desktop\jogo_26\menu_pelea.cpp
+1763611049 source:c:\users\franc\desktop\jogo_26\menu_pelea.cpp
 	<iostream>
 	"menu_pelea.h"
 
-1763520561 c:\users\franc\desktop\jogo_26\menu_pelea.h
+1763611062 c:\users\franc\desktop\jogo_26\menu_pelea.h
 	<SFML/Graphics.hpp>
 
-1763262914 source:c:\users\franc\desktop\jogo_26\tienda_menu.cpp
+1763663272 source:c:\users\franc\desktop\jogo_26\tienda_menu.cpp
 	<iostream>
 	"tienda_menu.h"
 
@@ -684,11 +685,11 @@
 	"archivos.h"
 	"inventario.h"
 
-1763533077 source:c:\users\franc\desktop\jogo_26\t_s.cpp
+1763669447 source:c:\users\franc\desktop\jogo_26\t_s.cpp
 	<iostream>
 	"t_s.h"
 
-1763533055 c:\users\franc\desktop\jogo_26\t_s.h
+1763667462 c:\users\franc\desktop\jogo_26\t_s.h
 	<SFML/Graphics.hpp>
 
 1763355977 source:c:\users\franc\desktop\jogo_26\pelea.cpp
@@ -697,10 +698,10 @@
 	"aliados.h"
 	"enemigos.h"
 
-1763533288 source:c:\users\franc\desktop\jogo_26\game.cpp
+1763671865 source:c:\users\franc\desktop\jogo_26\game.cpp
 	"game.h"
 
-1763530756 c:\users\franc\desktop\jogo_26\game.h
+1763672089 c:\users\franc\desktop\jogo_26\game.h
 	<SFML/Graphics.hpp>
 	"aliados.h"
 	"enemigos.h"
@@ -708,4 +709,5 @@
 	"t_s.h"
 	"menu_pelea.h"
 	"inventario.h"
+	"inventarioView.h"
 

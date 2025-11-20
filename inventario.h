@@ -18,6 +18,7 @@ public:
 
     bool quitarItem(int id);
 
+    void setSaldo(int saldo);
     int getsaldo();
 
     /// CONTENIDO

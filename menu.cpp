@@ -11,8 +11,8 @@ Menu::Menu()
         std::cout << "error\n";
     }
     ///INICIO------------------------------------------------------------
-    std::string opciones_ini[] = {"NUEVA PARTIDA","CONTINUAR","ACERCA DE","SALIR"};
-    for(int i=0; i<4; i++)
+    std::string opciones_ini[] = {"NUEVA PARTIDA","ACERCA DE","SALIR"};
+    for(int i=0; i<3; i++)
     {
         _text_inicio[i].setFont(_font);
         _text_inicio[i].setString(opciones_ini[i]);
@@ -39,12 +39,12 @@ void Menu::arriba()
     }
     else
     {
-        _seleccion = 3;
+        _seleccion = 2;
     }
 }
 void Menu::abajo()
 {
-    if(_seleccion < 3)
+    if(_seleccion < 2)
     {
         _seleccion++;
     }
