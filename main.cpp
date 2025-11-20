@@ -82,9 +82,9 @@ int main()
     vol.setFont(fuente);
     sf::Text _acercaDe;
     _acercaDe.setFont(fuente);
-    _acercaDe.setString("TP Integrador de Programacion II\nIntegrantes\nJavier Francisco Altamirano\nLucia Aylen Maffey\nGrupo 26!!");
+    _acercaDe.setString("TP Integrador de Programacion 2\nIntegrantes\nJavier Francisco Altamirano\nLucia Aylen Maffey\nGrupo 26!!");
     _acercaDe.setCharacterSize(40);
-    _acercaDe.setPosition(100,50);
+    _acercaDe.setPosition(100,80);
     ///recuadro de fondo
     sf::RectangleShape fondo_pausa(sf::Vector2f(800, 600));
     fondo_pausa.setFillColor(sf::Color(0, 0, 0, 150)); // negro semitransparente
@@ -383,7 +383,7 @@ int main()
         {
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::F) && reloj.getElapsedTime().asSeconds() > delay)
             {
-                estado = MAPA;
+                estado = MENUINICIO;
             }
         }
         //////////////////////////////////////////////////////////////////////////////////////////

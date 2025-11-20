@@ -171,7 +171,10 @@ void Txt_Spt::dibujarEnemigos(sf::RenderWindow& window)
     for (int i = 0; i < _cantidadEnemigos; i++)
     {
         _enemigosEnPelea[i].setPosition(posiciones[i]);
-        window.draw(_enemigosEnPelea[i]);
+        if(_vidaEnemigo[i] > 0)
+        {
+            window.draw(_enemigosEnPelea[i]);
+        }
     }
 }
 void Txt_Spt::configurarEnemigos(int cant, int e0, int e1, int e2)

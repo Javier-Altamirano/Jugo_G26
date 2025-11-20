@@ -685,7 +685,7 @@
 	"archivos.h"
 	"inventario.h"
 
-1763669447 source:c:\users\franc\desktop\jogo_26\t_s.cpp
+1763672526 source:c:\users\franc\desktop\jogo_26\t_s.cpp
 	<iostream>
 	"t_s.h"
 
@@ -698,7 +698,7 @@
 	"aliados.h"
 	"enemigos.h"
 
-1763671865 source:c:\users\franc\desktop\jogo_26\game.cpp
+1763672136 source:c:\users\franc\desktop\jogo_26\game.cpp
 	"game.h"
 
 1763672089 c:\users\franc\desktop\jogo_26\game.h
