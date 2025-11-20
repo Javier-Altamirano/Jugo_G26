@@ -7,6 +7,15 @@ Combate::Combate(int dificultad,Inventario& mochila) :
     _equipoA.push_back(archivo.LeerAliado(archivo.BIA(2)));
     _equipoA.push_back(archivo.LeerAliado(archivo.BIA(3)));
 
+    if(!_font.loadFromFile("Font/square.ttf"))
+    {
+        ///error
+    }
+    _turno.setFont(_font);
+    _turno.setCharacterSize(20);
+    _turno.setPosition(50,50);
+
+
     enemigoBase = archivo.LeerEnemigo(0);
     enemigoCombate = enemigoBase;
     turnoActual = TURNO_JUGADOR;
@@ -27,6 +36,8 @@ void Combate::update(sf::RenderWindow& win)
     if (_resultadoPelea != 2) return;
     if (_resultadoPelea == 0) return;
     Aliado& aliadoActual = _equipoA[_aliadoS];
+    std::string turno("Turno de " + std::string(_equipoA[_aliadoS].getNombre()));
+    _turno.setString(turno);
     win.setView(win.getDefaultView());
 
     recursos.setNombreAliado(0, _equipoA[0].getNombre());
@@ -153,7 +164,7 @@ void Combate::update(sf::RenderWindow& win)
             int indiceObjetivo = aliadosVivos[rand() % aliadosVivos.size()];
             Aliado& objetivo = _equipoA[indiceObjetivo];
 
-            int danioEnemigo = enemigoCombate.getAtaque() - objetivo.getDefensa();
+            int danioEnemigo = (enemigoCombate.getAtaque() * 2) - objetivo.getDefensa();
             if (danioEnemigo < 0) danioEnemigo = 0;
 
             objetivo.Danio(danioEnemigo);
@@ -317,7 +328,7 @@ void Combate::update(sf::RenderWindow& win)
             int indiceObjetivo = aliadosVivos[rand() % aliadosVivos.size()];
             Aliado& objetivo = _equipoA[indiceObjetivo];
 
-            int danioEnemigo = enemigoCombate.getAtaque() - objetivo.getDefensa();
+            int danioEnemigo = (enemigoCombate.getAtaque() *2) - objetivo.getDefensa();
             if (danioEnemigo < 0) danioEnemigo = 0;
 
             objetivo.Danio(danioEnemigo);
@@ -524,6 +535,7 @@ void Combate::draw(sf::RenderWindow& win)
         recursos.dibujarAliados(win);
         recursos.dibujarEnemigos(win);
         recursos.drawBarras(win);
+        win.draw(_turno);
 
         if(invActual == Abierto)
             _mVista.MostrarxPela(win);
@@ -538,6 +550,7 @@ void Combate::draw(sf::RenderWindow& win)
         recursos.dibujarAliados(win);
         recursos.dibujarEnemigos(win);
         recursos.drawBarras(win);
+        win.draw(_turno);
 
         if(invActual == Abierto)
             _mVista.MostrarxPela(win);
@@ -552,6 +565,7 @@ void Combate::draw(sf::RenderWindow& win)
         recursos.dibujarAliados(win);
         recursos.dibujarEnemigos(win);
         recursos.drawBarras(win);
+        win.draw(_turno);
 
         if(invActual == Abierto)
             _mVista.MostrarxPela(win);
@@ -566,6 +580,7 @@ void Combate::draw(sf::RenderWindow& win)
     }
     case PERDISTE:
     {
+        recursos.fondos(win,4);
         menuP.resultadoP(win, 0);
         break;
     }

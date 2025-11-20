@@ -10,7 +10,7 @@ Vendedor::Vendedor()
         std::cout << "error buhonero...\n";
     }
     _sprite.setTexture(_texture);
-    _sprite.setPosition(30,300);
+    _sprite.setPosition(300,300);
     _sprite.setOrigin(_sprite.getGlobalBounds().width/2, _sprite.getGlobalBounds().height/2);
 }
 

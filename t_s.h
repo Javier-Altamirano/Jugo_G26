@@ -14,8 +14,8 @@ private:
     sf::Sprite _enemigosEnPelea[3];
     int _cantidadEnemigos;
     ///=================================
-    sf::Texture _texture[4];
-    sf::Sprite  _sprite[4];
+    sf::Texture _texture[5];
+    sf::Sprite  _sprite[5];
     ///=================================
     sf::RectangleShape _barraFondo[3];
     sf::RectangleShape _barraVida[3];

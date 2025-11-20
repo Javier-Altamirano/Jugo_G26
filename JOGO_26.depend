@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1763671901 source:c:\users\franc\desktop\jogo_26\main.cpp
+1763677849 source:c:\users\franc\desktop\jogo_26\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<iostream>
@@ -442,7 +442,7 @@
 	<SFML/Graphics.hpp>
 	"colision.h"
 
-1763427930 source:c:\users\franc\desktop\jogo_26\personaje_jugador.cpp
+1763677241 source:c:\users\franc\desktop\jogo_26\personaje_jugador.cpp
 	<iostream>
 	"personaje_jugador.h"
 
@@ -668,7 +668,7 @@
 1763245553 c:\users\franc\desktop\jogo_26\menu_pausa.h
 	<SFML/Graphics.hpp>
 
-1763611049 source:c:\users\franc\desktop\jogo_26\menu_pelea.cpp
+1763676501 source:c:\users\franc\desktop\jogo_26\menu_pelea.cpp
 	<iostream>
 	"menu_pelea.h"
 
@@ -685,11 +685,11 @@
 	"archivos.h"
 	"inventario.h"
 
-1763672526 source:c:\users\franc\desktop\jogo_26\t_s.cpp
+1763677468 source:c:\users\franc\desktop\jogo_26\t_s.cpp
 	<iostream>
 	"t_s.h"
 
-1763667462 c:\users\franc\desktop\jogo_26\t_s.h
+1763675743 c:\users\franc\desktop\jogo_26\t_s.h
 	<SFML/Graphics.hpp>
 
 1763355977 source:c:\users\franc\desktop\jogo_26\pelea.cpp
@@ -698,10 +698,10 @@
 	"aliados.h"
 	"enemigos.h"
 
-1763672136 source:c:\users\franc\desktop\jogo_26\game.cpp
+1763676490 source:c:\users\franc\desktop\jogo_26\game.cpp
 	"game.h"
 
-1763672089 c:\users\franc\desktop\jogo_26\game.h
+1763673967 c:\users\franc\desktop\jogo_26\game.h
 	<SFML/Graphics.hpp>
 	"aliados.h"
 	"enemigos.h"

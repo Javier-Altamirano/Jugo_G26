@@ -10,7 +10,7 @@ Txt_Spt::Txt_Spt()
     }
 
     // ========
-    string aliados[] = {"Texture/messi.png", "Texture/banana.png", "Texture/cloud.png"};
+    string aliados[] = {"Texture/messi.png", "Texture/brian2.png", "Texture/cloud.png"};
     for(int i=0; i<3; i++)
     {
         _aliadoTexture[i].loadFromFile(aliados[i]);
@@ -31,10 +31,11 @@ Txt_Spt::Txt_Spt()
         "Texture/piso.png",
         "Texture/pelea.png",
         "Texture/portada.png",
-        "Texture/mapa.png"
+        "Texture/mapa.png",
+        "Texture/kloster.png"
     };
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 5; i++)
     {
         if (!_texture[i].loadFromFile(direccion[i]))
             cout << "Error cargando " << direccion[i] << endl;

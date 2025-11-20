@@ -39,10 +39,10 @@ int main()
     Item pocionE = archivos.LeerItem(1);
     /// ========>> ALIADOS <<========
     //Aliado a1(1,"Messi",540,540,67,37,300,300,true);
-   // Aliado a2(2,"Ford",620,620,55,42,300,300,true);
+    //Aliado a2(2,"Super Brian",620,620,55,42,300,300,true);
     //Aliado a3(3,"Claudio",600,600,50,42,300,300,true);
 
-
+    //archivos.ReGuardarAliados(a2,1);
     Combate world(1,mochila);
     int ca = archivos.CantEnemigoG();
     std::cout << "Cantidad detectada por CantAliadoG() = " << ca << std::endl;
@@ -82,7 +82,7 @@ int main()
     vol.setFont(fuente);
     sf::Text _acercaDe;
     _acercaDe.setFont(fuente);
-    _acercaDe.setString("TP Integrador de Programacion 2\nIntegrantes\nJavier Francisco Altamirano\nLucia Aylen Maffey\nGrupo 26!!");
+    _acercaDe.setString("TP Integrador de Programacion 2\nProfesor Brian Lara\nIntegrantes\nJavier Francisco Altamirano\nLucia Aylen Maffey\nGrupo 26!!");
     _acercaDe.setCharacterSize(40);
     _acercaDe.setPosition(100,80);
     ///recuadro de fondo
@@ -137,7 +137,6 @@ int main()
                     }
                     else if (event.key.code == sf::Keyboard::F)
                     {
-                        // Acción del menú (nuevo juego, cargar, salir, etc)
                         reloj.restart();
                         switch(menu.getSeleccion())
                         {
@@ -159,7 +158,6 @@ int main()
                     }
                 }
             }
-            ///
             ///PAUSA----------------------------------------------
             else if(pausa == true && mochilaA == false)
             {

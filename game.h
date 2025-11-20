@@ -43,6 +43,9 @@ private:
     enum Turno {TURNO_JUGADOR, TURNO_ENEMIGO};
     Turno turnoActual;
 
+    sf::Font _font;
+    sf::Text _turno;
+
 public:
     Combate(int dificultad,Inventario& mochila);
     void update(sf::RenderWindow& win);

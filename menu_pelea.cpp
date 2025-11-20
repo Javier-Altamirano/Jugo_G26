@@ -21,7 +21,7 @@ MenuPelea::MenuPelea()
     _resultado.setPosition(300,300);
     _resultado.setString("");
     _seleccion = 0;
-    if(!_texture.loadFromFile("Texture/mano.png"))
+    if(!_texture.loadFromFile("Texture/espada.png"))
     {
         ///error
     }

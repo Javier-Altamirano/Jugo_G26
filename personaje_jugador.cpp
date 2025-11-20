@@ -7,12 +7,12 @@ using namespace std;
 Jugador::Jugador()
 {
     _sprite.setPosition(1400, 1000);
-    if(!_texture.loadFromFile("Texture/fury.png"))///carga la textura
+    if(!_texture.loadFromFile("Texture/klosterPotente.png"))///carga la textura
     {
         std::cout << "error fury...\n";
     }
     _sprite.setTexture(_texture); /// asigna la textura al sprite del personaje
-    _sprite.setTextureRect(sf::IntRect(0, 136, 65, 116));
+    //_sprite.setTextureRect(sf::IntRect(0, 136, 65, 116));
     //_sprite.setScale(0.4f,0.4f);
     _velocidad = {4,4}; ///velocidad a la que lo podemos mover
     _sprite.setOrigin(_sprite.getGlobalBounds().width/2, _sprite.getGlobalBounds().height);///coloca el eje en el centro del sprite
