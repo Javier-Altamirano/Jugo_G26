@@ -21,3 +21,17 @@ Aliado::Aliado(int id, const char* nombre, int vidaM, int vidaA, int ataque, int
     : Personajes(id, nombre, vidaM, vidaA, ataque, defensa, vivo)
 {}
 */
+int Aliado::getEnergiaActual()
+{
+    return _energiaActual;
+}
+
+void Aliado::setEnergiaActual(int energia)
+{
+    _energiaActual = energia;
+}
+
+int Aliado::getEnergiaMax()
+{
+    return _energiaMax;
+}

@@ -42,20 +42,20 @@ void Combate::update(sf::RenderWindow& win)
 
     recursos.setNombreAliado(0, _equipoA[0].getNombre());
     recursos.setStatsAliado(0, _equipoA[0].getVidaA(), _equipoA[0].getVidaM());
-    recursos.setEnergiaAliado(0,_equipoA[0].getEA(),_equipoA[0].getEM());
+    recursos.setEnergiaAliado(0,_equipoA[0].getEnergiaActual(),_equipoA[0].getEnergiaMax());
 
     recursos.setNombreAliado(1, _equipoA[1].getNombre());
     recursos.setStatsAliado(1, _equipoA[1].getVidaA(), _equipoA[1].getVidaM());
-    recursos.setEnergiaAliado(1,_equipoA[1].getEA(),_equipoA[1].getEM());
+    recursos.setEnergiaAliado(1,_equipoA[1].getEnergiaActual(),_equipoA[1].getEnergiaMax());
 
     recursos.setNombreAliado(2, _equipoA[2].getNombre());
     recursos.setStatsAliado(2, _equipoA[2].getVidaA(), _equipoA[2].getVidaM());
-    recursos.setEnergiaAliado(2,_equipoA[2].getEA(),_equipoA[2].getEM());
+    recursos.setEnergiaAliado(2,_equipoA[2].getEnergiaActual(),_equipoA[2].getEnergiaMax());
     /////////////////////////////////////////////////////////////////////////////////
     recursos.setStatsEnemigo(0, _enemigos[0].getVidaA(), _enemigos[0].getVidaM());
     recursos.setStatsEnemigo(0, _enemigos[1].getVidaA(), _enemigos[1].getVidaM());
     recursos.setStatsEnemigo(0, _enemigos[2].getVidaA(), _enemigos[2].getVidaM());
-    int energia = _equipoA[_aliadoS].getEA();
+    int energia = _equipoA[_aliadoS].getEnergiaActual();
 
     int coste = 20;
     if(estado == Facil && invActual == Cerrado)
@@ -119,7 +119,7 @@ void Combate::update(sf::RenderWindow& win)
             {
                 turnoActual = TURNO_ENEMIGO;
                 energia -= coste;
-                _equipoA[_aliadoS].setEnergia(energia);
+                _equipoA[_aliadoS].setEnergiaActual(energia);
                 std::cout << "Habilidad especial...\n";
                 _enemigos[_objetivo].Danio(danio2);
                 std::cout << "Vida restante del enemigo: "
@@ -218,7 +218,7 @@ void Combate::update(sf::RenderWindow& win)
                 if(_mVista.getSeleccion() == 1)
                 {
                     _mochila.quitarItem(2);
-                    _equipoA[_aliadoS].setEnergia(energia + 20);
+                    _equipoA[_aliadoS].setEnergiaActual(energia + 20);
                 }
             }
         }
@@ -283,7 +283,7 @@ void Combate::update(sf::RenderWindow& win)
             {
                 turnoActual = TURNO_ENEMIGO;
                 energia -= coste;
-                _equipoA[_aliadoS].setEnergia(energia);
+                _equipoA[_aliadoS].setEnergiaActual(energia);
                 std::cout << "Habilidad especial...\n";
                 _enemigos[_objetivo].Danio(danio2);
                 std::cout << "Vida restante del enemigo: "
@@ -421,7 +421,7 @@ void Combate::update(sf::RenderWindow& win)
             {
                 turnoActual = TURNO_ENEMIGO;
                 energia -= coste;
-                _equipoA[_aliadoS].setEnergia(energia);
+                _equipoA[_aliadoS].setEnergiaActual(energia);
                 std::cout << "Habilidad especial...\n";
                 _enemigos[_objetivo].Danio(danio2);
                 std::cout << "Vida restante del enemigo: "

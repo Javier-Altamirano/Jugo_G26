@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1763677849 source:c:\users\franc\desktop\jogo_26\main.cpp
+1764634316 source:c:\users\franc\desktop\jogo_26\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<iostream>
@@ -585,7 +585,7 @@
 	<SFML/Graphics.hpp>
 	"colision.h"
 
-1761899995 source:c:\users\franc\desktop\jogo_26\vendedor.cpp
+1763678159 source:c:\users\franc\desktop\jogo_26\vendedor.cpp
 	<iostream>
 	"vendedor.h"
 
@@ -615,13 +615,13 @@
 
 1762666378 source:c:\users\franc\desktop\jogo_26\recursos.cpp
 
-1763346724 source:c:\users\franc\desktop\jogo_26\personajes.cpp
+1764633915 source:c:\users\franc\desktop\jogo_26\personajes.cpp
 	<iostream>
 	<string>
 	<cstring>
 	"personajes.h"
 
-1763664601 c:\users\franc\desktop\jogo_26\personajes.h
+1764633712 c:\users\franc\desktop\jogo_26\personajes.h
 	<iostream>
 
 1763423017 source:c:\users\franc\desktop\jogo_26\archivos.cpp
@@ -633,20 +633,20 @@
 	"enemigos.h"
 	"items.h"
 
-1763345822 c:\users\franc\desktop\jogo_26\aliados.h
+1764633599 c:\users\franc\desktop\jogo_26\aliados.h
 	"personajes.h"
 	<SFML/Graphics.hpp>
 
-1763176372 c:\users\franc\desktop\jogo_26\enemigos.h
+1764633202 c:\users\franc\desktop\jogo_26\enemigos.h
 	"personajes.h"
 
-1763176403 source:c:\users\franc\desktop\jogo_26\aliados.cpp
+1764633599 source:c:\users\franc\desktop\jogo_26\aliados.cpp
 	<iostream>
 	"aliados.h"
 	<string>
 	<cstring>
 
-1763176372 source:c:\users\franc\desktop\jogo_26\enemigos.cpp
+1764633216 source:c:\users\franc\desktop\jogo_26\enemigos.cpp
 	<iostream>
 	"enemigos.h"
 	<string>
@@ -698,7 +698,7 @@
 	"aliados.h"
 	"enemigos.h"
 
-1763676490 source:c:\users\franc\desktop\jogo_26\game.cpp
+1764633625 source:c:\users\franc\desktop\jogo_26\game.cpp
 	"game.h"
 
 1763673967 c:\users\franc\desktop\jogo_26\game.h

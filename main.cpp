@@ -38,9 +38,21 @@ int main()
     Item pocionV = archivos.LeerItem(0);
     Item pocionE = archivos.LeerItem(1);
     /// ========>> ALIADOS <<========
-    //Aliado a1(1,"Messi",540,540,67,37,300,300,true);
-    //Aliado a2(2,"Super Brian",620,620,55,42,300,300,true);
-    //Aliado a3(3,"Claudio",600,600,50,42,300,300,true);
+    /*Aliado a1(1,"Messi",540,540,67,37,300,300,true);
+    Aliado a2(2,"Super Brian",620,620,55,42,300,300,true);
+    Aliado a3(3,"Claudio",600,600,50,42,300,300,true);
+
+    archivos.GuardarAliados(a1);
+    archivos.GuardarAliados(a2);
+    archivos.GuardarAliados(a3);
+
+    Enemigos ee1(1,"Jawa",540,540,67,37,true);
+    Enemigos ee2(2,"Jawaa",540,540,67,37,true);
+    Enemigos ee3(3,"Jawaaa",540,540,67,37,true);
+
+    archivos.GuardarEnemigo(ee1);
+    archivos.GuardarEnemigo(ee2);
+    archivos.GuardarEnemigo(ee3);*/
 
     //archivos.ReGuardarAliados(a2,1);
     Combate world(1,mochila);
@@ -64,11 +76,11 @@ int main()
     Menu menu; ///TODOS LOS MENUS
     Enemigo enemi; ///ENEMIGO
     Enemigo e1,e2,e3,e4,e5,e6,e7,e8;
-    //int f,c; ///POSICION DE FILA Y COLUMNA
+
     bool camp_cerca;
     bool vendedor_cerca;
     bool enemigo_cerca;
-    ////////////////////////////
+
     ////////Funcion para seguir al personaje
     sf::View view(sf::FloatRect(0, 0, 800, 600)); // vista
     sf::Vector2f mapSize(4000.f, 3200.f); /// mapa
