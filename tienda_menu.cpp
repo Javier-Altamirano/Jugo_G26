@@ -17,7 +17,7 @@ TiendaMenu::TiendaMenu()
         ///error
     }
     ///INICIO DE TIENDA
-    std::string opciones[] {"COMPRAR","VENDER","RECUPERAR EQ.","SALIR"};
+    std::string opciones[] {"COMPRAR","VENDER","RECUPERAR EQ. $100","SALIR"};
     for(int i=0; i<4; i++)
     {
         _text1[i].setString(opciones[i]);

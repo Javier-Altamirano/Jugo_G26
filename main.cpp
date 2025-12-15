@@ -111,7 +111,7 @@ int main()
                             estadoTienda = TiendaEstado::FUERA;
                             estadoCombat = EstadoCombate::FUERA;
 
-                            mochila.setSaldo(50);
+                            mochila.setSaldo(100);
                             registro.reset();
                             equipo[0] = archivos.LeerAliado(archivos.BIA(1));
                             equipo[1] = archivos.LeerAliado(archivos.BIA(2));

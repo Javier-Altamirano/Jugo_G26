@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1765790660 source:c:\users\franc\desktop\jogo_26\main.cpp
+1765818652 source:c:\users\franc\desktop\jogo_26\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<iostream>
@@ -690,7 +690,7 @@
 1763611062 c:\users\franc\desktop\jogo_26\menu_pelea.h
 	<SFML/Graphics.hpp>
 
-1765768807 source:c:\users\franc\desktop\jogo_26\tienda_menu.cpp
+1765818652 source:c:\users\franc\desktop\jogo_26\tienda_menu.cpp
 	<iostream>
 	"tienda_menu.h"
 
@@ -752,7 +752,7 @@
 	"recursos_pelea.h"
 	"combate_back.h"
 
-1765789945 source:c:\users\franc\desktop\jogo_26\tiendamanager.cpp
+1765818652 source:c:\users\franc\desktop\jogo_26\tiendamanager.cpp
 	<iostream>
 	"tiendaManager.h"
 
@@ -803,7 +803,7 @@
 	"aliados.h"
 	"enemigos.h"
 
-1765791749 source:c:\users\franc\desktop\jogo_26\combate_back.cpp
+1765817266 source:c:\users\franc\desktop\jogo_26\combate_back.cpp
 	<iostream>
 	"combate_back.h"
 

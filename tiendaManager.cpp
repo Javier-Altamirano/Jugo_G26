@@ -101,7 +101,10 @@ void TiendaManager::update()
                             costo = _inv.getsaldo() - 100;
                             _inv.setSaldo(costo);
                             for(int i=0; i<3; i++)
+                            {
                                 _equipo[i].Revivir();
+                                _equipo[i].setEnergia(_equipo[i].getEnergiaMax());
+                            }
                             _musica.efectos(5);
                         }
                         else
