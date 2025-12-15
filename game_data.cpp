@@ -1,5 +1,5 @@
 #include <iostream>
-#include <fstream>
+#include <cstdio>
 #include "game_data.h"
 
 GameData::GameData(){}
@@ -7,13 +7,17 @@ GameData::GameData(){}
 void GameData::setEquipo(Aliado* eq)
 {
     for(int i = 0; i < 3; i++)
+    {
         _equipo[i] = eq[i];
+    }
 }
 
 void GameData::getEquipo(Aliado* eq) const
 {
     for(int i = 0; i < 3; i++)
+    {
         eq[i] = _equipo[i];
+    }
 }
 
 void GameData::setInventario(Inventario& inv)
@@ -38,30 +42,42 @@ Registros& GameData::getRegistros()
 
 bool GameData::guardar(const std::string& archivo)
 {
-     std::ofstream out(archivo, std::ios::binary);
-    if(!out) return false;
+    FILE* p = fopen(archivo.c_str(), "wb");
+    if(p == NULL) return false;
 
+    // Equipo
     for(int i = 0; i < 3; i++)
-        _equipo[i].guardar(out);
+    {
+        _equipo[i].guardar(p);
+    }
 
-    _inv.guardar(out);
-    _reg.guardar(out);
+    // Inventario
+    _inv.guardar(p);
 
+    // Registros
+    _reg.guardar(p);
+
+    fclose(p);
     return true;
 }
 
 bool GameData::cargar(const std::string& archivo)
 {
+    FILE* p = fopen(archivo.c_str(), "rb");
+    if(p == NULL) return false;
 
-    std::ifstream in(archivo, std::ios::binary);
-    if(!in) return false;
-
+    // Equipo
     for(int i = 0; i < 3; i++)
-        _equipo[i].cargar(in);
+    {
+        _equipo[i].cargar(p);
+    }
 
-    _inv.cargar(in);
-    _reg.cargar(in);
+    // Inventario
+    _inv.cargar(p);
 
+    // Registros
+    _reg.cargar(p);
+
+    fclose(p);
     return true;
 }
-

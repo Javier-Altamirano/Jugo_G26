@@ -1,15 +1,15 @@
 #pragma once
-#include "archivos.h"
+#include <string>
+#include <cstdio>
+#include "aliados.h"
 #include "inventario.h"
 #include "registro.h"
-#include <string>
 
-class GameData
-{
+class GameData {
 private:
-    Registros _reg;
     Aliado _equipo[3];
     Inventario _inv;
+    Registros _reg;
 
 public:
     GameData();

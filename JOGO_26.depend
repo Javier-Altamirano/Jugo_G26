@@ -606,13 +606,13 @@
 1763181591 c:\users\franc\desktop\jogo_26\items.h
 	<iostream>
 
-1765778948 c:\users\franc\desktop\jogo_26\inventario.h
+1765821197 c:\users\franc\desktop\jogo_26\inventario.h
 	<istream>
 	"items.h"
 	<fstream>
 	"archivos.h"
 
-1765778948 source:c:\users\franc\desktop\jogo_26\inventario.cpp
+1765821192 source:c:\users\franc\desktop\jogo_26\inventario.cpp
 	<iostream>
 	"inventario.h"
 	"archivos.h"
@@ -639,14 +639,14 @@
 	"enemigos.h"
 	"items.h"
 
-1765777047 c:\users\franc\desktop\jogo_26\aliados.h
+1765821192 c:\users\franc\desktop\jogo_26\aliados.h
 	<string>
 	"personajes.h"
 
 1764633202 c:\users\franc\desktop\jogo_26\enemigos.h
 	"personajes.h"
 
-1765777071 source:c:\users\franc\desktop\jogo_26\aliados.cpp
+1765820977 source:c:\users\franc\desktop\jogo_26\aliados.cpp
 	"aliados.h"
 	"archivos.h"
 	<fstream>
@@ -729,12 +729,11 @@
 	"registro.h"
 	"estados.h"
 
-1765789343 source:c:\users\franc\desktop\jogo_26\registro.cpp
+1765821192 source:c:\users\franc\desktop\jogo_26\registro.cpp
 	<iostream>
-	<fstream>
 	"registro.h"
 
-1765789343 c:\users\franc\desktop\jogo_26\registro.h
+1765821192 c:\users\franc\desktop\jogo_26\registro.h
 
 1765791201 source:c:\users\franc\desktop\jogo_26\mapmanager.cpp
 	<iostream>
@@ -803,7 +802,7 @@
 	"aliados.h"
 	"enemigos.h"
 
-1765817266 source:c:\users\franc\desktop\jogo_26\combate_back.cpp
+1765818826 source:c:\users\franc\desktop\jogo_26\combate_back.cpp
 	<iostream>
 	"combate_back.h"
 
@@ -842,11 +841,12 @@
 	<fstream>
 	"game_data.h"
 
-1765778565 c:\users\franc\desktop\jogo_26\game_data.h
-	"archivos.h"
+1765821310 c:\users\franc\desktop\jogo_26\game_data.h
+	<string>
+	<cstdio>
+	"aliados.h"
 	"inventario.h"
 	"registro.h"
-	<string>
 
 1765787060 source:c:\users\franc\desktop\jogo_26\texto.cpp
 	<iostream>

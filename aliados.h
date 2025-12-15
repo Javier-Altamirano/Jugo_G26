@@ -19,8 +19,8 @@ public:
 
     int getEnergiaMax();
 
-    void guardar(std::ofstream& out) const;
+    void guardar(FILE* p) const;
 
-    void cargar(std::ifstream& in);
+    void cargar(FILE* p);
 };
 

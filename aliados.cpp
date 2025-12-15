@@ -48,30 +48,30 @@ int Aliado::getEnergiaMax()
     return _energiaMax;
 }
 
-void Aliado::guardar(std::ofstream& out) const
+void Aliado::guardar(FILE* p) const
 {
     int id = getId();
     int vida = getVidaA();
     int energia = _energiaActual;
 
-    out.write((char*)&id, sizeof(int));
-    out.write((char*)&vida, sizeof(int));
-    out.write((char*)&energia, sizeof(int));
+    fwrite(&id, sizeof(int), 1, p);
+    fwrite(&vida, sizeof(int), 1, p);
+    fwrite(&energia, sizeof(int), 1, p);
 }
 
-void Aliado::cargar(std::ifstream& in)
+void Aliado::cargar(FILE* p)
 {
     int id, vida, energia;
 
-    in.read((char*)&id, sizeof(int));
-    in.read((char*)&vida, sizeof(int));
-    in.read((char*)&energia, sizeof(int));
+    fread(&id, sizeof(int), 1, p);
+    fread(&vida, sizeof(int), 1, p);
+    fread(&energia, sizeof(int), 1, p);
 
-    // CATÁLOGO
+    // Catálogo
     Archivos arch("Aliados.dat","Enemigos.dat","Items.dat");
     *this = arch.LeerAliado(arch.BIA(id));
 
-    // ESTADO DE PARTIDA
+    // Estado de la partida
     setVida(vida);
     setEnergia(energia);
 }

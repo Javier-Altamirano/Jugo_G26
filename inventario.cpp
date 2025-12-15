@@ -146,44 +146,37 @@ void Inventario::cargarItems(const Item& item)
         _cantidad++;
     }
 }
-void Inventario::guardar(std::ofstream& out) const
+void Inventario::guardar(FILE* p) const
 {
-    // Saldo
-    out.write((char*)&_saldo, sizeof(int));
+    fwrite(&_saldo, sizeof(int), 1, p);
+    fwrite(&_cantidad, sizeof(int), 1, p);
 
-    // Cantidad de items
-    out.write((char*)&_cantidad, sizeof(int));
-
-    // Items
     for(int i = 0; i < _cantidad; i++)
     {
         int id = _items[i].getId();
         int cant = _items[i].getCantidad();
 
-        out.write((char*)&id, sizeof(int));
-        out.write((char*)&cant, sizeof(int));
+        fwrite(&id, sizeof(int), 1, p);
+        fwrite(&cant, sizeof(int), 1, p);
     }
 }
-void Inventario::cargar(std::ifstream& in)
+void Inventario::cargar(FILE* p)
 {
-    // Limpio inventario
     _cantidad = 0;
 
-    // Saldo
-    in.read((char*)&_saldo, sizeof(int));
+    fread(&_saldo, sizeof(int), 1, p);
 
     int cantItems;
-    in.read((char*)&cantItems, sizeof(int));
+    fread(&cantItems, sizeof(int), 1, p);
 
     Archivos arch("Aliados.dat","Enemigos.dat","Items.dat");
 
     for(int i = 0; i < cantItems; i++)
     {
         int id, cantidad;
-        in.read((char*)&id, sizeof(int));
-        in.read((char*)&cantidad, sizeof(int));
+        fread(&id, sizeof(int), 1, p);
+        fread(&cantidad, sizeof(int), 1, p);
 
-        // Traigo item base del catálogo
         Item it = arch.LeerItem(arch.BII(id));
         it.setCantidad(cantidad);
 

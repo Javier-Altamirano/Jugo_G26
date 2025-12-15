@@ -43,8 +43,8 @@ public:
 
     void cargarItems(const Item& item);
 
-    void guardar(std::ofstream& out) const;
-    void cargar(std::ifstream& in);
+    void guardar(FILE* p) const;
+    void cargar(FILE* p);
 
 
 };

@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include "registro.h"
 using namespace std;
 
@@ -135,13 +134,29 @@ void Registros::mostrar()
     std::cout << "-------------------" << std::endl;
 }
 
-void Registros::guardar(std::ofstream& out) const
+void Registros::guardar(FILE* p) const
 {
-    out.write((char*)this, sizeof(Registros));
+    fwrite(&_combatesTotales, sizeof(int), 1, p);
+    fwrite(&_victorias, sizeof(int), 1, p);
+    fwrite(&_derrotas, sizeof(int), 1, p);
+    fwrite(&_inconcluso, sizeof(int), 1, p);
+    fwrite(&_danioTotalCausado, sizeof(int), 1, p);
+    fwrite(&_coleccionistasD, sizeof(int), 1, p);
+    fwrite(&_cazadoresD, sizeof(int), 1, p);
+    fwrite(&_jefesD, sizeof(int), 1, p);
+    fwrite(&_cantidadCuraciones, sizeof(int), 1, p);
 }
 
-void Registros::cargar(std::ifstream& in)
+void Registros::cargar(FILE* p)
 {
-    in.read((char*)this, sizeof(Registros));
+    fread(&_combatesTotales, sizeof(int), 1, p);
+    fread(&_victorias, sizeof(int), 1, p);
+    fread(&_derrotas, sizeof(int), 1, p);
+    fread(&_inconcluso, sizeof(int), 1, p);
+    fread(&_danioTotalCausado, sizeof(int), 1, p);
+    fread(&_coleccionistasD, sizeof(int), 1, p);
+    fread(&_cazadoresD, sizeof(int), 1, p);
+    fread(&_jefesD, sizeof(int), 1, p);
+    fread(&_cantidadCuraciones, sizeof(int), 1, p);
 }
 
