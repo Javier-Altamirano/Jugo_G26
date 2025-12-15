@@ -11,8 +11,8 @@ Menu::Menu()
         std::cout << "error\n";
     }
     ///INICIO------------------------------------------------------------
-    std::string opciones_ini[] = {"NUEVA PARTIDA","ACERCA DE","SALIR"};
-    for(int i=0; i<3; i++)
+    std::string opciones_ini[] = {"NUEVA PARTIDA","CONTINUAR","ACERCA DE","REGISTROS","SALIR"};
+    for(int i=0; i<5; i++)
     {
         _text_inicio[i].setFont(_font);
         _text_inicio[i].setString(opciones_ini[i]);
@@ -24,7 +24,7 @@ Menu::Menu()
 ///INICIO---------------------------------------------------
 void Menu::mostrar_inicio(sf::RenderWindow& window)
 {
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 5; i++)
     {
         _text_inicio[i].setFillColor(i == _seleccion ? sf::Color::Red : sf::Color::White);
         window.draw(_text_inicio[i]);
@@ -39,12 +39,12 @@ void Menu::arriba()
     }
     else
     {
-        _seleccion = 2;
+        _seleccion = 4;
     }
 }
 void Menu::abajo()
 {
-    if(_seleccion < 2)
+    if(_seleccion < 4)
     {
         _seleccion++;
     }

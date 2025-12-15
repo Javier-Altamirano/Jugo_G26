@@ -3,11 +3,7 @@
 #include <string>
 #include <cstring>
 using namespace std;
-/*
-Enemigos::Enemigos(int id, const char* nombre, int vidaM, int vidaA, int ataque, int defensa, bool vivo)
-    : Personajes(id, nombre, vidaM, vidaA, ataque, defensa, vivo)
-{
-}*/
+
 Enemigos::Enemigos(int id, const char* nombre, int vidaM, int vidaA, int ataque, int defensa, bool vivo)
 {
     _idPersonaje = id;

@@ -3,13 +3,13 @@
 #include "items.h"
 #include "archivos.h"
 #include "inventario.h"
-class TiendaMenu:  public sf::Drawable
+class TiendaMenu
 {
 private:
     Inventario* inv;
     ///
     sf::Font _font;
-    sf::Text _text1[3];
+    sf::Text _text1[4];
     int _seleccion;
     ///COMPRA
     Item* _itemsTotalse;
@@ -22,6 +22,9 @@ private:
 
     sf::Texture _textura;
     sf::Sprite _sprite;
+
+    sf::Texture _buhoT;
+    sf::Sprite _buhoS;
 public:
     TiendaMenu();
     ~TiendaMenu();
@@ -29,10 +32,11 @@ public:
     int getseleccion(int x);
     void arriba(int x);
     void abajo(int x);
+    void reset();
 
     void mostrar(sf::RenderWindow& window);
     void mostrarCompra(sf::RenderWindow& window);
     void mostrarVenta(sf::RenderWindow& window);
 
-    void draw(sf::RenderTarget& target, sf::RenderStates states)const override;
+    void draw(sf::RenderWindow& window);
 };

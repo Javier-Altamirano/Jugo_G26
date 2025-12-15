@@ -2,7 +2,6 @@
 #include "campamento.h"
 using namespace std;
 
-
 Campamento::Campamento()
 {
     if(!_texture.loadFromFile("Texture/camp.png"))

@@ -1,6 +1,8 @@
 #pragma once
 #include <istream>
 #include "items.h"
+#include <fstream>
+#include "archivos.h"
 
 class Inventario
 {
@@ -12,13 +14,14 @@ private:
 public:
     Inventario();
     /// Destructor
-    ~Inventario(){}
+    ~Inventario() {}
 
     bool agregarItem(const Item& item);
 
-    bool quitarItem(int id);
+    bool quitarItem(int id, bool vender);
 
     void setSaldo(int saldo);
+
     int getsaldo();
 
     /// CONTENIDO
@@ -30,9 +33,18 @@ public:
     /// Espacio total
     int getCapacidadMax() const;
 
-    /// Verificar si tiene un item
-    bool tieneItem(int id) const;
+    const Item& getItem(int index) const
+    {
+        return _items[index];
+    }
 
-    const Item& getItem(int index) const { return _items[index]; }
+    void copiar(const Inventario& otro);
+
+
+    void cargarItems(const Item& item);
+
+    void guardar(std::ofstream& out) const;
+    void cargar(std::ifstream& in);
+
 
 };

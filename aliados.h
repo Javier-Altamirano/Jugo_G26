@@ -1,6 +1,6 @@
 #pragma once
+#include <string>
 #include "personajes.h"
-#include <SFML/Graphics.hpp>
 
 class Aliado : public Personajes
 {
@@ -15,7 +15,12 @@ public:
 
     void setEnergiaActual(int energia);
 
+    void setEnergia(int energia);
+
     int getEnergiaMax();
 
+    void guardar(std::ofstream& out) const;
+
+    void cargar(std::ifstream& in);
 };
 

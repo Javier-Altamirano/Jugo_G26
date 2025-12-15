@@ -18,10 +18,13 @@ MenuPelea::MenuPelea()
         _text[x].setPosition(590, 415 + x * 40);
     }
     _resultado.setFont(_font);
-    _resultado.setPosition(300,300);
+    _resultado.setPosition(300,150);
     _resultado.setString("");
+    _resultado.setCharacterSize(40);
+    _resultado.setColor(sf::Color::Red);
     _seleccion = 0;
-    if(!_texture.loadFromFile("Texture/espada.png"))
+
+    if(!_texture.loadFromFile("Texture/mano.png"))
     {
         ///error
     }
@@ -66,7 +69,7 @@ void MenuPelea::resultadoP(sf::RenderWindow& window, int x)
     }
     else if(x == 0)
     {
-        _resultado.setString("PERDISTE!");
+        _resultado.setString("DESTRUIDO!");
     }
     window.draw(_resultado);
 }

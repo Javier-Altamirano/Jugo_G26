@@ -31,4 +31,6 @@ public:
     void maletinC(sf::RenderWindow& window);
     void maletinO(sf::RenderWindow& window);
     void MostrarxPela(sf::RenderWindow& window);
+
+    void resetSelection() { _seleccion = 0; }
 };

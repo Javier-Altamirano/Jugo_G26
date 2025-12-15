@@ -45,6 +45,15 @@ public:
     {
         _vidaActual = _vidaMax;
     }
+    void setVida(int v)
+    {
+        if(v >= _vidaMax)
+            _vidaActual = _vidaMax;
+        else
+        {
+            _vidaActual = v;
+        }
+    }
 
     bool estaVivo() const;
 

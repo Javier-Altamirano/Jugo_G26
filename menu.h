@@ -5,7 +5,7 @@ class Menu
 {
 private:
     ///MENU INICIO
-    sf::Text _text_inicio[4];
+    sf::Text _text_inicio[5];
     sf::Font _font;
     int _seleccion;
 public:

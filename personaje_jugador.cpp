@@ -7,7 +7,7 @@ using namespace std;
 Jugador::Jugador()
 {
     _sprite.setPosition(1400, 1000);
-    if(!_texture.loadFromFile("Texture/klosterPotente.png"))///carga la textura
+    if(!_texture.loadFromFile("Texture/kloster2.png"))///carga la textura
     {
         std::cout << "error fury...\n";
     }
@@ -37,8 +37,21 @@ void Jugador::updateView(sf::View& view, const sf::Vector2f& mapSize)
     view.setCenter(center);
 }
 ///Moviemiento del jugador
-void Jugador::update()
+void Jugador::update(int n)
 {
+    int x,y;
+    switch(n)
+    {
+    case 1:
+        x = 4000;
+        y = 3200;
+        break;
+    case 2:
+        x = 800;
+        y = 600;
+        break;
+    }
+
     _velocidad = {0,0};
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) ///Mover Arriba
     {
@@ -76,63 +89,13 @@ void Jugador::update()
         _sprite.setPosition(_sprite.getPosition().x, _sprite.getOrigin().y);
     }
 
-    if (_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width > 4000)
+    if (_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width > x)
     {
-        _sprite.setPosition(4000 - (_sprite.getGlobalBounds().width - _sprite.getOrigin().x), _sprite.getPosition().y);
+        _sprite.setPosition(x - (_sprite.getGlobalBounds().width - _sprite.getOrigin().x), _sprite.getPosition().y);
     }
-    if(_sprite.getGlobalBounds().top+_sprite.getGlobalBounds().height > 3200)
+    if(_sprite.getGlobalBounds().top+_sprite.getGlobalBounds().height > y)
     {
-        _sprite.setPosition(_sprite.getPosition().x, 3200 + (_sprite.getGlobalBounds().height - _sprite.getOrigin().y));
-    }
-}
-void Jugador::jugador_mapa()
-{}
-void Jugador::jugador_tienda()
-{
-    _velocidad = {0,0};
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) ///Mover Arriba
-    {
-        _velocidad.y = -4;
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) ///Mover Izquierda
-    {
-        _velocidad.x = -4;
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))///Mover Abajo
-    {
-        _velocidad.y = 4;
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))///Mover Derecha
-    {
-        _velocidad.x = 4;
-    }
-    _sprite.move(_velocidad);
-    /// Vista del Personaje
-    if(_velocidad.x < 0) /// Mira para la izquierda
-    {
-        _sprite.setScale(-1,1);
-    }
-    else if(_velocidad.x > 0) /// Mira para la derecha
-    {
-        _sprite.setScale(1,1);
-    }
-    ///Posicion evita que se salga de la pantalla
-    if(_sprite.getGlobalBounds().left < 0)///Borde Alto
-    {
-        _sprite.setPosition(_sprite.getOrigin().x, _sprite.getPosition().y);
-    }
-    if(_sprite.getGlobalBounds().top < 0)///Borde Izquierdo
-    {
-        _sprite.setPosition(_sprite.getPosition().x, _sprite.getOrigin().y);
-    }
-
-    if (_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width > 800)///Borde Derecho
-    {
-        _sprite.setPosition(800 - (_sprite.getGlobalBounds().width - _sprite.getOrigin().x), _sprite.getPosition().y);
-    }
-    if(_sprite.getGlobalBounds().top+_sprite.getGlobalBounds().height > 600)///Borde Bajo
-    {
-        _sprite.setPosition(_sprite.getPosition().x, 600 + (_sprite.getGlobalBounds().height - _sprite.getOrigin().y));
+        _sprite.setPosition(_sprite.getPosition().x, y + (_sprite.getGlobalBounds().height - _sprite.getOrigin().y));
     }
 }
 ///COLISION DEL PJ

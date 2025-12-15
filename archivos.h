@@ -1,8 +1,8 @@
 #pragma once
+#include <string>
 #include "aliados.h"
 #include "enemigos.h"
 #include "items.h"
-
 class Archivos
 {
 private:

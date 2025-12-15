@@ -1,7 +1,6 @@
-#include <iostream>
 #include "archivos.h"
+#include <fstream>
 using namespace std;
-
 ///-----------> ITEMS <-----------///
 bool Archivos::GuardarItem(const Item& reg)
 {

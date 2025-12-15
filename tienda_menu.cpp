@@ -10,20 +10,20 @@ TiendaMenu::TiendaMenu()
         ///error
     }
     _sprite.setTexture(_textura);
-    _sprite.setPosition(200,100);
+    _sprite.setPosition(480,75);
     ///---------------------------------------///
     if(!_font.loadFromFile("Font/square.ttf"))
     {
         ///error
     }
     ///INICIO DE TIENDA
-    std::string opciones[] {"COMPRAR","VENDER","SALIR"};
-    for(int i=0; i<3; i++)
+    std::string opciones[] {"COMPRAR","VENDER","RECUPERAR EQ.","SALIR"};
+    for(int i=0; i<4; i++)
     {
         _text1[i].setString(opciones[i]);
         _text1[i].setFont(_font);
-        _text1[i].setCharacterSize(28);
-        _text1[i].setPosition(220, 150 + i * 70);
+        _text1[i].setCharacterSize(25);
+        _text1[i].setPosition(500, 130 + i * 60);
     }
     ///COMPRA
     Archivos arch("Aliados.dat","Enemigos.dat","Items.dat");
@@ -48,30 +48,36 @@ TiendaMenu::TiendaMenu()
         venta = _itemsTotalse[i].getPrecioVenta();
         mens1 = nombre + " <> $" + std::to_string(compra);
         mens2 = nombre + " <> $" + std::to_string(venta);
-         ///
+        ///
         _textItems[i].setFont(_font);
         _textItems[i].setString(mens1);
         _textItems[i].setCharacterSize(20);
-        _textItems[i].setPosition(220, 150 + i * 70);
+        _textItems[i].setPosition(500, 130 + i * 60);
         ///
         _textItemsV[i].setFont(_font);
         _textItemsV[i].setString(mens2);
         _textItemsV[i].setCharacterSize(20);
-        _textItemsV[i].setPosition(220, 150 + i * 70);
+        _textItemsV[i].setPosition(500, 130 + i * 60);
     }
     _textItems[_cantidadItems].setFont(_font);
     _textItems[_cantidadItems].setString("ATRAS");
     _textItems[_cantidadItems].setCharacterSize(20);
-    _textItems[_cantidadItems].setPosition(220, 150 + _cantidadItems * 70);
+    _textItems[_cantidadItems].setPosition(500, 130 + _cantidadItems * 60);
     ///
     _textItemsV[_cantidadItems].setFont(_font);
     _textItemsV[_cantidadItems].setString("ATRAS");
     _textItemsV[_cantidadItems].setCharacterSize(20);
-    _textItemsV[_cantidadItems].setPosition(220, 150 + _cantidadItems * 70);
+    _textItemsV[_cantidadItems].setPosition(500, 130 + _cantidadItems * 60);
 
     _seleccion = 0;
     _seleccionCompra = 0;
     _seleccionVenta = 0;
+
+    if(!_buhoT.loadFromFile("Texture/buhoneroxd.png"))
+    {
+        //error
+    }
+    _buhoS.setTexture(_buhoT);
 }
 TiendaMenu::~TiendaMenu()
 {
@@ -115,7 +121,7 @@ void TiendaMenu::abajo(int x)
     ///INICIO
     if(x == 1)
     {
-        if(_seleccion < 2)
+        if(_seleccion < 3)
             _seleccion++;
     }
     ///COMPRA
@@ -151,7 +157,7 @@ void TiendaMenu::mostrar(sf::RenderWindow& window)
     sf::Color verdeSemiOscuro(34, 139, 34, 255);
     sf::Color grisTransparente(128, 128, 128, 100);
     ///
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {
         _text1[i].setFillColor(i == _seleccion ? verdeSemiOscuro : grisTransparente);
         window.draw(_text1[i]);
@@ -184,7 +190,8 @@ void TiendaMenu::mostrarVenta(sf::RenderWindow& window)
     }
 }
 
-void TiendaMenu::draw(sf::RenderTarget& target, sf::RenderStates states)const
+void TiendaMenu::draw(sf::RenderWindow& win)
 {
-    target.draw(_sprite, states);
+    win.draw(_buhoS);
+    win.draw(_sprite);
 }

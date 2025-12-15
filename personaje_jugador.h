@@ -16,10 +16,9 @@ public:
     void draw(sf::RenderTarget& target, sf::RenderStates states)const override;
     ///VISTA
     sf::FloatRect getBounds() const override;
-
     void pos(float x, float y);
+
     ///JOYSTICK
-    void update();
-    void jugador_mapa();
-    void jugador_tienda();
+    void update(int n);
+
 };

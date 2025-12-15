@@ -1,24 +1,25 @@
 # depslib dependency file v1.0
-1764634316 source:c:\users\franc\desktop\jogo_26\main.cpp
+1765790660 source:c:\users\franc\desktop\jogo_26\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<iostream>
-	"souns.h"
+	"sound.h"
 	"personaje_jugador.h"
-	"enemigo.h"
 	"enemigos.h"
-	"campamento.h"
-	"vendedor.h"
 	"menu.h"
 	"menu_pausa.h"
-	"menu_pelea.h"
-	"tienda_menu.h"
-	"t_s.h"
+	"recursos_pelea.h"
 	"items.h"
 	"inventario.h"
 	"archivos.h"
 	"inventarioView.h"
-	"game.h"
+	"mapManager.h"
+	"tiendaManager.h"
+	"estados.h"
+	"combate_back.h"
+	"fondos.h"
+	"game_data.h"
+	"texto.h"
 
 1731167480 c:\users\franc\desktop\jogo_26\sfml\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -438,11 +439,11 @@
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
 
-1762727344 c:\users\franc\desktop\jogo_26\personaje_jugador.h
+1765066348 c:\users\franc\desktop\jogo_26\personaje_jugador.h
 	<SFML/Graphics.hpp>
 	"colision.h"
 
-1763677241 source:c:\users\franc\desktop\jogo_26\personaje_jugador.cpp
+1765066219 source:c:\users\franc\desktop\jogo_26\personaje_jugador.cpp
 	<iostream>
 	"personaje_jugador.h"
 
@@ -453,7 +454,7 @@
 1761236203 c:\users\franc\desktop\jogo_26\colision.h
 	<SFML/Graphics.hpp>
 
-1761899863 source:c:\users\franc\desktop\jogo_26\campamento.cpp
+1765771169 source:c:\users\franc\desktop\jogo_26\campamento.cpp
 	<iostream>
 	"campamento.h"
 
@@ -461,11 +462,11 @@
 	<SFML/Graphics.hpp>
 	"colision.h"
 
-1763666338 source:c:\users\franc\desktop\jogo_26\enemigo.cpp
+1765787230 source:c:\users\franc\desktop\jogo_26\enemigo.cpp
 	<iostream>
 	"enemigo.h"
 
-1763656766 c:\users\franc\desktop\jogo_26\enemigo.h
+1765788087 c:\users\franc\desktop\jogo_26\enemigo.h
 	<SFML/Graphics.hpp>
 	"colision.h"
 
@@ -573,11 +574,11 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1763332449 source:c:\users\franc\desktop\jogo_26\sounds.cpp
+1765496939 source:c:\users\franc\desktop\jogo_26\sounds.cpp
 	<iostream>
 	"souns.h"
 
-1763332260 c:\users\franc\desktop\jogo_26\souns.h
+1765069502 c:\users\franc\desktop\jogo_26\souns.h
 	<SFML/Audio.hpp>
 	<SFML/Graphics.hpp>
 
@@ -585,15 +586,15 @@
 	<SFML/Graphics.hpp>
 	"colision.h"
 
-1763678159 source:c:\users\franc\desktop\jogo_26\vendedor.cpp
+1765486480 source:c:\users\franc\desktop\jogo_26\vendedor.cpp
 	<iostream>
 	"vendedor.h"
 
-1763670634 source:c:\users\franc\desktop\jogo_26\menu.cpp
+1765783069 source:c:\users\franc\desktop\jogo_26\menu.cpp
 	<iostream>
 	"menu.h"
 
-1763261739 c:\users\franc\desktop\jogo_26\menu.h
+1765783069 c:\users\franc\desktop\jogo_26\menu.h
 	<SFML/Graphics.hpp>
 
 1763089916 source:c:\users\franc\desktop\jogo_26\items.cpp
@@ -605,13 +606,17 @@
 1763181591 c:\users\franc\desktop\jogo_26\items.h
 	<iostream>
 
-1763609645 c:\users\franc\desktop\jogo_26\inventario.h
+1765778948 c:\users\franc\desktop\jogo_26\inventario.h
 	<istream>
 	"items.h"
+	<fstream>
+	"archivos.h"
 
-1763609679 source:c:\users\franc\desktop\jogo_26\inventario.cpp
+1765778948 source:c:\users\franc\desktop\jogo_26\inventario.cpp
 	<iostream>
 	"inventario.h"
+	"archivos.h"
+	<fstream>
 
 1762666378 source:c:\users\franc\desktop\jogo_26\recursos.cpp
 
@@ -621,75 +626,85 @@
 	<cstring>
 	"personajes.h"
 
-1764633712 c:\users\franc\desktop\jogo_26\personajes.h
+1765776401 c:\users\franc\desktop\jogo_26\personajes.h
 	<iostream>
 
-1763423017 source:c:\users\franc\desktop\jogo_26\archivos.cpp
-	<iostream>
+1765776840 source:c:\users\franc\desktop\jogo_26\archivos.cpp
 	"archivos.h"
+	<fstream>
 
-1763091549 c:\users\franc\desktop\jogo_26\archivos.h
+1765776797 c:\users\franc\desktop\jogo_26\archivos.h
+	<string>
 	"aliados.h"
 	"enemigos.h"
 	"items.h"
 
-1764633599 c:\users\franc\desktop\jogo_26\aliados.h
+1765777047 c:\users\franc\desktop\jogo_26\aliados.h
+	<string>
 	"personajes.h"
-	<SFML/Graphics.hpp>
 
 1764633202 c:\users\franc\desktop\jogo_26\enemigos.h
 	"personajes.h"
 
-1764633599 source:c:\users\franc\desktop\jogo_26\aliados.cpp
-	<iostream>
+1765777071 source:c:\users\franc\desktop\jogo_26\aliados.cpp
 	"aliados.h"
-	<string>
-	<cstring>
+	"archivos.h"
+	<fstream>
+	<stdio.h>
+	<string.h>
 
-1764633216 source:c:\users\franc\desktop\jogo_26\enemigos.cpp
+1765771227 source:c:\users\franc\desktop\jogo_26\enemigos.cpp
 	<iostream>
 	"enemigos.h"
 	<string>
 	<cstring>
 
-1763664112 source:c:\users\franc\desktop\jogo_26\inventarioview.cpp
+1765770195 source:c:\users\franc\desktop\jogo_26\inventarioview.cpp
 	<iostream>
 	"inventarioView.h"
 
-1763663536 c:\users\franc\desktop\jogo_26\inventarioview.h
+1765762002 c:\users\franc\desktop\jogo_26\inventarioview.h
 	"inventario.h"
 	"archivos.h"
 	<SFML/Graphics.hpp>
 
-1763245553 source:c:\users\franc\desktop\jogo_26\menu_pausa.cpp
+1765782657 source:c:\users\franc\desktop\jogo_26\menu_pausa.cpp
 	<iostream>
 	"menu_pausa.h"
 
-1763245553 c:\users\franc\desktop\jogo_26\menu_pausa.h
+1765781993 c:\users\franc\desktop\jogo_26\menu_pausa.h
 	<SFML/Graphics.hpp>
+	"inventario.h"
+	"inventarioView.h"
+	"estados.h"
+	"sound.h"
+	"game_data.h"
+	"inventario.h"
+	"registro.h"
+	"aliados.h"
 
-1763676501 source:c:\users\franc\desktop\jogo_26\menu_pelea.cpp
+1764837520 source:c:\users\franc\desktop\jogo_26\menu_pelea.cpp
 	<iostream>
 	"menu_pelea.h"
 
 1763611062 c:\users\franc\desktop\jogo_26\menu_pelea.h
 	<SFML/Graphics.hpp>
 
-1763663272 source:c:\users\franc\desktop\jogo_26\tienda_menu.cpp
+1765768807 source:c:\users\franc\desktop\jogo_26\tienda_menu.cpp
 	<iostream>
 	"tienda_menu.h"
 
-1763262554 c:\users\franc\desktop\jogo_26\tienda_menu.h
+1765768807 c:\users\franc\desktop\jogo_26\tienda_menu.h
 	<SFML/Graphics.hpp>
 	"items.h"
 	"archivos.h"
 	"inventario.h"
 
-1763677468 source:c:\users\franc\desktop\jogo_26\t_s.cpp
+1764903655 source:c:\users\franc\desktop\jogo_26\t_s.cpp
 	<iostream>
 	"t_s.h"
 
-1763675743 c:\users\franc\desktop\jogo_26\t_s.h
+1764902336 c:\users\franc\desktop\jogo_26\t_s.h
 	<SFML/Graphics.hpp>
 
 1763355977 source:c:\users\franc\desktop\jogo_26\pelea.cpp
@@ -698,10 +713,10 @@
 	"aliados.h"
 	"enemigos.h"
 
-1764633625 source:c:\users\franc\desktop\jogo_26\game.cpp
+1765498019 source:c:\users\franc\desktop\jogo_26\game.cpp
 	"game.h"
 
-1763673967 c:\users\franc\desktop\jogo_26\game.h
+1765498793 c:\users\franc\desktop\jogo_26\game.h
 	<SFML/Graphics.hpp>
 	"aliados.h"
 	"enemigos.h"
@@ -710,4 +725,134 @@
 	"menu_pelea.h"
 	"inventario.h"
 	"inventarioView.h"
+	"sound.h"
+	"registro.h"
+	"estados.h"
+
+1765789343 source:c:\users\franc\desktop\jogo_26\registro.cpp
+	<iostream>
+	<fstream>
+	"registro.h"
+
+1765789343 c:\users\franc\desktop\jogo_26\registro.h
+
+1765791201 source:c:\users\franc\desktop\jogo_26\mapmanager.cpp
+	<iostream>
+	"mapManager.h"
+
+1765788736 c:\users\franc\desktop\jogo_26\mapmanager.h
+	<SFML/Graphics.hpp>
+	"personaje_jugador.h"
+	"enemigo.h"
+	"campamento.h"
+	"sound.h"
+	"estados.h"
+	"menu_pausa.h"
+	"inventarioView.h"
+	"recursos_pelea.h"
+	"combate_back.h"
+
+1765789945 source:c:\users\franc\desktop\jogo_26\tiendamanager.cpp
+	<iostream>
+	"tiendaManager.h"
+
+1765782530 c:\users\franc\desktop\jogo_26\tiendamanager.h
+	<SFML/Graphics.hpp>
+	"personaje_jugador.h"
+	"vendedor.h"
+	"campamento.h"
+	"tienda_menu.h"
+	"items.h"
+	"inventario.h"
+	"inventarioView.h"
+	"sound.h"
+	"estados.h"
+	"menu_pausa.h"
+
+1765783162 c:\users\franc\desktop\jogo_26\estados.h
+
+1765681650 source:c:\users\franc\desktop\jogo_26\sound.cpp
+	<iostream>
+	"sound.h"
+
+1765590995 c:\users\franc\desktop\jogo_26\sound.h
+	<SFML/Audio.hpp>
+	<SFML/Graphics.hpp>
+
+1765505823 source:c:\users\franc\desktop\jogo_26\combate.cpp
+
+1765506387 c:\users\franc\desktop\jogo_26\combate.h
+	<SFML/Graphics.hpp>
+	"aliados.h"
+	"enemigos.h"
+	"archivos.h"
+	"recursos_pelea.h"
+	"menu_pelea.h"
+	"inventario.h"
+	"inventarioView.h"
+	"sound.h"
+	"registro.h"
+	"estados.h"
+
+1765790265 source:c:\users\franc\desktop\jogo_26\recursos_pelea.cpp
+	"recursos_pelea.h"
+	<iostream>
+
+1765609773 c:\users\franc\desktop\jogo_26\recursos_pelea.h
+	<SFML/Graphics.hpp>
+	"aliados.h"
+	"enemigos.h"
+
+1765791749 source:c:\users\franc\desktop\jogo_26\combate_back.cpp
+	<iostream>
+	"combate_back.h"
+
+1765791229 c:\users\franc\desktop\jogo_26\combate_back.h
+	"aliados.h"
+	"enemigos.h"
+	"archivos.h"
+	"menu_pelea.h"
+	"inventario.h"
+	"sound.h"
+	"registro.h"
+	"estados.h"
+	"recursos_pelea.h"
+	"inventarioView.h"
+	"tiendaManager.h"
+	"personaje_jugador.h"
+	"game_data.h"
+
+1765591133 source:c:\users\franc\desktop\jogo_26\combate_view.cpp
+	"combate_view.h"
+
+1765511901 c:\users\franc\desktop\jogo_26\combate_view.h
+	<SFML/Graphics.hpp>
+	"combate_back.h"
+	"menu_pelea.h"
+
+1765783736 source:c:\users\franc\desktop\jogo_26\fondos.cpp
+	<iostream>
+	"fondos.h"
+
+1765783736 c:\users\franc\desktop\jogo_26\fondos.h
+	<SFML/Graphics.hpp>
+
+1765781237 source:c:\users\franc\desktop\jogo_26\game_data.cpp
+	<iostream>
+	<fstream>
+	"game_data.h"
+
+1765778565 c:\users\franc\desktop\jogo_26\game_data.h
+	"archivos.h"
+	"inventario.h"
+	"registro.h"
+	<string>
+
+1765787060 source:c:\users\franc\desktop\jogo_26\texto.cpp
+	<iostream>
+	"texto.h"
+
+1765787060 c:\users\franc\desktop\jogo_26\texto.h
+	<SFML/Graphics.hpp>
+	"registro.h"
 

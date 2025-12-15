@@ -36,7 +36,7 @@ void InventarioView::mostrar_saldo(sf::RenderWindow& window, int x)
     }
     else if(x == 2)
     {
-        _text.setPosition(220,370);
+        _text.setPosition(490,345);
     }
     _text.setColor(sf::Color::Green);
     _text.setString("Dinero $ " + std::to_string(_inventario.getsaldo()));
@@ -81,25 +81,14 @@ void InventarioView::maletinO(sf::RenderWindow& window)
 }
 void InventarioView::arriba()
 {
-    if(_cantidadItems > 0 && _seleccion > 0)
-    {
+    if(_inventario.getCantidad() > 0 && _seleccion > 0)
         _seleccion--;
-    }
-    else
-    {
-        return;
-    }
 }
 void InventarioView::abajo()
 {
-    if(_cantidadItems > 0 && _seleccion < _cantidadItems)
-    {
+    int cant = _inventario.getCantidad();
+    if(cant > 0 && _seleccion < cant - 1)
         _seleccion++;
-    }
-    else
-    {
-        return;
-    }
 }
 
 int InventarioView::getSeleccion()
@@ -109,12 +98,17 @@ int InventarioView::getSeleccion()
 void InventarioView::MostrarxPela(sf::RenderWindow& window)
 {
     int y = 340;
+    _sprite2.setPosition(140,200);
+    window.draw(_sprite2);
     if(_inventario.getCantidad() == 0)
     {
-        _text.setPosition(300,300);
+        _text.setFillColor(sf::Color::White);
+        _text.setPosition(360,300);
         _text.setString("VACIO..");
         window.draw(_text);
+        return;
     }
+
     for (int i = 0; i < _inventario.getCantidad(); i++)
     {
         Item it = _inventario.getItem(i);
@@ -125,12 +119,9 @@ void InventarioView::MostrarxPela(sf::RenderWindow& window)
             std::to_string(it.getCantidad())
         );
 
-        if (i == _seleccion)
-            _text.setFillColor(sf::Color::Red);
-        else
-            _text.setFillColor(sf::Color::White);
+        _text.setFillColor(i == _seleccion ? sf::Color::Red : sf::Color::White);
 
-        _text.setPosition(527, y);
+        _text.setPosition(360, y);
         y += 25;
 
         window.draw(_text);
